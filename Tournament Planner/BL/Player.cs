@@ -44,7 +44,9 @@ namespace Tournament_Planner.BL
         public override bool Equals(object obj)
         {
             var p2 = obj as Player;
-            return p2 != null && p2.FirstName == this.FirstName && p2.SecondName == this.SecondName && p2.Gender == this.Gender && p2.Company.Equals(this.Company);
+            return (p2 != null) && 
+                ((object.ReferenceEquals(this, p2)) ||
+                (p2.FirstName == this.FirstName && p2.SecondName == this.SecondName && p2.Gender == this.Gender && p2.Company.Equals(this.Company)));
         }
 
         public override int GetHashCode()

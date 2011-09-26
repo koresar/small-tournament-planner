@@ -17,5 +17,21 @@ namespace Tournament_Planner.BL
         {
 
         }
+
+        public IEnumerable<Match> BuildSchedule()
+        {
+            for (int i = 0; i < this.Count; i++)
+            {
+                for (int j = i + 1; j < this.Count; j++)
+                {
+                    var player1 = this[i];
+                    var player2 = this[j];
+                    if (player1 != player2)
+                    {
+                        yield return new Match(player1, player2);
+                    }
+                }
+            }
+        }
     }
 }

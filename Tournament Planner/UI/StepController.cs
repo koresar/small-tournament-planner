@@ -21,5 +21,9 @@ namespace Tournament_Planner.UI
         protected TournamentData TournamentData { get; private set; }
 
         public string ProceedError { get; protected set; }
+
+        public virtual void OnEnteringStep()
+        {
+        }
     }
 }

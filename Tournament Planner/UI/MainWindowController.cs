@@ -54,6 +54,7 @@ namespace Tournament_Planner.UI
         private void SetCurrentStep(StepController newCurrentStep)
         {
             this.currentStep = newCurrentStep;
+            this.currentStep.OnEnteringStep();
             this.mainForm.SetCurrentControl(this.currentStep.Control);
             if (this.currentStep == this.steps.Last())
             {
