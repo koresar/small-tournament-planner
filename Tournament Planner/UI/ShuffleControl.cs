@@ -19,6 +19,8 @@ namespace Tournament_Planner.UI
             this.InitializeComponent();
         }
 
+        public event Action DoShuffleClicked;
+
         public void SetDataSources(TournamentData tournamentData)
         {
             this.data = tournamentData;
@@ -35,7 +37,28 @@ namespace Tournament_Planner.UI
 
         private void btnDoShuffle_Click(object sender, EventArgs e)
         {
+            if (this.DoShuffleClicked != null)
+            {
+                this.DoShuffleClicked();
+            }
+        }
 
+        public void DrawGroups(List<Group> groups)
+        {
+            this.flowLayoutPanel.Controls.Clear();
+
+            foreach (var group in groups)
+            {
+                var gridControl = new DataGridView();
+                gridControl.RowHeadersVisible = false;
+
+                var bs = new BindingSource();
+                bs.DataSource = group;
+                gridControl.DataSource = bs;
+
+                gridControl.AutoSizeAllCells();
+                this.flowLayoutPanel.Controls.Add(gridControl);
+            }
         }
     }
 }

@@ -138,15 +138,8 @@ namespace Tournament_Planner.UI
 
         private void EnterPlayersControl_Load(object sender, EventArgs e)
         {
-            foreach (DataGridViewColumn column in this.tblCompanies.Columns)
-            {
-                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            }
-
-            foreach (DataGridViewColumn column in this.tblPlayers.Columns)
-            {
-                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            }
+            this.tblCompanies.AutoSizeAllCells();
+            this.tblPlayers.AutoSizeAllCells();
         }
 
         private void btnSaveList_Click(object sender, EventArgs e)

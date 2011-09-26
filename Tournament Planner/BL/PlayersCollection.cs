@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System;
 
 namespace Tournament_Planner.BL
 {
@@ -9,7 +10,8 @@ namespace Tournament_Planner.BL
         {
         }
 
-        public PlayersCollection(IList<Player> companies) : base(companies)
+        public PlayersCollection(IList<Player> players)
+            : base(players)
         {
 
         }
@@ -17,6 +19,16 @@ namespace Tournament_Planner.BL
         public bool IsNumberOfPlayersAcceptable()
         {
             return this.Count % 4 == 0 || this.Count % 3 == 0;
+        }
+
+        public int GetSuggestedNumberOfPlayersInGroup()
+        {
+            if (!this.IsNumberOfPlayersAcceptable())
+            {
+                throw new InvalidOperationException("Impossible to split onto groups that number of players.");
+            }
+
+            return this.Count % 4 == 0 ? 4 : 3;
         }
     }
 }

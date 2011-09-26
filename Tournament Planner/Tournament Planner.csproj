@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="BL\CompaniesCollection.cs" />
     <Compile Include="BL\Company.cs" />
+    <Compile Include="BL\Group.cs" />
     <Compile Include="UI\EnterPlayersControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -86,6 +87,7 @@
     <Compile Include="UI\StepController.cs" />
     <Compile Include="BL\TournamentData.cs" />
     <Compile Include="UI\TournametDataSaveLoad.cs" />
+    <Compile Include="UI\UiExtensionMethods.cs" />
     <EmbeddedResource Include="UI\EnterPlayersControl.resx">
       <DependentUpon>EnterPlayersControl.cs</DependentUpon>
     </EmbeddedResource>

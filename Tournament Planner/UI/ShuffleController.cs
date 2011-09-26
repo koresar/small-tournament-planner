@@ -8,12 +8,22 @@ namespace Tournament_Planner.UI
 {
     public class ShuffleController : StepController
     {
+        private List<Group> groups;
+        private ShuffleControl editingControl;
+
         public ShuffleController(TournamentData tournamentData) : base(tournamentData)
         {
-            var control = new ShuffleControl();
-            this.Control = control;
+            this.editingControl = new ShuffleControl();
+            this.Control = this.editingControl;
 
-            control.SetDataSources(this.TournamentData);
+            this.editingControl.SetDataSources(this.TournamentData);
+            this.editingControl.DoShuffleClicked += this.editingControl_DoShuffleClicked;
+        }
+
+        private void editingControl_DoShuffleClicked()
+        {
+            this.groups = this.TournamentData.SplitPeopleOnRandomGroups().ToList();
+            this.editingControl.DrawGroups(this.groups);
         }
     }
 }
