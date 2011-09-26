@@ -13,6 +13,10 @@ namespace Tournament_Planner.UI
 
         public event Action AddClicked;
 
+        public event Action SaveClicked;
+
+        public event Action LoadClicked;
+
         public event Action DataChanged;
 
         public event Action<Player> SelectedPlayerChanged;
@@ -119,17 +123,46 @@ namespace Tournament_Planner.UI
 
         internal void SetFirstNameError(string p)
         {
-            this.errorProvider1.SetError(this.textBox1, p);
+            this.errorProvider.SetError(this.textBox1, p);
         }
 
         internal void SetSecondNameError(string p)
         {
-            this.errorProvider1.SetError(this.textBox2, p);
+            this.errorProvider.SetError(this.textBox2, p);
         }
 
         internal void SetCompanyError(string p)
         {
-            this.errorProvider1.SetError(this.cmbCompany, p);
+            this.errorProvider.SetError(this.cmbCompany, p);
+        }
+
+        private void EnterPlayersControl_Load(object sender, EventArgs e)
+        {
+            foreach (DataGridViewColumn column in this.tblCompanies.Columns)
+            {
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+
+            foreach (DataGridViewColumn column in this.tblPlayers.Columns)
+            {
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+        }
+
+        private void btnSaveList_Click(object sender, EventArgs e)
+        {
+            if (this.SaveClicked != null)
+            {
+                this.SaveClicked();
+            }
+        }
+
+        private void btnLoadList_Click(object sender, EventArgs e)
+        {
+            if (this.LoadClicked != null)
+            {
+                this.LoadClicked();
+            }
         }
     }
 }

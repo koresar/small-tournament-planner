@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
 using Tournament_Planner.BL;
 
 namespace Tournament_Planner.UI
@@ -22,7 +19,32 @@ namespace Tournament_Planner.UI
             this.editControl.DataChanged += this.editControl_DataChanged;
             this.editControl.SelectedPlayerChanged += this.editControl_SelectedPlayerChanged;
             this.editControl.DeletePlayerClicked += this.editControl_DeletePlayerClicked;
+            this.editControl.SaveClicked += this.editControl_SaveClicked;
+            this.editControl.LoadClicked += this.editControl_LoadClicked;
+
             this.TournamentData.Players.ListChanged += this.Players_ListChanged;
+        }
+
+        private void editControl_SaveClicked()
+        {
+            var dialog = new SaveFileDialog();
+            dialog.Filter = "Players list file (*.stppl)|*.stppl";
+            dialog.FilterIndex = 0;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                new TournametDataSaveLoad(this.TournamentData).SavePlayersList(dialog.FileName);
+            }
+        }
+
+        private void editControl_LoadClicked()
+        {
+            var dialog = new OpenFileDialog();
+            dialog.Filter = "Players list file (*.stppl)|*.stppl";
+            dialog.FilterIndex = 0;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                new TournametDataSaveLoad(this.TournamentData).LoadPlayersList(dialog.FileName);
+            }
         }
 
         private void editControl_DeletePlayerClicked(Player player)

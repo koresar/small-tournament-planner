@@ -1,13 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
 
 namespace Tournament_Planner.BL
 {
     public class Player
     {
+        private const string forbiddenCharacters = ",";
+        private const string csvSeparator = ",";
+        private string firstName;
+        private string secondName;
+
         public Player(string firstName, string secondName, Gender gender, Company company)
         {
             if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(secondName) || company == null)
@@ -22,16 +24,22 @@ namespace Tournament_Planner.BL
         }
 
         [DisplayName("First name")]
-        public string FirstName { get; set; }
+        public string FirstName { get { return this.firstName; } set { this.firstName = value.Replace(forbiddenCharacters, string.Empty); } }
 
         [DisplayName("Second name")]
-        public string SecondName { get; set; }
+        public string SecondName { get { return this.secondName; } set { this.secondName = value.Replace(forbiddenCharacters, string.Empty); } }
 
         [DisplayName("Gender")]
         public Gender Gender { get; set; }
 
         [DisplayName("Company")]
         public Company Company { get; set; }
+
+        [Browsable(false)]
+        public string FullName
+        {
+            get { return string.Format("{0} {1}", this.FirstName, this.SecondName); }
+        }
 
         public override bool Equals(object obj)
         {
@@ -49,9 +57,22 @@ namespace Tournament_Planner.BL
             return string.Format("{0} {1} ({2}), {3}", this.FirstName, this.SecondName, this.Gender, this.Company);
         }
 
-        public string FullName
+        public string ToCsvString()
         {
-            get { return string.Format("{0} {1}", this.FirstName, this.SecondName); }
+            return string.Format(
+                "{1}{0}{2}{0}{3}{0}{4}", 
+                csvSeparator,
+                this.FirstName,
+                this.SecondName,
+                this.Gender == BL.Gender.Male ? "M" : "F",
+                this.Company.Name);
+        }
+
+        public static Player FromCsvString(string line)
+        {
+            string[] items = line.Split(csvSeparator.ToCharArray());
+
+            return new Player(items[0], items[1], items[2] == "M" ? Gender.Male : Gender.Female, new Company(items[3]));
         }
     }
 }

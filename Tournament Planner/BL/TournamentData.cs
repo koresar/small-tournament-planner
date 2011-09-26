@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace Tournament_Planner.BL
 {
     public class TournamentData
     {
-        public PlayersCollection Players = new PlayersCollection();
+        public PlayersCollection Players { get; private set; }
 
-        public CompaniesCollection Companies = new CompaniesCollection();
+        public CompaniesCollection Companies { get; private set; }
+
+        public TournamentData()
+        {
+            this.Players = new PlayersCollection();
+            this.Companies = new CompaniesCollection();
+        }
     }
 }

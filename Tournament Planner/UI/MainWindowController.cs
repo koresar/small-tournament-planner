@@ -43,7 +43,7 @@ namespace Tournament_Planner.UI
             }
             else if (!this.currentStep.AllowProceed)
             {
-                MessageBox.Show(this.currentStep.ProceedError, "Impossible to proceed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MsgBox.Error(this.currentStep.ProceedError, "Impossible to proceed");
             }
             else
             {

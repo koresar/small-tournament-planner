@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
 
 namespace Tournament_Planner.BL
 {
     public class Company
     {
+        private const string forbiddenCharacters = ",";
+        private string name;
+
         public Company()
         {
 
@@ -24,7 +24,7 @@ namespace Tournament_Planner.BL
         }
 
         [DisplayName("Company name")]
-        public string Name { get; set; }
+        public string Name { get { return this.name; } set { this.name = value.Replace(forbiddenCharacters, string.Empty); } }
 
         public override bool Equals(object obj)
         {
