@@ -29,7 +29,7 @@ namespace Tournament_Planner.BL
                 {
                     if (match.IsAnyPlayerSame(m))
                     {
-                        match.Progress = MatchProgress.ImpossbileToStart;
+                        m.Progress = MatchProgress.ImpossbileToStart;
                     }
                 }
             }
@@ -40,7 +40,7 @@ namespace Tournament_Planner.BL
                 {
                     if (match.IsAnyPlayerSame(m))
                     {
-                        match.Progress = MatchProgress.PossibleToStart;
+                        m.Progress = MatchProgress.PossibleToStart;
                     }
                 }
             }
