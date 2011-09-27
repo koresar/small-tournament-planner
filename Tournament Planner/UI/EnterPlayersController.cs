@@ -10,6 +10,8 @@ namespace Tournament_Planner.UI
 
         public EnterPlayersController(TournamentData tournamentData) : base(tournamentData)
         {
+            this.ProceedError = "Number of players should be multiple of 4 or 3.";
+
             this.editControl = new EnterPlayersControl();
             this.Control = this.editControl;
 
@@ -44,6 +46,7 @@ namespace Tournament_Planner.UI
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 new TournametDataSaveLoad(this.TournamentData).LoadPlayersList(dialog.FileName);
+                this.ValidateEnteredData();
             }
         }
 
@@ -113,7 +116,6 @@ namespace Tournament_Planner.UI
         private void Players_ListChanged(object sender, ListChangedEventArgs e)
         {
             this.AllowProceed = this.TournamentData.Players.IsNumberOfPlayersAcceptable();
-            this.ProceedError = "Number of players should divide by 3 or 4.";
         }
     }
 }

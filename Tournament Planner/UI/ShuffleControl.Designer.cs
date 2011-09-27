@@ -113,7 +113,6 @@
             this.Controls.Add(this.tblPlayers);
             this.Name = "ShuffleControl";
             this.Size = new System.Drawing.Size(718, 499);
-            this.Load += new System.EventHandler(this.ShuffleControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tblPlayers)).EndInit();
             this.pnlGroups.ResumeLayout(false);
             this.ResumeLayout(false);

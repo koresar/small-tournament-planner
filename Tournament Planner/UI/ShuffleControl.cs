@@ -24,10 +24,6 @@ namespace Tournament_Planner.UI
         public void SetDataSources(TournamentData tournamentData)
         {
             this.data = tournamentData;
-        }
-
-        private void ShuffleControl_Load(object sender, EventArgs e)
-        {
             this.tblPlayers.Rows.Clear();
             foreach (var p in this.data.Players)
             {

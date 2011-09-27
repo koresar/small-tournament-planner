@@ -12,11 +12,13 @@ namespace Tournament_Planner.BL
         {
         }
 
-        public Group(IList<Player> players)
+        public Group(IList<Player> players, string name)
             : base(players)
         {
-
+            this.Name = name;
         }
+
+        public string Name { get; private set; }
 
         public IEnumerable<Match> BuildSchedule()
         {

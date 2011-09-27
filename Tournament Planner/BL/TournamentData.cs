@@ -6,6 +6,8 @@ namespace Tournament_Planner.BL
 {
     public class TournamentData
     {
+        private char[] GroupNames = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+
         public PlayersCollection Players { get; private set; }
 
         public CompaniesCollection Companies { get; private set; }
@@ -29,7 +31,7 @@ namespace Tournament_Planner.BL
             int numberOfPlayersInGroup = this.Players.GetSuggestedNumberOfPlayersInGroup();
             for (int i = 0; i < randomOrderedPlayers.Count / numberOfPlayersInGroup; i++)
             {
-                yield return new Group(randomOrderedPlayers.GetRange(i * numberOfPlayersInGroup, numberOfPlayersInGroup));
+                yield return new Group(randomOrderedPlayers.GetRange(i * numberOfPlayersInGroup, numberOfPlayersInGroup), this.GroupNames[i].ToString());
             }
         }
 

@@ -12,22 +12,34 @@ namespace Tournament_Planner.UI
 
         public ShuffleController(TournamentData tournamentData) : base(tournamentData)
         {
+            this.AllowProceed = true;
             this.editingControl = new ShuffleControl();
             this.Control = this.editingControl;
 
-            this.editingControl.SetDataSources(this.TournamentData);
             this.editingControl.DoShuffleClicked += this.editingControl_DoShuffleClicked;
         }
 
         private void editingControl_DoShuffleClicked()
         {
+            this.Shuffle();
+        }
+
+        public void Shuffle()
+        {
             this.TournamentData.Groups.Clear();
             foreach (var group in this.TournamentData.SplitPeopleOnRandomGroups())
-	        {
+            {
                 this.TournamentData.Groups.Add(group);
-	        }
+            }
 
             this.editingControl.DrawGroups(this.TournamentData.Groups);
+        }
+
+        public override void OnEnteringStep()
+        {
+            this.editingControl.SetDataSources(this.TournamentData);
+            base.OnEnteringStep();
+            this.Shuffle();
         }
     }
 }
