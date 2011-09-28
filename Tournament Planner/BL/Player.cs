@@ -35,6 +35,9 @@ namespace Tournament_Planner.BL
         [DisplayName("Company")]
         public Company Company { get; set; }
 
+        [DisplayName("Group")]
+        public Group StartGroup { get; set; }
+
         [Browsable(false)]
         public string FullName
         {

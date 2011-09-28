@@ -44,6 +44,9 @@ namespace Tournament_Planner.BL
             }
         }
 
+        [DisplayName("Group")]
+        public Group Group { get; set; }
+
         [Browsable(false)]
         public List<Game> Games { get; private set; }
 

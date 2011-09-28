@@ -16,6 +16,10 @@ namespace Tournament_Planner.BL
             : base(players)
         {
             this.Name = name;
+            foreach (var player in players)
+            {
+                player.StartGroup = this;
+            }
         }
 
         public string Name { get; private set; }
@@ -30,10 +34,15 @@ namespace Tournament_Planner.BL
                     var player2 = this[j];
                     if (player1 != player2)
                     {
-                        yield return new Match(player1, player2);
+                        yield return new Match(player1, player2) { Group = this };
                     }
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            return this.Name;
         }
     }
 }

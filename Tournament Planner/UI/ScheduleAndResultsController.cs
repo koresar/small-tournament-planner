@@ -69,6 +69,7 @@ namespace Tournament_Planner.UI
         {
             this.editingControl.AllowStart(this.selectedMatch.Progress == MatchProgress.PossibleToStart);
             this.editingControl.AllowResultEntering(this.selectedMatch.Progress == MatchProgress.InProgress || this.selectedMatch.Progress == MatchProgress.Finished);
+            this.editingControl.PopulateMatchData(this.selectedMatch);
         }
 
         public override void OnEnteringStep()

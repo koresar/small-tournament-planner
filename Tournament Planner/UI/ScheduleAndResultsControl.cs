@@ -12,9 +12,12 @@ namespace Tournament_Planner.UI
 {
     public partial class ScheduleAndResultsControl : UserControl
     {
+        private List<MaskedTextBox> gameResultsControls;
+
         public ScheduleAndResultsControl()
         {
             this.InitializeComponent();
+            this.gameResultsControls = new List<MaskedTextBox>() { this.txtGame1, this.txtGame2, this.txtGame3 };
         }
 
         public event Action<Match> MatchSelected;
@@ -25,10 +28,22 @@ namespace Tournament_Planner.UI
 
         public void SetDataSources(BL.TournamentData tournamentData)
         {
+            var previousSelectedMatch = this.tblMatches.SelectedRows.Count == 1 ? (Match)this.tblMatches.SelectedRows[0].DataBoundItem : null;
+
             var bs = new BindingSource();
             bs.DataSource = tournamentData.Schedule;
             this.tblMatches.DataSource = bs;
             this.tblMatches.AutoSizeAllCells();
+
+            if (previousSelectedMatch != null)
+            {
+                var row = this.tblMatches.Rows.Cast<DataGridViewRow>().FirstOrDefault(r => r.DataBoundItem == previousSelectedMatch);
+                if (row != null)
+                {
+                    this.tblMatches.ClearSelection();
+                    row.Selected = true;
+                }
+            }
         }
 
         public void AllowStart(bool allow)
@@ -71,9 +86,7 @@ namespace Tournament_Planner.UI
 
         public IEnumerable<Game> GetGameData()
         {
-            yield return this.GetGameScores(this.txtGame1);
-            yield return this.GetGameScores(this.txtGame2);
-            yield return this.GetGameScores(this.txtGame3);
+            return this.gameResultsControls.Select(c => this.GetGameScores(c));
         }
 
         private Game GetGameScores(MaskedTextBox maskedTextBox)
@@ -94,6 +107,30 @@ namespace Tournament_Planner.UI
         public void SetGameDataError(string errorMessage)
         {
             this.errorProvider.SetError(this.pnlGames, errorMessage);
+        }
+
+        public void PopulateMatchData(Match match)
+        {
+            this.errorProvider.Clear();
+
+            this.gameResultsControls.ForEach(c => c.Clear());
+            if (match.Games != null)
+            {
+                int counter = 0;
+                foreach (var g in match.Games)
+                {
+                    this.gameResultsControls[counter].Text = g.ToString();
+                    counter++;
+                }
+            }
+
+            this.lblGroup.Text = string.Empty;
+            if (match.Group != null)
+            {
+                this.lblGroup.Text = string.Format("Group {0}", match.Group.Name);
+            }
+
+            this.lblPlayerVsPlayer.Text = string.Format("{0} vs {1}", match.Player1.FullName, match.Player2.FullName);
         }
     }
 }
