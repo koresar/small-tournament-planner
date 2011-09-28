@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tblMatches = new System.Windows.Forms.DataGridView();
+            this.groupControl = new Tournament_Planner.UI.GroupControl();
             this.pnlResult = new System.Windows.Forms.Panel();
             this.pnlGames = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,8 +41,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtGame2 = new System.Windows.Forms.MaskedTextBox();
             this.lblGroup = new System.Windows.Forms.Label();
-            this.lblPlayerVsPlayer = new System.Windows.Forms.Label();
             this.btnFinish = new System.Windows.Forms.Button();
+            this.lblPlayerVsPlayer = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -66,6 +67,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.groupControl);
             this.splitContainer1.Panel2.Controls.Add(this.pnlResult);
             this.splitContainer1.Panel2.Controls.Add(this.btnStart);
             this.splitContainer1.Size = new System.Drawing.Size(886, 591);
@@ -85,12 +87,20 @@
             this.tblMatches.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.tblMatches.Size = new System.Drawing.Size(439, 591);
             this.tblMatches.TabIndex = 0;
-            this.tblMatches.SelectionChanged += new System.EventHandler(this.tblMatches_SelectionChanged);
+            // 
+            // groupControl
+            // 
+            this.groupControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupControl.Location = new System.Drawing.Point(11, 175);
+            this.groupControl.Name = "groupControl";
+            this.groupControl.Size = new System.Drawing.Size(425, 154);
+            this.groupControl.TabIndex = 6;
             // 
             // pnlResult
             // 
-            this.pnlResult.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlResult.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlResult.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlResult.Controls.Add(this.pnlGames);
             this.pnlResult.Controls.Add(this.lblGroup);
@@ -170,8 +180,8 @@
             // 
             // lblGroup
             // 
-            this.lblGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lblGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblGroup.Location = new System.Drawing.Point(5, 0);
             this.lblGroup.Name = "lblGroup";
@@ -180,22 +190,10 @@
             this.lblGroup.Text = "Group X";
             this.lblGroup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblPlayerVsPlayer
-            // 
-            this.lblPlayerVsPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPlayerVsPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblPlayerVsPlayer.Location = new System.Drawing.Point(4, 36);
-            this.lblPlayerVsPlayer.Name = "lblPlayerVsPlayer";
-            this.lblPlayerVsPlayer.Size = new System.Drawing.Size(429, 23);
-            this.lblPlayerVsPlayer.TabIndex = 3;
-            this.lblPlayerVsPlayer.Text = "Player vs Player";
-            this.lblPlayerVsPlayer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // btnFinish
             // 
-            this.btnFinish.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFinish.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFinish.Location = new System.Drawing.Point(3, 109);
             this.btnFinish.Name = "btnFinish";
             this.btnFinish.Size = new System.Drawing.Size(430, 21);
@@ -204,10 +202,22 @@
             this.btnFinish.UseVisualStyleBackColor = true;
             this.btnFinish.Click += new System.EventHandler(this.btnFinish_Click);
             // 
+            // lblPlayerVsPlayer
+            // 
+            this.lblPlayerVsPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPlayerVsPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPlayerVsPlayer.Location = new System.Drawing.Point(4, 36);
+            this.lblPlayerVsPlayer.Name = "lblPlayerVsPlayer";
+            this.lblPlayerVsPlayer.Size = new System.Drawing.Size(429, 23);
+            this.lblPlayerVsPlayer.TabIndex = 3;
+            this.lblPlayerVsPlayer.Text = "Player vs Player";
+            this.lblPlayerVsPlayer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // btnStart
             // 
-            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStart.Location = new System.Drawing.Point(2, 4);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(438, 23);
@@ -257,5 +267,6 @@
         private System.Windows.Forms.Label lblGroup;
         private System.Windows.Forms.Panel pnlGames;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private GroupControl groupControl;
     }
 }

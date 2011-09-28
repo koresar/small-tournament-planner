@@ -8,6 +8,8 @@ namespace Tournament_Planner.BL
 {
     public class Group : BindingList<Player>
     {
+        private MatchesCollection groupMatches;
+
         public Group() : base()
         {
         }
@@ -24,7 +26,22 @@ namespace Tournament_Planner.BL
 
         public string Name { get; private set; }
 
-        public IEnumerable<Match> BuildSchedule()
+        public MatchesCollection GetGroupMatches()
+        {
+            if (this.groupMatches == null)
+            {
+                this.groupMatches = new MatchesCollection(this.BuildSchedule().ToList());
+            }
+
+            return this.groupMatches;
+        }
+
+        public IEnumerable<Match> GetPlayerMatches(Player player)
+        {
+            return this.GetGroupMatches().Where(m => m.Player1 == player || m.Player2 == player);
+        }
+
+        private IEnumerable<Match> BuildSchedule()
         {
             for (int i = 0; i < this.Count; i++)
             {

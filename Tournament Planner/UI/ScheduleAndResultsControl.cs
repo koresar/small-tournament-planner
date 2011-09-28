@@ -18,6 +18,7 @@ namespace Tournament_Planner.UI
         {
             this.InitializeComponent();
             this.gameResultsControls = new List<MaskedTextBox>() { this.txtGame1, this.txtGame2, this.txtGame3 };
+            this.tblMatches.SelectionChanged += new System.EventHandler(this.tblMatches_SelectionChanged);
         }
 
         public event Action<Match> MatchSelected;
@@ -25,6 +26,11 @@ namespace Tournament_Planner.UI
         public event Action StartMatch;
 
         public event Action FinishMatch;
+
+        public GroupControl GetGroupControl()
+        {
+            return this.groupControl;
+        }
 
         public void SetDataSources(BL.TournamentData tournamentData)
         {
@@ -37,12 +43,26 @@ namespace Tournament_Planner.UI
 
             if (previousSelectedMatch != null)
             {
-                var row = this.tblMatches.Rows.Cast<DataGridViewRow>().FirstOrDefault(r => r.DataBoundItem == previousSelectedMatch);
-                if (row != null)
-                {
-                    this.tblMatches.ClearSelection();
-                    row.Selected = true;
-                }
+                this.SelectMatch(previousSelectedMatch);
+            }
+        }
+
+        public void SelectMatch(Match match)
+        {
+            var currentSelection = this.tblMatches.SelectedRows.Count == 1 ? (Match)this.tblMatches.SelectedRows[0].DataBoundItem : null;
+            if (currentSelection == match)
+            {
+                return;
+            }
+
+            this.tblMatches.SelectionChanged -= new System.EventHandler(this.tblMatches_SelectionChanged);
+            this.tblMatches.ClearSelection();
+            this.tblMatches.SelectionChanged += new System.EventHandler(this.tblMatches_SelectionChanged);
+
+            var row = this.tblMatches.Rows.Cast<DataGridViewRow>().FirstOrDefault(r => r.DataBoundItem == match);
+            if (row != null)
+            {
+                row.Selected = true;
             }
         }
 
@@ -61,10 +81,7 @@ namespace Tournament_Planner.UI
             if (this.MatchSelected != null)
             {
                 var match = this.tblMatches.SelectedRows.Count == 1 ? (Match)this.tblMatches.SelectedRows[0].DataBoundItem : null;
-                if (match != null)
-                {
-                    this.MatchSelected(match);
-                }
+                this.MatchSelected(match);
             }
         }
 
@@ -112,25 +129,29 @@ namespace Tournament_Planner.UI
         public void PopulateMatchData(Match match)
         {
             this.errorProvider.Clear();
-
             this.gameResultsControls.ForEach(c => c.Clear());
-            if (match.Games != null)
-            {
-                int counter = 0;
-                foreach (var g in match.Games)
-                {
-                    this.gameResultsControls[counter].Text = g.ToString();
-                    counter++;
-                }
-            }
-
             this.lblGroup.Text = string.Empty;
-            if (match.Group != null)
-            {
-                this.lblGroup.Text = string.Format("Group {0}", match.Group.Name);
-            }
+            this.lblPlayerVsPlayer.Text = string.Empty;
 
-            this.lblPlayerVsPlayer.Text = string.Format("{0} vs {1}", match.Player1.FullName, match.Player2.FullName);
+            if (match != null)
+            {
+                if (match.Games != null)
+                {
+                    int counter = 0;
+                    foreach (var g in match.Games)
+                    {
+                        this.gameResultsControls[counter].Text = g.ToString();
+                        counter++;
+                    }
+                }
+
+                if (match.Group != null)
+                {
+                    this.lblGroup.Text = string.Format("Group {0}", match.Group.Name);
+                }
+
+                this.lblPlayerVsPlayer.Text = string.Format("{0} vs {1}", match.Player1.FullName, match.Player2.FullName);
+            }
         }
     }
 }

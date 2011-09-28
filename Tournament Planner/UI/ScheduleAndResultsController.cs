@@ -10,15 +10,38 @@ namespace Tournament_Planner.UI
     {
         private ScheduleAndResultsControl editingControl;
         private Match selectedMatch;
+        private GroupController groupController;
 
         public ScheduleAndResultsController(TournamentData tournamentData)
             : base(tournamentData)
         {
             this.editingControl = new ScheduleAndResultsControl();
             this.Control = this.editingControl;
-            this.editingControl.MatchSelected += this.editingControl_MatchSelected;
+
+            this.editingControl.MatchSelected += this.MatchInListSelected;
             this.editingControl.StartMatch += this.editingControl_StartMatch;
             this.editingControl.FinishMatch += this.editingControl_FinishMatch;
+
+            this.groupController = new GroupController(this.editingControl.GetGroupControl());
+            this.groupController.MatchSelected += this.MatchInGroupGridSelected;
+        }
+
+        private bool clickFromGroup = false;
+
+        private void MatchInGroupGridSelected(Match match)
+        {
+            if (match != null)
+            {
+                if (this.selectedMatch == match)
+                {
+                    return;
+                }
+
+                clickFromGroup = true;
+                this.RefreshCurrentMatchData();
+                this.editingControl.SelectMatch(match);
+                clickFromGroup = false;
+            }
         }
 
         private void editingControl_StartMatch()
@@ -59,17 +82,34 @@ namespace Tournament_Planner.UI
             this.RefreshCurrentMatchData();
         }
 
-        private void editingControl_MatchSelected(Match match)
+        private void MatchInListSelected(Match match)
         {
             this.selectedMatch = match;
+            if (!clickFromGroup)
+            {
+                this.groupController.ForceSelectMatch(match);
+            }
+
             this.RefreshCurrentMatchData();
         }
 
         private void RefreshCurrentMatchData()
         {
-            this.editingControl.AllowStart(this.selectedMatch.Progress == MatchProgress.PossibleToStart);
-            this.editingControl.AllowResultEntering(this.selectedMatch.Progress == MatchProgress.InProgress || this.selectedMatch.Progress == MatchProgress.Finished);
-            this.editingControl.PopulateMatchData(this.selectedMatch);
+            if (this.selectedMatch == null)
+            {
+                this.editingControl.AllowStart(false);
+                this.editingControl.AllowResultEntering(false);
+                this.editingControl.PopulateMatchData(null);
+                this.groupController.SetDataSource(null);
+            }
+            else
+            {
+                this.editingControl.AllowStart(this.selectedMatch.Progress == MatchProgress.PossibleToStart);
+                this.editingControl.AllowResultEntering(this.selectedMatch.Progress == MatchProgress.InProgress || this.selectedMatch.Progress == MatchProgress.Finished);
+                this.editingControl.PopulateMatchData(this.selectedMatch);
+                this.groupController.SetDataSource(this.selectedMatch.Group);
+                this.groupController.TrySelectMatch(this.selectedMatch);
+            }
         }
 
         public override void OnEnteringStep()

@@ -68,6 +68,13 @@
     </Compile>
     <Compile Include="UI\EnterPlayersController.cs" />
     <Compile Include="BL\Game.cs" />
+    <Compile Include="UI\GroupControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\GroupControl.Designer.cs">
+      <DependentUpon>GroupControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\GroupController.cs" />
     <Compile Include="UI\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +108,9 @@
     <Compile Include="UI\UiExtensionMethods.cs" />
     <EmbeddedResource Include="UI\EnterPlayersControl.resx">
       <DependentUpon>EnterPlayersControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\GroupControl.resx">
+      <DependentUpon>GroupControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

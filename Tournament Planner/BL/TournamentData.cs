@@ -45,7 +45,7 @@ namespace Tournament_Planner.BL
             this.Schedule.Clear();
             foreach (Group group in this.Groups)
             {
-                foreach (Match match in group.BuildSchedule())
+                foreach (Match match in group.GetGroupMatches())
                 {
                     this.Schedule.Add(match);
                 }
