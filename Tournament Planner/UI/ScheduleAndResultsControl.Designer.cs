@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tblMatches = new System.Windows.Forms.DataGridView();
-            this.groupControl = new Tournament_Planner.UI.GroupControl();
             this.pnlResult = new System.Windows.Forms.Panel();
             this.pnlGames = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
@@ -45,6 +44,7 @@
             this.lblPlayerVsPlayer = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.groupControl = new Tournament_Planner.UI.GroupControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -87,15 +87,6 @@
             this.tblMatches.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.tblMatches.Size = new System.Drawing.Size(439, 591);
             this.tblMatches.TabIndex = 0;
-            // 
-            // groupControl
-            // 
-            this.groupControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupControl.Location = new System.Drawing.Point(11, 175);
-            this.groupControl.Name = "groupControl";
-            this.groupControl.Size = new System.Drawing.Size(425, 154);
-            this.groupControl.TabIndex = 6;
             // 
             // pnlResult
             // 
@@ -151,7 +142,7 @@
             this.txtGame3.Mask = "00:00";
             this.txtGame3.Name = "txtGame3";
             this.txtGame3.Size = new System.Drawing.Size(43, 20);
-            this.txtGame3.TabIndex = 1;
+            this.txtGame3.TabIndex = 2;
             // 
             // txtGame1
             // 
@@ -159,7 +150,7 @@
             this.txtGame1.Mask = "00:00";
             this.txtGame1.Name = "txtGame1";
             this.txtGame1.Size = new System.Drawing.Size(43, 20);
-            this.txtGame1.TabIndex = 1;
+            this.txtGame1.TabIndex = 0;
             // 
             // label2
             // 
@@ -229,6 +220,15 @@
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
+            // 
+            // groupControl
+            // 
+            this.groupControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupControl.Location = new System.Drawing.Point(11, 175);
+            this.groupControl.Name = "groupControl";
+            this.groupControl.Size = new System.Drawing.Size(425, 114);
+            this.groupControl.TabIndex = 1;
             // 
             // ScheduleAndResultsControl
             // 

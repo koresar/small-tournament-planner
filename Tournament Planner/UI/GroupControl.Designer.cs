@@ -47,7 +47,7 @@
             this.tblData.ReadOnly = true;
             this.tblData.RowHeadersVisible = false;
             this.tblData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.tblData.Size = new System.Drawing.Size(303, 154);
+            this.tblData.Size = new System.Drawing.Size(303, 120);
             this.tblData.TabIndex = 0;
             // 
             // GroupControl
@@ -56,7 +56,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tblData);
             this.Name = "GroupControl";
-            this.Size = new System.Drawing.Size(303, 154);
+            this.Size = new System.Drawing.Size(303, 120);
             ((System.ComponentModel.ISupportInitialize)(this.tblData)).EndInit();
             this.ResumeLayout(false);
 
