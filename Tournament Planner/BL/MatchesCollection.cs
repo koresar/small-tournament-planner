@@ -24,7 +24,7 @@ namespace Tournament_Planner.BL
 
             if (matchProgress == MatchProgress.InProgress)
             {
-                // Set some matches as impossible to start due to players became busy.
+                // Set some matches as impossible to begin due to players became busy.
                 foreach (var m in this.Where(x => x.Progress == MatchProgress.PossibleToStart && x != match))
                 {
                     if (match.IsAnyPlayerSame(m))
@@ -35,7 +35,7 @@ namespace Tournament_Planner.BL
             }
             else if (matchProgress == MatchProgress.Finished)
             {
-                // Set some matches as possible to start due to players ended the game and free to play next match.
+                // Set some matches as possible to begin due to players ended the game and free to play a next match.
                 foreach (var m in this.Where(x => x.Progress == MatchProgress.ImpossbileToStart && x != match))
                 {
                     if (match.IsAnyPlayerSame(m))

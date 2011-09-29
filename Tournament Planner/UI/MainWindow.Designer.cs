@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.btnNext = new System.Windows.Forms.Button();
             this.pnlCurrentStepContainer = new System.Windows.Forms.Panel();
             this.lblHello = new System.Windows.Forms.Label();
@@ -47,9 +48,9 @@
             // 
             // pnlCurrentStepContainer
             // 
-            this.pnlCurrentStepContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlCurrentStepContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCurrentStepContainer.Controls.Add(this.lblHello);
             this.pnlCurrentStepContainer.Location = new System.Drawing.Point(13, 13);
             this.pnlCurrentStepContainer.Name = "pnlCurrentStepContainer";
@@ -73,8 +74,8 @@
             this.ClientSize = new System.Drawing.Size(1032, 569);
             this.Controls.Add(this.pnlCurrentStepContainer);
             this.Controls.Add(this.btnNext);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainWindow";
-            this.ShowIcon = false;
             this.Text = "Tournament Planner";
             this.pnlCurrentStepContainer.ResumeLayout(false);
             this.pnlCurrentStepContainer.PerformLayout();
