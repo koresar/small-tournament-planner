@@ -47,6 +47,12 @@ namespace Tournament_Planner.UI
             set { this.cmbCompany.SelectedItem = value; }
         }
 
+        public Skill Skill
+        {
+            get { return (Skill)this.cmbSkill.SelectedItem; }
+            set { this.cmbSkill.SelectedItem = value; }
+        }
+
         public void SetDataSources(TournamentData data)
         {
             var bsCompany = new BindingSource();
@@ -61,6 +67,8 @@ namespace Tournament_Planner.UI
 
             this.cmbCompany.DataSource = data.Companies;
             this.cmbCompany.DisplayMember = "Name";
+
+            cmbSkill.DataSource = Enum.GetValues(typeof(Skill));
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -119,6 +127,7 @@ namespace Tournament_Planner.UI
             this.textBox2.Text = player.SecondName;
             this.cmbGender.SelectedItem = player.Gender;
             this.cmbCompany.SelectedItem = player.Company;
+            this.cmbSkill.SelectedItem = player.Skill;
         }
 
         internal void SetFirstNameError(string p)

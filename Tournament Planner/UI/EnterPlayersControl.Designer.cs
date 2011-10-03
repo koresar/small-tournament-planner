@@ -46,6 +46,8 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.cmbSkill = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.companiesCollectionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tblPlayers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -61,9 +63,9 @@
             // 
             this.tblPlayers.AllowUserToAddRows = false;
             this.tblPlayers.AllowUserToDeleteRows = false;
-            this.tblPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tblPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -74,13 +76,13 @@
             this.tblPlayers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.tblPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tblPlayers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.tblPlayers.Location = new System.Drawing.Point(0, 89);
+            this.tblPlayers.Location = new System.Drawing.Point(0, 110);
             this.tblPlayers.MultiSelect = false;
             this.tblPlayers.Name = "tblPlayers";
             this.tblPlayers.ReadOnly = true;
             this.tblPlayers.RowHeadersVisible = false;
             this.tblPlayers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tblPlayers.Size = new System.Drawing.Size(540, 401);
+            this.tblPlayers.Size = new System.Drawing.Size(540, 380);
             this.tblPlayers.TabIndex = 0;
             this.tblPlayers.SelectionChanged += new System.EventHandler(this.tblPlayers_SelectionChanged);
             this.tblPlayers.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tblPlayers_KeyUp);
@@ -97,8 +99,10 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.cmbSkill);
             this.splitContainer1.Panel2.Controls.Add(this.btnLoadList);
             this.splitContainer1.Panel2.Controls.Add(this.btnSaveList);
+            this.splitContainer1.Panel2.Controls.Add(this.label5);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.Controls.Add(this.label4);
             this.splitContainer1.Panel2.Controls.Add(this.label3);
@@ -134,7 +138,7 @@
             // btnLoadList
             // 
             this.btnLoadList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoadList.Location = new System.Drawing.Point(401, 58);
+            this.btnLoadList.Location = new System.Drawing.Point(401, 81);
             this.btnLoadList.Name = "btnLoadList";
             this.btnLoadList.Size = new System.Drawing.Size(139, 23);
             this.btnLoadList.TabIndex = 6;
@@ -145,7 +149,7 @@
             // btnSaveList
             // 
             this.btnSaveList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveList.Location = new System.Drawing.Point(256, 58);
+            this.btnSaveList.Location = new System.Drawing.Point(256, 81);
             this.btnSaveList.Name = "btnSaveList";
             this.btnSaveList.Size = new System.Drawing.Size(139, 23);
             this.btnSaveList.TabIndex = 6;
@@ -155,8 +159,8 @@
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(31, 35);
             this.label2.Name = "label2";
@@ -186,8 +190,8 @@
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(49, 9);
             this.label1.Name = "label1";
@@ -228,8 +232,8 @@
             // 
             // textBox2
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.Location = new System.Drawing.Point(112, 32);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(160, 20);
@@ -238,8 +242,8 @@
             // 
             // textBox1
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Location = new System.Drawing.Point(112, 6);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(160, 20);
@@ -249,6 +253,28 @@
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
+            // 
+            // cmbSkill
+            // 
+            this.cmbSkill.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbSkill.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSkill.FormattingEnabled = true;
+            this.cmbSkill.Location = new System.Drawing.Point(112, 59);
+            this.cmbSkill.Name = "cmbSkill";
+            this.cmbSkill.Size = new System.Drawing.Size(160, 21);
+            this.cmbSkill.TabIndex = 7;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(80, 62);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(26, 13);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Skill";
             // 
             // companiesCollectionBindingSource
             // 
@@ -293,5 +319,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnLoadList;
         private System.Windows.Forms.Button btnSaveList;
+        private System.Windows.Forms.ComboBox cmbSkill;
+        private System.Windows.Forms.Label label5;
     }
 }

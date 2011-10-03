@@ -73,7 +73,8 @@ namespace Tournament_Planner.UI
                     this.editControl.FirstNameText,
                     this.editControl.SecondNameText, 
                     this.editControl.Gender,
-                    this.editControl.Comapny));
+                    this.editControl.Comapny,
+                    this.editControl.Skill));
             }
         }
 

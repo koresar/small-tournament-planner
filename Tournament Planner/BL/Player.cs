@@ -3,6 +3,13 @@ using System.ComponentModel;
 
 namespace Tournament_Planner.BL
 {
+    public enum Skill
+    {
+        Beginner,
+        Average,
+        Good,
+    }
+
     public class Player
     {
         private const string forbiddenCharacters = ",";
@@ -10,7 +17,7 @@ namespace Tournament_Planner.BL
         private string firstName;
         private string secondName;
 
-        public Player(string firstName, string secondName, Gender gender, Company company)
+        public Player(string firstName, string secondName, Gender gender, Company company, Skill skill)
         {
             if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(secondName) || company == null)
             {
@@ -21,6 +28,7 @@ namespace Tournament_Planner.BL
             this.SecondName = secondName;
             this.Gender = gender;
             this.Company = company;
+            this.Skill = skill;
         }
 
         [DisplayName("First name")]
@@ -37,6 +45,9 @@ namespace Tournament_Planner.BL
 
         [DisplayName("Group")]
         public Group StartGroup { get; set; }
+
+        [DisplayName("Skill")]
+        public Skill Skill { get; set; }
 
         [Browsable(false)]
         public string FullName
@@ -65,19 +76,25 @@ namespace Tournament_Planner.BL
         public string ToCsvString()
         {
             return string.Format(
-                "{1}{0}{2}{0}{3}{0}{4}", 
+                "{1}{0}{2}{0}{3}{0}{4}{0}{5}", 
                 csvSeparator,
                 this.FirstName,
                 this.SecondName,
                 this.Gender == BL.Gender.Male ? "M" : "F",
-                this.Company.Name);
+                this.Company.Name,
+                (int)this.Skill);
         }
 
         public static Player FromCsvString(string line)
         {
             string[] items = line.Split(csvSeparator.ToCharArray());
 
-            return new Player(items[0], items[1], items[2] == "M" ? Gender.Male : Gender.Female, new Company(items[3]));
+            return new Player(
+                items[0], 
+                items[1], 
+                items[2] == "M" ? Gender.Male : Gender.Female, 
+                new Company(items[3]),
+                (Skill)int.Parse(items[4]));
         }
     }
 }
