@@ -8,6 +8,7 @@ namespace Tournament_Planner.UI
     public class EnterPlayersController : StepController
     {
         private EnterPlayersControl editControl;
+        private Player lastSelectedPlayer;
 
         public EnterPlayersController(Tournament tournamentData) : base(tournamentData)
         {
@@ -19,6 +20,7 @@ namespace Tournament_Planner.UI
             this.editControl.SetDataSources(this.TournamentData);
 
             this.editControl.AddClicked += this.control_AddClicked;
+            this.editControl.ApplyClicked += this.control_ApplyClicked;
             this.editControl.DataChanged += this.editControl_DataChanged;
             this.editControl.SelectedPlayerChanged += this.editControl_SelectedPlayerChanged;
             this.editControl.DeletePlayerClicked += this.editControl_DeletePlayerClicked;
@@ -26,6 +28,7 @@ namespace Tournament_Planner.UI
             this.editControl.LoadClicked += this.editControl_LoadClicked;
 
             this.TournamentData.Players.ListChanged += this.Players_ListChanged;
+            this.AllowProceed = this.TournamentData.Players.IsNumberOfPlayersAcceptable();
         }
 
         private void editControl_SaveClicked()
@@ -58,6 +61,7 @@ namespace Tournament_Planner.UI
 
         private void editControl_SelectedPlayerChanged(Player player)
         {
+            this.lastSelectedPlayer = player;
             this.editControl.PopulateData(player);
         }
 
@@ -78,6 +82,19 @@ namespace Tournament_Planner.UI
                     Company = this.editControl.Company.Name,
                     Skill = this.editControl.Skill,
                 }));
+            }
+        }
+
+        private void control_ApplyClicked()
+        {
+            if (this.lastSelectedPlayer != null && this.ValidateEnteredData())
+            {                
+                this.lastSelectedPlayer.FirstName = this.editControl.FirstNameText;
+                this.lastSelectedPlayer.SecondName = this.editControl.SecondNameText;
+                this.lastSelectedPlayer.Gender = this.editControl.Gender;
+                this.lastSelectedPlayer.Company = this.editControl.Company;
+                this.lastSelectedPlayer.Skill = this.editControl.Skill;
+                this.editControl.Refresh();
             }
         }
 

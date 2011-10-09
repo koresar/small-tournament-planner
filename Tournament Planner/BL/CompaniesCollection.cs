@@ -26,5 +26,10 @@ namespace Tournament_Planner.BL
         {
             return this.Select(c => c.GetXmlData()).ToList();
         }
+
+        public Company GetByName(string name)
+        {
+            return this.First(c => c.Name == name);
+        }
     }
 }

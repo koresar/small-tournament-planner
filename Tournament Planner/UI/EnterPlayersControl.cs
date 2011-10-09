@@ -14,6 +14,8 @@ namespace Tournament_Planner.UI
 
         public event Action AddClicked;
 
+        public event Action ApplyClicked;
+
         public event Action SaveClicked;
 
         public event Action LoadClicked;
@@ -78,6 +80,14 @@ namespace Tournament_Planner.UI
             if (this.AddClicked != null)
             {
                 this.AddClicked();
+            }
+        }
+
+        private void btnApply_Click(object sender, EventArgs e)
+        {
+            if (this.ApplyClicked != null)
+            {
+                this.ApplyClicked();
             }
         }
 
