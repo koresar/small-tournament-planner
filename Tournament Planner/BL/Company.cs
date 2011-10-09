@@ -1,30 +1,42 @@
 ﻿using System;
 using System.ComponentModel;
+using Tournament_Planner.BL.XmlSerializable;
 
 namespace Tournament_Planner.BL
 {
-    public class Company
+    public class Company : IXmlSerializable<CompanyData>
     {
-        private const string forbiddenCharacters = ",";
-        private string name;
+        private CompanyData data;
 
+        /// <summary>
+        /// This constructor is necessary for UI binding.
+        /// </summary>
         public Company()
         {
-
+            this.data = new CompanyData() { Name = "Enter company name" };
         }
 
-        public Company(string name)
+        public Company(CompanyData data)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(data.Name))
             {
-                throw new ArgumentException("name should not be null");
+                throw new ArgumentException("Company name should not be empty.");
             }
 
-            this.Name = name;
+            this.data = data;
         }
 
         [DisplayName("Company name")]
-        public string Name { get { return this.name; } set { this.name = value.Replace(forbiddenCharacters, string.Empty); } }
+        public string Name
+        {
+            get { return this.data.Name; }
+            set { this.data.Name = value; }
+        }
+
+        public CompanyData GetXmlData()
+        {
+            return this.data;
+        }
 
         public override bool Equals(object obj)
         {
@@ -33,7 +45,7 @@ namespace Tournament_Planner.BL
 
         public override int GetHashCode()
         {
-            return this.Name == null ? 0 : this.Name.GetHashCode();
+            return string.IsNullOrEmpty(this.Name) ? 0 : this.Name.GetHashCode();
         }
 
         public override string ToString()

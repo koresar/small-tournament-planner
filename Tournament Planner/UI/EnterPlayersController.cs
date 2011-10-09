@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 using Tournament_Planner.BL;
+using Tournament_Planner.BL.XmlSerializable;
 
 namespace Tournament_Planner.UI
 {
@@ -8,7 +9,7 @@ namespace Tournament_Planner.UI
     {
         private EnterPlayersControl editControl;
 
-        public EnterPlayersController(TournamentData tournamentData) : base(tournamentData)
+        public EnterPlayersController(Tournament tournamentData) : base(tournamentData)
         {
             this.ProceedError = "Number of players should be multiple of 4 or 3.";
 
@@ -69,12 +70,14 @@ namespace Tournament_Planner.UI
         {
             if (this.ValidateEnteredData())
             {
-                this.TournamentData.Players.Add(new Player(
-                    this.editControl.FirstNameText,
-                    this.editControl.SecondNameText, 
-                    this.editControl.Gender,
-                    this.editControl.Comapny,
-                    this.editControl.Skill));
+                this.TournamentData.Players.Add(new Player(new PlayerData()
+                {
+                    FirstName = this.editControl.FirstNameText,
+                    SecondName = this.editControl.SecondNameText, 
+                    Gender = this.editControl.Gender,
+                    Company = this.editControl.Company.Name,
+                    Skill = this.editControl.Skill,
+                }));
             }
         }
 
@@ -101,7 +104,7 @@ namespace Tournament_Planner.UI
                 this.editControl.SetSecondNameError(null);
             }
 
-            if (this.editControl.Comapny == null)
+            if (this.editControl.Company == null)
             {
                 this.editControl.SetCompanyError("Add some companies first.");
                 result = false;

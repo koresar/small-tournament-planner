@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Tournament_Planner.BL;
+using Tournament_Planner.BL.XmlSerializable;
 
 namespace Tournament_Planner.UI
 {
@@ -41,7 +42,7 @@ namespace Tournament_Planner.UI
             set { this.cmbGender.SelectedItem = value; }
         }
 
-        public Company Comapny
+        public Company Company
         {
             get { return this.cmbCompany.SelectedItem as Company; }
             set { this.cmbCompany.SelectedItem = value; }
@@ -53,10 +54,11 @@ namespace Tournament_Planner.UI
             set { this.cmbSkill.SelectedItem = value; }
         }
 
-        public void SetDataSources(TournamentData data)
+        public void SetDataSources(Tournament data)
         {
             var bsCompany = new BindingSource();
             bsCompany.DataSource = data.Companies;
+            bsCompany.AllowNew = true;
             this.tblCompanies.DataSource = bsCompany;
 
             var bsPlayers = new BindingSource();

@@ -1,16 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml.Serialization;
 using Tournament_Planner.BL;
+using Tournament_Planner.BL.XmlSerializable;
 
 namespace Tournament_Planner.UI
 {
     public class TournametDataSaveLoad
     {
-        private TournamentData data;
+        private Tournament data;
 
-        public TournametDataSaveLoad(TournamentData data)
+        public TournametDataSaveLoad(Tournament data)
         {
             this.data = data;
         }
@@ -19,12 +20,10 @@ namespace Tournament_Planner.UI
         {
             try
             {
-                using (var stream = File.CreateText(fileName))
+                using (var stream = new MemoryStream())
                 {
-                    foreach (var player in this.data.Players)
-                    {
-                        stream.WriteLine(player.ToCsvString());
-                    }
+                    new XmlSerializer(typeof(TournamentData)).Serialize(stream, this.data.GetXmlData());
+                    File.WriteAllBytes(fileName, stream.ToArray());
                 }
 
                 return true;
@@ -40,30 +39,13 @@ namespace Tournament_Planner.UI
         {
             try
             {
-                List<Player> players = new List<Player>();
-
-                using (var stream = File.OpenText(fileName))
+                TournamentData newData;
+                using (var stream = new MemoryStream(File.ReadAllBytes(fileName)))
                 {
-                    string line = stream.ReadLine();
-                    while (line != null)
-                    {
-                        players.Add(Player.FromCsvString(line));
-                        line = stream.ReadLine();
-                    }
+                    newData = new XmlSerializer(typeof(TournamentData)).Deserialize(stream) as TournamentData;
                 }
 
-                this.data.Players.Clear();
-                foreach (var player in players)
-                {
-                    this.data.Players.Add(player);
-
-                }
-
-                this.data.Companies.Clear();
-                foreach (var company in players.Select(p => p.Company).Distinct().ToList())
-                {
-                    this.data.Companies.Add(company);
-                }
+                this.data.SetXmlData(newData);
 
                 return true;
             }

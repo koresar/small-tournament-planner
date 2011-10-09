@@ -12,7 +12,7 @@ namespace Tournament_Planner.UI
         private MainWindow mainForm;
         private List<StepController> steps;
         private StepController currentStep;
-        private TournamentData tournamentData;
+        private Tournament tournamentData;
 
         public MainWindowController(MainWindow mainForm)
         {
@@ -25,7 +25,7 @@ namespace Tournament_Planner.UI
 
         private void InitializeData()
         {
-            this.tournamentData = new TournamentData();
+            this.tournamentData = new Tournament();
             this.steps = new List<StepController>();
             this.steps.Add(new EnterPlayersController(this.tournamentData));
             this.steps.Add(new ShuffleController(this.tournamentData));

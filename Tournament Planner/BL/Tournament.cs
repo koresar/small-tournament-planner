@@ -1,27 +1,59 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using Tournament_Planner.BL.XmlSerializable;
 
 namespace Tournament_Planner.BL
 {
-    public class TournamentData
+    public class Tournament : IXmlSerializable<TournamentData>
     {
         private char[] GroupNames = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
-        public PlayersCollection Players { get; private set; }
+        private TournamentData data;
+        private PlayersCollection players;
+        private CompaniesCollection companies;
 
-        public CompaniesCollection Companies { get; private set; }
+        public Tournament()
+        {
+            this.data = new TournamentData();
+            this.Schedule = new MatchesCollection();
+            this.Groups = new List<Group>();
+        }
+
+        public PlayersCollection Players
+        {
+            get { return this.players ?? (this.players = new PlayersCollection(this.data.Players)); }
+        }
+
+        public CompaniesCollection Companies
+        {
+            get { return this.companies ?? (this.companies = new CompaniesCollection(this.data.Companies)); }
+        }
 
         public List<Group> Groups { get; private set; }
 
         public MatchesCollection Schedule { get; private set; }
 
-        public TournamentData()
+        public TournamentData GetXmlData()
         {
-            this.Players = new PlayersCollection();
-            this.Companies = new CompaniesCollection();
-            this.Schedule = new MatchesCollection();
-            this.Groups = new List<Group>();
+            this.data.Companies = this.Companies.GetXmlData();
+            this.data.Players = this.Players.GetXmlData();
+            return this.data;
+        }
+
+        public void SetXmlData(TournamentData newData)
+        {
+            this.Players.Clear();
+            foreach (var player in newData.Players)
+            {
+                this.Players.Add(new Player(player));
+            }
+
+            this.Companies.Clear();
+            foreach (var company in newData.Companies.Distinct())
+            {
+                this.Companies.Add(new Company(company));
+            }
         }
 
         public IEnumerable<Group> SplitPeopleOnRandomGroups()

@@ -60,6 +60,11 @@
     <Compile Include="BL\Match.cs" />
     <Compile Include="BL\MatchesCollection.cs" />
     <Compile Include="BL\MatchProgress.cs" />
+    <Compile Include="BL\XmlSerializable\CompanyData.cs" />
+    <Compile Include="BL\XmlSerializable\IXmlSerializable.cs" />
+    <Compile Include="BL\XmlSerializable\PlayerData.cs" />
+    <Compile Include="BL\XmlSerializable\Skill.cs" />
+    <Compile Include="BL\XmlSerializable\TournamentData.cs" />
     <Compile Include="UI\EnterPlayersControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -84,7 +89,7 @@
     <Compile Include="UI\MainWindowController.cs" />
     <Compile Include="BL\Player.cs" />
     <Compile Include="BL\PlayersCollection.cs" />
-    <Compile Include="BL\Gender.cs" />
+    <Compile Include="BL\XmlSerializable\Gender.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\MsgBox.cs" />
@@ -103,7 +108,7 @@
     </Compile>
     <Compile Include="UI\ShuffleController.cs" />
     <Compile Include="UI\StepController.cs" />
-    <Compile Include="BL\TournamentData.cs" />
+    <Compile Include="BL\Tournament.cs" />
     <Compile Include="UI\TournametDataSaveLoad.cs" />
     <Compile Include="UI\UiExtensionMethods.cs" />
     <EmbeddedResource Include="UI\EnterPlayersControl.resx">

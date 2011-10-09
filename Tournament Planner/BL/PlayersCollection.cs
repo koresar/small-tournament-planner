@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System;
+using Tournament_Planner.BL.XmlSerializable;
 
 namespace Tournament_Planner.BL
 {
-    public class PlayersCollection : BindingList<Player>
+    public class PlayersCollection : BindingList<Player>, IXmlSerializable<List<PlayerData>>
     {
         public PlayersCollection() : base()
         {
@@ -13,7 +15,11 @@ namespace Tournament_Planner.BL
         public PlayersCollection(IList<Player> players)
             : base(players)
         {
+        }
 
+        public PlayersCollection(List<PlayerData> list)
+            : this(list.Select(p => new Player(p)).ToList())
+        {
         }
 
         public bool IsNumberOfPlayersAcceptable()
@@ -29,6 +35,11 @@ namespace Tournament_Planner.BL
             }
 
             return this.Count % 4 == 0 ? 4 : 3;
+        }
+
+        public List<PlayerData> GetXmlData()
+        {
+            return this.Select(p => p.GetXmlData()).ToList();
         }
     }
 }

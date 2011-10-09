@@ -9,7 +9,7 @@ namespace Tournament_Planner.UI
 {
     public class StepController
     {
-        public StepController(TournamentData tournamentData)
+        public StepController(Tournament tournamentData)
         {
             this.TournamentData = tournamentData;
         }
@@ -18,7 +18,7 @@ namespace Tournament_Planner.UI
 
         public bool AllowProceed { get; protected set; }
 
-        protected TournamentData TournamentData { get; private set; }
+        protected Tournament TournamentData { get; private set; }
 
         public string ProceedError { get; protected set; }
 

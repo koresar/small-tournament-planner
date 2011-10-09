@@ -12,7 +12,7 @@ namespace Tournament_Planner.UI
 {
     public partial class ShuffleControl : UserControl
     {
-        private TournamentData data;
+        private Tournament data;
 
         public ShuffleControl()
         {
@@ -21,7 +21,7 @@ namespace Tournament_Planner.UI
 
         public event Action DoShuffleClicked;
 
-        public void SetDataSources(TournamentData tournamentData)
+        public void SetDataSources(Tournament tournamentData)
         {
             this.data = tournamentData;
             this.tblPlayers.Rows.Clear();

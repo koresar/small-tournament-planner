@@ -12,7 +12,7 @@ namespace Tournament_Planner.UI
         private Match selectedMatch;
         private GroupController groupController;
 
-        public ScheduleAndResultsController(TournamentData tournamentData)
+        public ScheduleAndResultsController(Tournament tournamentData)
             : base(tournamentData)
         {
             this.editingControl = new ScheduleAndResultsControl();

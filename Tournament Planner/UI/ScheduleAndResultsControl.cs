@@ -32,7 +32,7 @@ namespace Tournament_Planner.UI
             return this.groupControl;
         }
 
-        public void SetDataSources(BL.TournamentData tournamentData)
+        public void SetDataSources(BL.Tournament tournamentData)
         {
             var previousSelectedMatch = this.tblMatches.SelectedRows.Count == 1 ? (Match)this.tblMatches.SelectedRows[0].DataBoundItem : null;
 

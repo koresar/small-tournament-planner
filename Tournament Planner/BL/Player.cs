@@ -1,58 +1,73 @@
 ﻿using System;
 using System.ComponentModel;
+using Tournament_Planner.BL.XmlSerializable;
 
 namespace Tournament_Planner.BL
 {
-    public enum Skill
-    {
-        Beginner,
-        Average,
-        Good,
-    }
-
-    public class Player
+    public class Player : IXmlSerializable<PlayerData>
     {
         private const string forbiddenCharacters = ",";
         private const string csvSeparator = ",";
-        private string firstName;
-        private string secondName;
+        private PlayerData data;
+        private Company company;
 
-        public Player(string firstName, string secondName, Gender gender, Company company, Skill skill)
+        public Player(PlayerData data)
         {
-            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(secondName) || company == null)
+            if (string.IsNullOrEmpty(data.FirstName) || string.IsNullOrEmpty(data.SecondName) || data.Company == null)
             {
                 throw new ArgumentException("Arguments should not be empty.");
             }
 
-            this.FirstName = firstName;
-            this.SecondName = secondName;
-            this.Gender = gender;
-            this.Company = company;
-            this.Skill = skill;
+            this.data = data;
         }
 
         [DisplayName("First name")]
-        public string FirstName { get { return this.firstName; } set { this.firstName = value.Replace(forbiddenCharacters, string.Empty); } }
+        public string FirstName
+        {
+            get { return this.data.FirstName; }
+            set { this.data.FirstName = value.Replace(forbiddenCharacters, string.Empty); }
+        }
 
         [DisplayName("Second name")]
-        public string SecondName { get { return this.secondName; } set { this.secondName = value.Replace(forbiddenCharacters, string.Empty); } }
+        public string SecondName
+        {
+            get { return this.data.SecondName; }
+            set { this.data.SecondName = value.Replace(forbiddenCharacters, string.Empty); }
+        }
 
         [DisplayName("Gender")]
-        public Gender Gender { get; set; }
+        public Gender Gender
+        {
+            get { return this.data.Gender; }
+            set { this.data.Gender = value; }
+        }
 
         [DisplayName("Company")]
-        public Company Company { get; set; }
+        public Company Company
+        {
+            get { return this.company ?? (this.company = new Company(new CompanyData() { Name = this.data.Company })); }
+            set
+            {
+                this.data.Company = value.Name;
+                this.company = value;
+            }
+        }
+
+        [DisplayName("Skill")]
+        public Skill Skill { get { return this.data.Skill; } set { this.data.Skill = value; } }
 
         [DisplayName("Group")]
         public Group StartGroup { get; set; }
-
-        [DisplayName("Skill")]
-        public Skill Skill { get; set; }
 
         [Browsable(false)]
         public string FullName
         {
             get { return string.Format("{0} {1}", this.FirstName, this.SecondName); }
+        }
+
+        public PlayerData GetXmlData()
+        {
+            return this.data;
         }
 
         public override bool Equals(object obj)
@@ -71,30 +86,6 @@ namespace Tournament_Planner.BL
         public override string ToString()
         {
             return string.Format("{0} {1} ({2}), {3}", this.FirstName, this.SecondName, this.Gender, this.Company);
-        }
-
-        public string ToCsvString()
-        {
-            return string.Format(
-                "{1}{0}{2}{0}{3}{0}{4}{0}{5}", 
-                csvSeparator,
-                this.FirstName,
-                this.SecondName,
-                this.Gender == BL.Gender.Male ? "M" : "F",
-                this.Company.Name,
-                (int)this.Skill);
-        }
-
-        public static Player FromCsvString(string line)
-        {
-            string[] items = line.Split(csvSeparator.ToCharArray());
-
-            return new Player(
-                items[0], 
-                items[1], 
-                items[2] == "M" ? Gender.Male : Gender.Female, 
-                new Company(items[3]),
-                (Skill)int.Parse(items[4]));
         }
     }
 }
