@@ -58,6 +58,7 @@ namespace Tournament_Planner.BL
 
         public IEnumerable<Group> SplitPeopleOnRandomGroups()
         {
+            // TODO: Split using skill.
             var rnd = new Random((int)DateTime.Now.Ticks);
             var randomOrderedPlayers = this.Players.Present.OrderBy(p => rnd.Next()).ToList();
             int numberOfPlayersInGroup = this.Players.GetSuggestedNumberOfPlayersInGroup();

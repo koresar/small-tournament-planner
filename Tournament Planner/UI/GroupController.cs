@@ -69,6 +69,7 @@ namespace Tournament_Planner.UI
 
         private string[] GetPlayerRowStrings(int playerOrderNumberInGroup)
         {
+            // TODO: add reverse score. I.e. player score in row displayed first. 1:2 instead of 2:1.
             var player = this.group[playerOrderNumberInGroup];
             var cells = new string[this.GetNumberOfColumnsInGrid()];
             cells[0] = player.FullName;

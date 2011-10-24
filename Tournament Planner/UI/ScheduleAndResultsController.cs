@@ -15,6 +15,7 @@ namespace Tournament_Planner.UI
         public ScheduleAndResultsController(Tournament tournamentData)
             : base(tournamentData)
         {
+            // TODO: Add Save and Load buttons for whole data!
             this.editingControl = new ScheduleAndResultsControl();
             this.Control = this.editingControl;
 
