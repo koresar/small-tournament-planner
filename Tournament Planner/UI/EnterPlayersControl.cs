@@ -56,6 +56,18 @@ namespace Tournament_Planner.UI
             set { this.cmbSkill.SelectedItem = value; }
         }
 
+        public bool Present
+        {
+            get { return this.chkPresent.Checked; }
+            set { this.chkPresent.Checked = value; }
+        }
+
+        public string NumberOfPlayersText
+        {
+            get { return this.lblNumberOfPlayer.Text; }
+            set { this.lblNumberOfPlayer.Text = value; }
+        }
+
         public void SetDataSources(Tournament data)
         {
             var bsCompany = new BindingSource();
@@ -140,6 +152,7 @@ namespace Tournament_Planner.UI
             this.cmbGender.SelectedItem = player.Gender;
             this.cmbCompany.SelectedItem = player.Company;
             this.cmbSkill.SelectedItem = player.Skill;
+            this.chkPresent.Checked = player.Present;
         }
 
         internal void SetFirstNameError(string p)

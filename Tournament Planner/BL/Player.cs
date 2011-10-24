@@ -59,6 +59,9 @@ namespace Tournament_Planner.BL
         [DisplayName("Group")]
         public Group StartGroup { get; set; }
 
+        [DisplayName("Present")]
+        public bool Present { get { return this.data.Present; } set { this.data.Present = value; } }
+
         [Browsable(false)]
         public string FullName
         {

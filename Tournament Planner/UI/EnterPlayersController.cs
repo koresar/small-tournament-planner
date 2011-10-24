@@ -81,6 +81,7 @@ namespace Tournament_Planner.UI
                     Gender = this.editControl.Gender,
                     Company = this.editControl.Company.Name,
                     Skill = this.editControl.Skill,
+                    Present = this.editControl.Present,
                 }));
             }
         }
@@ -94,6 +95,7 @@ namespace Tournament_Planner.UI
                 this.lastSelectedPlayer.Gender = this.editControl.Gender;
                 this.lastSelectedPlayer.Company = this.editControl.Company;
                 this.lastSelectedPlayer.Skill = this.editControl.Skill;
+                this.lastSelectedPlayer.Present = this.editControl.Present;
                 this.editControl.Refresh();
             }
         }
@@ -136,6 +138,8 @@ namespace Tournament_Planner.UI
 
         private void Players_ListChanged(object sender, ListChangedEventArgs e)
         {
+            this.editControl.NumberOfPlayersText = string.Format("Number of players: {0}", this.TournamentData.Players.Count);
+
             this.AllowProceed = this.TournamentData.Players.IsNumberOfPlayersAcceptable();
         }
     }

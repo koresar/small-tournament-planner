@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tblPlayers = new System.Windows.Forms.DataGridView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tblCompanies = new System.Windows.Forms.DataGridView();
@@ -42,14 +42,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnApply = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.cmbCompany = new System.Windows.Forms.ComboBox();
             this.cmbGender = new System.Windows.Forms.ComboBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.chkPresent = new System.Windows.Forms.CheckBox();
             this.companiesCollectionBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnApply = new System.Windows.Forms.Button();
+            this.lblNumberOfPlayer = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tblPlayers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -67,14 +69,14 @@
             this.tblPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.tblPlayers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.tblPlayers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.tblPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tblPlayers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.tblPlayers.Location = new System.Drawing.Point(0, 110);
@@ -100,6 +102,8 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.lblNumberOfPlayer);
+            this.splitContainer1.Panel2.Controls.Add(this.chkPresent);
             this.splitContainer1.Panel2.Controls.Add(this.cmbSkill);
             this.splitContainer1.Panel2.Controls.Add(this.btnLoadList);
             this.splitContainer1.Panel2.Controls.Add(this.btnSaveList);
@@ -121,14 +125,14 @@
             // 
             // tblCompanies
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.tblCompanies.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.tblCompanies.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.tblCompanies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tblCompanies.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblCompanies.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -223,6 +227,17 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "First Name";
             // 
+            // btnApply
+            // 
+            this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnApply.Location = new System.Drawing.Point(435, 3);
+            this.btnApply.Name = "btnApply";
+            this.btnApply.Size = new System.Drawing.Size(63, 49);
+            this.btnApply.TabIndex = 4;
+            this.btnApply.Text = "Apply to selected";
+            this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
+            // 
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -278,20 +293,31 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // chkPresent
+            // 
+            this.chkPresent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkPresent.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkPresent.Checked = true;
+            this.chkPresent.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPresent.Location = new System.Drawing.Point(251, 58);
+            this.chkPresent.Name = "chkPresent";
+            this.chkPresent.Size = new System.Drawing.Size(96, 17);
+            this.chkPresent.TabIndex = 8;
+            this.chkPresent.Text = "Present today";
+            this.chkPresent.UseVisualStyleBackColor = true;
+            // 
             // companiesCollectionBindingSource
             // 
             this.companiesCollectionBindingSource.DataSource = typeof(Tournament_Planner.BL.CompaniesCollection);
             // 
-            // btnApply
+            // lblNumberOfPlayer
             // 
-            this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnApply.Location = new System.Drawing.Point(435, 3);
-            this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(63, 49);
-            this.btnApply.TabIndex = 4;
-            this.btnApply.Text = "Apply to selected";
-            this.btnApply.UseVisualStyleBackColor = true;
-            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
+            this.lblNumberOfPlayer.AutoSize = true;
+            this.lblNumberOfPlayer.Location = new System.Drawing.Point(7, 90);
+            this.lblNumberOfPlayer.Name = "lblNumberOfPlayer";
+            this.lblNumberOfPlayer.Size = new System.Drawing.Size(95, 13);
+            this.lblNumberOfPlayer.TabIndex = 9;
+            this.lblNumberOfPlayer.Text = "Number of players:";
             // 
             // EnterPlayersControl
             // 
@@ -335,5 +361,7 @@
         private System.Windows.Forms.ComboBox cmbSkill;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnApply;
+        private System.Windows.Forms.CheckBox chkPresent;
+        private System.Windows.Forms.Label lblNumberOfPlayer;
     }
 }

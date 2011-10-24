@@ -22,5 +22,8 @@ namespace Tournament_Planner.BL.XmlSerializable
 
         [XmlElement("Skill")]
         public Skill Skill { get; set; }
+
+        [XmlElement("Present")]
+        public bool Present { get; set; }
     }
 }
