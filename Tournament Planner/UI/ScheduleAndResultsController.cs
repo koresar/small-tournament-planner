@@ -28,6 +28,11 @@ namespace Tournament_Planner.UI
 
         private bool clickFromGroup = false;
 
+        public override bool IsAllowProceed()
+        {
+            return false;
+        }
+
         private void MatchInGroupGridSelected(Match match)
         {
             if (match != null)

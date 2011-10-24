@@ -61,5 +61,10 @@ namespace Tournament_Planner.BL
         {
             return this.Name;
         }
+
+        public int GetPlayerScore(Player player)
+        {
+            return this.groupMatches.GetPlayerMatches(player).Select(m => m.GetPlayerScore(player)).Sum();
+        }
     }
 }

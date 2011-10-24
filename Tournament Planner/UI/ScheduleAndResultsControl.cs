@@ -18,7 +18,7 @@ namespace Tournament_Planner.UI
         {
             this.InitializeComponent();
             this.gameResultsControls = new List<MaskedTextBox>() { this.txtGame1, this.txtGame2, this.txtGame3 };
-            this.tblMatches.SelectionChanged += new System.EventHandler(this.tblMatches_SelectionChanged);
+            this.tblMatches.SelectionChanged += this.tblMatches_SelectionChanged;
         }
 
         public event Action<Match> MatchSelected;

@@ -47,29 +47,37 @@ namespace Tournament_Planner.UI
             }
         }
 
+        private int GetNumberOfColumnsInGrid()
+        {
+            // First with players names, several more with match vs each other player, and one more for score.
+            return this.group.Count + 2;
+        }
+
         private string[] GetFirstRowStrings()
         {
-            var headers = new string[this.group.Count + 1];
+            var headers = new string[this.GetNumberOfColumnsInGrid()];
             headers[0] = string.Format("Group {0}", this.group.Name);
             for (int i = 0; i < this.group.Count; i++)
             {
                 headers[i + 1] = this.group[i].FullName;
             }
 
+            headers[headers.Length - 1] = "Score";
+
             return headers;
         }
 
-        private string[] GetPlayerRowStrings(int playerNumberInGroup)
+        private string[] GetPlayerRowStrings(int playerOrderNumberInGroup)
         {
-            var player = this.group[playerNumberInGroup];
-            var cells = new string[this.group.Count + 1];
+            var player = this.group[playerOrderNumberInGroup];
+            var cells = new string[this.GetNumberOfColumnsInGrid()];
             cells[0] = player.FullName;
             var playerMatches = this.group.GetPlayerMatches(player).ToList();
             int playerMatchesCounter = 0;
             for (int i = 0; i < this.group.Count; i++)
             {
                 string cellValue;
-                if (i == playerNumberInGroup)
+                if (i == playerOrderNumberInGroup)
                 {
                     cellValue = "-";
                 }
@@ -82,13 +90,15 @@ namespace Tournament_Planner.UI
                 cells[i + 1] = cellValue;
             }
 
+            cells[cells.Length - 1] = this.group.GetPlayerScore(player).ToString();
+
             return cells;
         }
 
         private object[] GetPlayerRowTags(int playerNumberInGroup)
         {
             var player = this.group[playerNumberInGroup];
-            var cells = new object[this.group.Count + 1];
+            var cells = new object[this.GetNumberOfColumnsInGrid()];
             cells[0] = player.FullName;
             var playerMatches = this.group.GetPlayerMatches(player).ToList();
             int playerMatchesCounter = 0;

@@ -42,7 +42,7 @@ namespace Tournament_Planner.UI
             {
                 throw new InvalidOperationException("No more steps.");
             }
-            else if (!this.currentStep.AllowProceed)
+            else if (!this.currentStep.IsAllowProceed())
             {
                 MsgBox.Error(this.currentStep.ProceedError, "Impossible to proceed");
             }

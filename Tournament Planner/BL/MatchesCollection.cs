@@ -48,7 +48,12 @@ namespace Tournament_Planner.BL
 
         public bool IsPlayerBusy(Player player)
         {
-            return this.Any(m => m.Progress == MatchProgress.InProgress && (m.Player1 == player || m.Player2 == player));
+            return this.Any(m => m.Progress == MatchProgress.InProgress && m.IsPlayerPlaysHere(player));
+        }
+
+        public IEnumerable<Match> GetPlayerMatches(Player player)
+        {
+            return this.Where(m => m.IsPlayerPlaysHere(player));
         }
     }
 }

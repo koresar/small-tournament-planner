@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Linq;
+using System.ComponentModel;
 using System.Windows.Forms;
 using Tournament_Planner.BL;
 using Tournament_Planner.BL.XmlSerializable;
@@ -28,7 +29,11 @@ namespace Tournament_Planner.UI
             this.editControl.LoadClicked += this.editControl_LoadClicked;
 
             this.TournamentData.Players.ListChanged += this.Players_ListChanged;
-            this.AllowProceed = this.TournamentData.Players.IsNumberOfPlayersAcceptable();
+        }
+
+        public override bool IsAllowProceed()
+        {
+            return this.TournamentData.Players.IsNumberOfPlayersAcceptable();
         }
 
         private void editControl_SaveClicked()
@@ -138,9 +143,7 @@ namespace Tournament_Planner.UI
 
         private void Players_ListChanged(object sender, ListChangedEventArgs e)
         {
-            this.editControl.NumberOfPlayersText = string.Format("Number of players: {0}", this.TournamentData.Players.Count);
-
-            this.AllowProceed = this.TournamentData.Players.IsNumberOfPlayersAcceptable();
+            this.editControl.NumberOfPlayersText = string.Format("Number of players: {0}", this.TournamentData.Players.Present.Count());
         }
     }
 }

@@ -15,6 +15,15 @@ namespace Tournament_Planner.BL
             this.Games = new List<Game>();
         }
 
+        [DisplayName("Group")]
+        public string GroupName
+        {
+            get
+            {
+                return this.Group.Name;
+            }
+        }
+
         [DisplayName("Progress")]
         public MatchProgress Progress { get; set; }
 
@@ -64,14 +73,32 @@ namespace Tournament_Planner.BL
 
         public bool IsAnyPlayerSame(Match m)
         {
-            return
-                this.Player1 == m.Player1 || this.Player1 == m.Player2 ||
-                this.Player2 == m.Player1 || this.Player2 == m.Player2;
+            return this.IsPlayerPlaysHere(m.Player1) || this.IsPlayerPlaysHere(m.Player2);
+        }
+
+        public bool IsPlayerPlaysHere(Player p)
+        {
+            return this.Player1 == p || this.Player2 == p;
         }
 
         public override string ToString()
         {
             return string.Format("{0} vs {1}", this.Player1, this.Player2);
+        }
+
+        public int GetPlayerScore(Player player)
+        {
+            if (!this.IsPlayerPlaysHere(player))
+            {
+                throw new ArgumentException("This player does not plays in the match!");
+            }
+
+            if (this.Progress != MatchProgress.Finished)
+            {
+                return 0;
+            }
+
+            return player == this.Winner ? 3 : 0;
         }
     }
 }

@@ -12,7 +12,6 @@ namespace Tournament_Planner.UI
 
         public ShuffleController(Tournament tournamentData) : base(tournamentData)
         {
-            this.AllowProceed = true;
             this.editingControl = new ShuffleControl();
             this.Control = this.editingControl;
 

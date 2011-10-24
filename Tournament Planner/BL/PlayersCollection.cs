@@ -22,9 +22,15 @@ namespace Tournament_Planner.BL
         {
         }
 
+        public IEnumerable<Player> Present
+        {
+            get { return this.Where(p => p.Present); }
+        }
+
         public bool IsNumberOfPlayersAcceptable()
         {
-            return this.Count % 4 == 0 || this.Count % 3 == 0;
+            var numberOfPresentPlayer = this.Present.Count();
+            return numberOfPresentPlayer > 0 && (numberOfPresentPlayer % 4 == 0 || numberOfPresentPlayer % 3 == 0);
         }
 
         public int GetSuggestedNumberOfPlayersInGroup()
@@ -34,7 +40,8 @@ namespace Tournament_Planner.BL
                 throw new InvalidOperationException("Impossible to split onto groups that number of players.");
             }
 
-            return this.Count % 4 == 0 ? 4 : 3;
+            var numberOfPresentPlayer = this.Present.Count();
+            return numberOfPresentPlayer % 4 == 0 ? 4 : 3;
         }
 
         public List<PlayerData> GetXmlData()

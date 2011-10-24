@@ -59,7 +59,7 @@ namespace Tournament_Planner.BL
         public IEnumerable<Group> SplitPeopleOnRandomGroups()
         {
             var rnd = new Random((int)DateTime.Now.Ticks);
-            var randomOrderedPlayers = this.Players.OrderBy(p => rnd.Next()).ToList();
+            var randomOrderedPlayers = this.Players.Present.OrderBy(p => rnd.Next()).ToList();
             int numberOfPlayersInGroup = this.Players.GetSuggestedNumberOfPlayersInGroup();
             for (int i = 0; i < randomOrderedPlayers.Count / numberOfPlayersInGroup; i++)
             {

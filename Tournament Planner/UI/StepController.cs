@@ -16,7 +16,10 @@ namespace Tournament_Planner.UI
 
         public Control Control { get; protected set; }
 
-        public bool AllowProceed { get; protected set; }
+        public virtual bool IsAllowProceed()
+        {
+            return true;
+        }
 
         protected Tournament TournamentData { get; private set; }
 
