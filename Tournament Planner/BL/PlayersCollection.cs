@@ -8,6 +8,9 @@ namespace Tournament_Planner.BL
 {
     public class PlayersCollection : BindingList<Player>, IXmlSerializable<List<PlayerData>>
     {
+        public const int MaximumNumberOfPlayersInGroup = 5;
+        public const int MinimumNumberOfPlayersInGroup = 3;
+
         public PlayersCollection() : base()
         {
         }
@@ -29,8 +32,7 @@ namespace Tournament_Planner.BL
 
         public bool IsNumberOfPlayersAcceptable()
         {
-            var numberOfPresentPlayer = this.Present.Count();
-            return numberOfPresentPlayer > 0 && (numberOfPresentPlayer % 4 == 0 || numberOfPresentPlayer % 3 == 0);
+            return this.SilentlyGetSuggestedNumberOfPlayersInGroup() != 0;
         }
 
         public int GetSuggestedNumberOfPlayersInGroup()
@@ -40,13 +42,31 @@ namespace Tournament_Planner.BL
                 throw new InvalidOperationException("Impossible to split onto groups that number of players.");
             }
 
-            var numberOfPresentPlayer = this.Present.Count();
-            return numberOfPresentPlayer % 4 == 0 ? 4 : 3;
+            return this.SilentlyGetSuggestedNumberOfPlayersInGroup();
         }
 
         public List<PlayerData> GetXmlData()
         {
             return this.Select(p => p.GetXmlData()).ToList();
+        }
+
+        private int SilentlyGetSuggestedNumberOfPlayersInGroup()
+        {
+            var numberOfPresentPlayer = this.Present.Count();
+            if (numberOfPresentPlayer == 0)
+            {
+                return 0;
+            }
+
+            for (int i = MaximumNumberOfPlayersInGroup; i >= MinimumNumberOfPlayersInGroup; i--)
+            {
+                if (numberOfPresentPlayer % i == 0)
+                {
+                    return i;
+                }
+            }
+
+            return 0;
         }
     }
 }

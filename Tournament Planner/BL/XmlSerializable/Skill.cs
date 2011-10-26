@@ -6,7 +6,10 @@ using System.Xml.Serialization;
 
 namespace Tournament_Planner.BL.XmlSerializable
 {
-    public enum Skill
+    /// <summary>
+    /// Player average skill. The higher the number - the higher the skill.
+    /// </summary>
+    public enum Skill : byte
     {
         [XmlEnum("Unknown")]
         Unknown,

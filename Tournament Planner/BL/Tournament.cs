@@ -58,13 +58,23 @@ namespace Tournament_Planner.BL
 
         public IEnumerable<Group> SplitPeopleOnRandomGroups()
         {
-            // TODO: Split using skill.
             var rnd = new Random((int)DateTime.Now.Ticks);
-            var randomOrderedPlayers = this.Players.Present.OrderBy(p => rnd.Next()).ToList();
+
+            var values = Enum.GetValues(typeof(Skill)).Cast<byte>().ToList();
+
+            var randomSortedBySkill = 
+                this.Players. // Take players
+                Present. // Select only those who are present today
+                OrderBy(p => rnd.Next()). // Shuffle them all in order to not be splitted using the order of entrance screen
+                OrderByDescending(p => p.Skill). // Sort by skill. Most skillful goes first.
+                ToList();
+
             int numberOfPlayersInGroup = this.Players.GetSuggestedNumberOfPlayersInGroup();
-            for (int i = 0; i < randomOrderedPlayers.Count / numberOfPlayersInGroup; i++)
+            int numberOfGroups = randomSortedBySkill.Count / numberOfPlayersInGroup;
+
+            for (int i = 0; i < numberOfGroups; i++)
             {
-                yield return new Group(randomOrderedPlayers.GetRange(i * numberOfPlayersInGroup, numberOfPlayersInGroup), this.GroupNames[i].ToString());
+                yield return new Group(randomSortedBySkill.Where((p, position) => position % numberOfGroups == i).ToList(), this.GroupNames[i].ToString());
             }
         }
 
