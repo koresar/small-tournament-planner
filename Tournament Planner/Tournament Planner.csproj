@@ -61,7 +61,9 @@
     <Compile Include="BL\MatchesCollection.cs" />
     <Compile Include="BL\MatchProgress.cs" />
     <Compile Include="BL\XmlSerializable\CompanyData.cs" />
+    <Compile Include="BL\XmlSerializable\GameData.cs" />
     <Compile Include="BL\XmlSerializable\IXmlSerializable.cs" />
+    <Compile Include="BL\XmlSerializable\MatchData.cs" />
     <Compile Include="BL\XmlSerializable\PlayerData.cs" />
     <Compile Include="BL\XmlSerializable\Skill.cs" />
     <Compile Include="BL\XmlSerializable\TournamentData.cs" />

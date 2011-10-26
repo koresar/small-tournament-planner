@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
+using Tournament_Planner.BL.XmlSerializable;
 
 namespace Tournament_Planner.BL
 {
     public class Match
     {
+        public Match(MatchData data)
+        {
+
+        }
+
         public Match(Player player1, Player player2)
         {
             this.Player1 = player1;
