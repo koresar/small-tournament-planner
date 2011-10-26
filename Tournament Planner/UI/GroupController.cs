@@ -57,22 +57,23 @@ namespace Tournament_Planner.UI
         {
             var headers = new string[this.GetNumberOfColumnsInGrid()];
             headers[0] = string.Format("Group {0}", this.group.Name);
+            headers[1] = "Score";
+
             for (int i = 0; i < this.group.Count; i++)
             {
-                headers[i + 1] = this.group[i].FullName;
+                headers[i + 2] = this.group[i].FullName;
             }
-
-            headers[headers.Length - 1] = "Score";
 
             return headers;
         }
 
         private string[] GetPlayerRowStrings(int playerOrderNumberInGroup)
         {
-            // TODO: add reverse score. I.e. player score in row displayed first. 1:2 instead of 2:1.
             var player = this.group[playerOrderNumberInGroup];
             var cells = new string[this.GetNumberOfColumnsInGrid()];
             cells[0] = player.FullName;
+            cells[1] = this.group.GetPlayerScore(player).ToString();
+
             var playerMatches = this.group.GetPlayerMatches(player).ToList();
             int playerMatchesCounter = 0;
             for (int i = 0; i < this.group.Count; i++)
@@ -84,14 +85,12 @@ namespace Tournament_Planner.UI
                 }
                 else
                 {
-                    cellValue = playerMatches[playerMatchesCounter].StringResult;
+                    cellValue = playerMatches[playerMatchesCounter].GetStringResult(player);
                     playerMatchesCounter++;
                 }
 
-                cells[i + 1] = cellValue;
+                cells[i + 2] = cellValue;
             }
-
-            cells[cells.Length - 1] = this.group.GetPlayerScore(player).ToString();
 
             return cells;
         }
@@ -116,7 +115,7 @@ namespace Tournament_Planner.UI
                     playerMatchesCounter++;
                 }
 
-                cells[i + 1] = cellValue;
+                cells[i + 2] = cellValue;
             }
 
             return cells;

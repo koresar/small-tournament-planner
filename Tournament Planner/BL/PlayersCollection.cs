@@ -45,6 +45,18 @@ namespace Tournament_Planner.BL
             return this.SilentlyGetSuggestedNumberOfPlayersInGroup();
         }
 
+        public IEnumerable<int> GetPossibleNumberOfPlayersInGroup()
+        {
+            var numberOfPresentPlayer = this.Present.Count();
+            for (int i = MaximumNumberOfPlayersInGroup; i >= MinimumNumberOfPlayersInGroup; i--)
+            {
+                if (numberOfPresentPlayer % i == 0)
+                {
+                    yield return i;
+                }
+            }
+        }
+
         public List<PlayerData> GetXmlData()
         {
             return this.Select(p => p.GetXmlData()).ToList();

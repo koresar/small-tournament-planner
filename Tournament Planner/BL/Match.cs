@@ -38,18 +38,7 @@ namespace Tournament_Planner.BL
         {
             get 
             {
-                if (this.Games.Count == 0)
-                {
-                    return string.Empty;
-                }
-
-                int gamesWon1 = this.Games.Count(g => g.Score1 > g.Score2);
-                int gamesWon2 = this.Games.Count(g => g.Score1 < g.Score2);
-                var template = 
-                    this.Games.Count == 3 ? "{0}:{1} ({2} {3} {4})" : 
-                    this.Games.Count == 2 ? "{0}:{1} ({2} {3})" :
-                    "INTERNAL ERROR!";
-                return string.Format(template, gamesWon1, gamesWon2, this.Games[0], this.Games[1], this.Games.ElementAtOrDefault(2));
+                return this.GetStringResult(this.Player1);
             }
         }
 
@@ -69,6 +58,33 @@ namespace Tournament_Planner.BL
 
                 return gamesWon1 > gamesWon2 ? this.Player1 : this.Player2;
             }
+        }
+
+        public string GetStringResult(Player firstScorePlayer)
+        {
+            if (!this.IsPlayerPlaysHere(firstScorePlayer))
+            {
+                throw new ArgumentException("This player does not plays in the match!");
+            }
+            
+            if (this.Games.Count == 0)
+            {
+                return string.Empty;
+            }
+
+            bool inverse = this.Player2 == firstScorePlayer;
+            bool threeGame = this.Games.Count == 3;
+
+            int gamesWon1 = this.Games.Count(g => g.Score1 > g.Score2);
+            int gamesWon2 = this.Games.Count(g => g.Score1 < g.Score2);
+            var template = (!inverse ? "{0}:{1}" : "{1}:{0}") + (threeGame ? " ({2} {3} {4})" : " ({2} {3})");
+            return string.Format(
+                template, 
+                gamesWon1, 
+                gamesWon2, 
+                this.Games[0].GetStringResult(inverse), 
+                this.Games[1].GetStringResult(inverse),
+                threeGame ? this.Games[2].GetStringResult(inverse) : string.Empty);
         }
 
         public bool IsAnyPlayerSame(Match m)

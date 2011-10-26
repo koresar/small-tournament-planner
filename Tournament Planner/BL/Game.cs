@@ -17,9 +17,14 @@ namespace Tournament_Planner.BL
 
         public int Score2 { get; private set; }
 
+        public string GetStringResult(bool inverse = false)
+        {
+            return string.Format(!inverse ? "{0}-{1}" : "{1}-{0}", this.Score1, this.Score2);            
+        }
+
         public override string ToString()
         {
-            return string.Format("{0}-{1}", this.Score1, this.Score2);
+            return this.GetStringResult();
         }
     }
 }

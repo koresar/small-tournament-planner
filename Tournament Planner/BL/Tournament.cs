@@ -56,7 +56,7 @@ namespace Tournament_Planner.BL
             }
         }
 
-        public IEnumerable<Group> SplitPeopleOnRandomGroups()
+        public IEnumerable<Group> SplitPeopleOnRandomGroups(int preferredNumberOfPlayersInGroup)
         {
             var rnd = new Random((int)DateTime.Now.Ticks);
 
@@ -69,7 +69,7 @@ namespace Tournament_Planner.BL
                 OrderByDescending(p => p.Skill). // Sort by skill. Most skillful goes first.
                 ToList();
 
-            int numberOfPlayersInGroup = this.Players.GetSuggestedNumberOfPlayersInGroup();
+            int numberOfPlayersInGroup = preferredNumberOfPlayersInGroup;
             int numberOfGroups = randomSortedBySkill.Count / numberOfPlayersInGroup;
 
             for (int i = 0; i < numberOfGroups; i++)

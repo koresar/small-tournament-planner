@@ -227,7 +227,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupControl.Location = new System.Drawing.Point(11, 175);
             this.groupControl.Name = "groupControl";
-            this.groupControl.Size = new System.Drawing.Size(425, 114);
+            this.groupControl.Size = new System.Drawing.Size(425, 161);
             this.groupControl.TabIndex = 1;
             // 
             // ScheduleAndResultsControl

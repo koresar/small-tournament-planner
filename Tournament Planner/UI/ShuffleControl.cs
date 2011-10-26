@@ -21,6 +21,11 @@ namespace Tournament_Planner.UI
 
         public event Action DoShuffleClicked;
 
+        public int SelectedNumberOfPlayersInGroup
+        {
+            get { return (int)this.cmbPlayersInGroup.SelectedItem; }
+        }
+
         public void SetDataSources(Tournament tournamentData)
         {
             this.data = tournamentData;
@@ -29,6 +34,9 @@ namespace Tournament_Planner.UI
             {
                 this.tblPlayers.Rows.Add(p.FullName);
             }
+
+            this.cmbPlayersInGroup.Items.AddRange(this.data.Players.GetPossibleNumberOfPlayersInGroup().Cast<object>().ToArray());
+            this.cmbPlayersInGroup.SelectedItem = this.data.Players.GetSuggestedNumberOfPlayersInGroup();
         }
 
         private void btnDoShuffle_Click(object sender, EventArgs e)
@@ -46,6 +54,7 @@ namespace Tournament_Planner.UI
             foreach (var group in groups)
             {
                 var gridControl = new DataGridView();
+                gridControl.Height += 5; // This is a magic number. Nope. It's a MAGIC number. UI magic happened after this line introduced.
                 gridControl.RowHeadersVisible = false;
 
                 var bs = new BindingSource();

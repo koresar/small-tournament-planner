@@ -26,7 +26,7 @@ namespace Tournament_Planner.UI
         public void Shuffle()
         {
             this.TournamentData.Groups.Clear();
-            foreach (var group in this.TournamentData.SplitPeopleOnRandomGroups())
+            foreach (var group in this.TournamentData.SplitPeopleOnRandomGroups(this.editingControl.SelectedNumberOfPlayersInGroup))
             {
                 this.TournamentData.Groups.Add(group);
             }
