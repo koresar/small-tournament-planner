@@ -43,6 +43,11 @@ namespace Tournament_Planner.BL
 
         private void CheckId(IIdReferenceItem p)
         {
+            if (this.lastId == 0 && this.Count > 0)
+            {
+                this.lastId = this.Select(i => i.Id).Max();
+            }
+
             if (p.Id == 0)
             {
                 this.lastId++;
