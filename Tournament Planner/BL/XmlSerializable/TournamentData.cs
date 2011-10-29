@@ -12,6 +12,7 @@ namespace Tournament_Planner.BL.XmlSerializable
         {
             this.Companies = new List<CompanyData>();
             this.Players = new List<PlayerData>();
+            this.Groups = new List<GroupData>();
         }
 
         [XmlArray("Companies")]
@@ -21,5 +22,9 @@ namespace Tournament_Planner.BL.XmlSerializable
         [XmlArray("Players")]
         [XmlArrayItem("Player")]
         public List<PlayerData> Players { get; set; }
+
+        [XmlArray("Groups")]
+        [XmlArrayItem("Group")]
+        public List<GroupData> Groups { get; set; }
     }
 }

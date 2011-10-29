@@ -3,28 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
+using Tournament_Planner.BL.XmlSerializable;
 
 namespace Tournament_Planner.BL
 {
-    public class Group : BindingList<Player>
+    public class Group : IdItem<GroupData>, IIdReferenceItem
     {
         private MatchesCollection groupMatches;
+        private BindingList<Player> players = new BindingList<Player>();
 
-        public Group() : base()
+        public Group(GroupData data, IRepository<Player> playersRepo) : base(data)
         {
+            foreach (var playerId in this.Data.Players)
+            {
+                this.players.Add(playersRepo.GetById(playerId));
+            }
         }
 
-        public Group(IList<Player> players, string name)
-            : base(players)
+        public Group(IList<Player> players, string name)  : base()
         {
             this.Name = name;
             foreach (var player in players)
             {
-                player.StartGroup = this;
+                this.players.Add(player);
             }
+
+            //foreach (var player in players)
+            //{
+            //    player.StartGroup = this;
+            //}
         }
 
-        public string Name { get; private set; }
+        public BindingList<Player> Players
+        {
+            get { return this.players; }
+        }
+
+        public string Name 
+        {
+            get { return this.Data.Name; }
+            private set { this.Data.Name = value; } 
+        }
 
         public MatchesCollection GetGroupMatches()
         {
@@ -43,12 +62,12 @@ namespace Tournament_Planner.BL
 
         private IEnumerable<Match> BuildSchedule()
         {
-            for (int i = 0; i < this.Count; i++)
+            for (int i = 0; i < this.players.Count; i++)
             {
-                for (int j = i + 1; j < this.Count; j++)
+                for (int j = i + 1; j < this.players.Count; j++)
                 {
-                    var player1 = this[i];
-                    var player2 = this[j];
+                    var player1 = this.players[i];
+                    var player2 = this.players[j];
                     if (player1 != player2)
                     {
                         yield return new Match(player1, player2) { Group = this };
@@ -65,6 +84,12 @@ namespace Tournament_Planner.BL
         public int GetPlayerScore(Player player)
         {
             return this.groupMatches.GetPlayerMatches(player).Select(m => m.GetPlayerScore(player)).Sum();
+        }
+
+        public GroupData GetXmlData()
+        {
+            this.Data.Players = this.players.Select(p => p.Id).ToList();
+            return base.GetXmlData();
         }
     }
 }

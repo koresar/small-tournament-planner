@@ -6,12 +6,16 @@ using System.Xml.Serialization;
 
 namespace Tournament_Planner.BL.XmlSerializable
 {
-    public class CompanyData : IIdReferenceItem
+    public class GroupData : IIdReferenceItem
     {
         [XmlAttribute("Id")]
         public int Id { get; set; }
 
         [XmlElement("Name")]
         public string Name { get; set; }
+
+        [XmlArray("Players")]
+        [XmlArrayItem("Id")]
+        public List<int> Players { get; set; }
     }
 }

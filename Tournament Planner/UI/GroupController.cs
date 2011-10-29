@@ -41,7 +41,7 @@ namespace Tournament_Planner.UI
             this.control.Visible = true;
             var firstRow = this.GetFirstRowStrings();
             this.control.AddRow(firstRow, firstRow.Cast<object>().ToArray());
-            for (int i = 0; i < this.group.Count; i++)
+            for (int i = 0; i < this.group.Players.Count; i++)
             {
                 this.control.AddRow(this.GetPlayerRowStrings(i), this.GetPlayerRowTags(i));
             }
@@ -50,7 +50,7 @@ namespace Tournament_Planner.UI
         private int GetNumberOfColumnsInGrid()
         {
             // First with players names, several more with match vs each other player, and one more for score.
-            return this.group.Count + 2;
+            return this.group.Players.Count + 2;
         }
 
         private string[] GetFirstRowStrings()
@@ -59,9 +59,9 @@ namespace Tournament_Planner.UI
             headers[0] = string.Format("Group {0}", this.group.Name);
             headers[1] = "Score";
 
-            for (int i = 0; i < this.group.Count; i++)
+            for (int i = 0; i < this.group.Players.Count; i++)
             {
-                headers[i + 2] = this.group[i].FullName;
+                headers[i + 2] = this.group.Players[i].FullName;
             }
 
             return headers;
@@ -69,14 +69,14 @@ namespace Tournament_Planner.UI
 
         private string[] GetPlayerRowStrings(int playerOrderNumberInGroup)
         {
-            var player = this.group[playerOrderNumberInGroup];
+            var player = this.group.Players[playerOrderNumberInGroup];
             var cells = new string[this.GetNumberOfColumnsInGrid()];
             cells[0] = player.FullName;
             cells[1] = this.group.GetPlayerScore(player).ToString();
 
             var playerMatches = this.group.GetPlayerMatches(player).ToList();
             int playerMatchesCounter = 0;
-            for (int i = 0; i < this.group.Count; i++)
+            for (int i = 0; i < this.group.Players.Count; i++)
             {
                 string cellValue;
                 if (i == playerOrderNumberInGroup)
@@ -97,12 +97,12 @@ namespace Tournament_Planner.UI
 
         private object[] GetPlayerRowTags(int playerNumberInGroup)
         {
-            var player = this.group[playerNumberInGroup];
+            var player = this.group.Players[playerNumberInGroup];
             var cells = new object[this.GetNumberOfColumnsInGrid()];
             cells[0] = player.FullName;
             var playerMatches = this.group.GetPlayerMatches(player).ToList();
             int playerMatchesCounter = 0;
-            for (int i = 0; i < this.group.Count; i++)
+            for (int i = 0; i < this.group.Players.Count; i++)
             {
                 object cellValue;
                 if (i == playerNumberInGroup)

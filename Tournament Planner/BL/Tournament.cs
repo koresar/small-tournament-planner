@@ -10,29 +10,21 @@ namespace Tournament_Planner.BL
         private char[] GroupNames = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
         private TournamentData data;
-        private PlayersCollection players;
-        private CompaniesCollection companies;
 
         public Tournament()
         {
             this.data = new TournamentData();
+            this.Companies = new CompaniesCollection(this.data.Companies);
+            this.Players = new PlayersCollection(this.data.Players, this.Companies);
+            this.Groups = new GroupsCollection(this.data.Groups, this.Players);
             this.Schedule = new MatchesCollection();
-            this.Groups = new List<Group>();
-            this.companies = new CompaniesCollection(this.data.Companies);
-            this.players = new PlayersCollection(this.data.Players, this.companies);
         }
 
-        public PlayersCollection Players
-        {
-            get { return this.players; }
-        }
+        public CompaniesCollection Companies { get; private set; }
 
-        public CompaniesCollection Companies
-        {
-            get { return this.companies; }
-        }
+        public PlayersCollection Players { get; private set; }
 
-        public List<Group> Groups { get; private set; }
+        public GroupsCollection Groups { get; private set; }
 
         public MatchesCollection Schedule { get; private set; }
 
@@ -40,6 +32,7 @@ namespace Tournament_Planner.BL
         {
             this.data.Companies = this.Companies.GetXmlData();
             this.data.Players = this.Players.GetXmlData();
+            this.data.Groups = this.Groups.GetXmlData();
             return this.data;
         }
 
@@ -54,11 +47,16 @@ namespace Tournament_Planner.BL
             this.Players.Clear();
             foreach (var player in newData.Players)
             {
-                this.Players.Add(new Player(player, this.companies));
+                this.Players.Add(new Player(player, this.Companies));
+            }
+
+            this.Groups.Clear();
+            foreach (var group in newData.Groups)
+            {
+                this.Groups.Add(new Group(group, this.Players));
             }
 
             this.Schedule = new MatchesCollection();
-            this.Groups = new List<Group>();
         }
 
         public IEnumerable<Group> SplitPeopleOnRandomGroups(int preferredNumberOfPlayersInGroup)

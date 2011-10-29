@@ -57,12 +57,17 @@
     <Compile Include="BL\CompaniesCollection.cs" />
     <Compile Include="BL\Company.cs" />
     <Compile Include="BL\Group.cs" />
+    <Compile Include="BL\GroupsCollection.cs" />
+    <Compile Include="BL\XmlSerializable\IIdReferenceItem.cs" />
     <Compile Include="BL\IRepository.cs" />
     <Compile Include="BL\Match.cs" />
     <Compile Include="BL\MatchesCollection.cs" />
     <Compile Include="BL\MatchProgress.cs" />
+    <Compile Include="BL\Repository.cs" />
+    <Compile Include="BL\IdItem.cs" />
     <Compile Include="BL\XmlSerializable\CompanyData.cs" />
     <Compile Include="BL\XmlSerializable\GameData.cs" />
+    <Compile Include="BL\XmlSerializable\GroupData.cs" />
     <Compile Include="BL\XmlSerializable\IXmlSerializable.cs" />
     <Compile Include="BL\XmlSerializable\MatchData.cs" />
     <Compile Include="BL\XmlSerializable\PlayerData.cs" />

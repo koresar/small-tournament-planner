@@ -6,16 +6,14 @@ using Tournament_Planner.BL.XmlSerializable;
 
 namespace Tournament_Planner.BL
 {
-    public class PlayersCollection : BindingList<Player>, IXmlSerializable<List<PlayerData>>
+    public class PlayersCollection : Repository<Player, PlayerData>
     {
         public const int MaximumNumberOfPlayersInGroup = 5;
         public const int MinimumNumberOfPlayersInGroup = 3;
-        private IRepository<Company> companiesRepo;
 
         public PlayersCollection(List<PlayerData> list, IRepository<Company> companiesRepo)
             : base(list.Select(p => new Player(p, companiesRepo)).ToList())
         {
-            this.companiesRepo = companiesRepo;
         }
 
         public IEnumerable<Player> Present
@@ -48,11 +46,6 @@ namespace Tournament_Planner.BL
                     yield return i;
                 }
             }
-        }
-
-        public List<PlayerData> GetXmlData()
-        {
-            return this.Select(p => p.GetXmlData()).ToList();
         }
 
         private int SilentlyGetSuggestedNumberOfPlayersInGroup()

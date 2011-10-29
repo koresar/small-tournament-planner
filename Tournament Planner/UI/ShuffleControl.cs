@@ -47,7 +47,7 @@ namespace Tournament_Planner.UI
             }
         }
 
-        public void DrawGroups(List<Group> groups)
+        public void DrawGroups(IEnumerable<Group> groups)
         {
             this.flowLayoutPanel.Controls.Clear();
 
