@@ -46,7 +46,7 @@ namespace Tournament_Planner.BL
         public void SetXmlData(TournamentData newData)
         {
             this.Companies.Clear();
-            foreach (var company in newData.Companies.Distinct())
+            foreach (var company in newData.Companies)
             {
                 this.Companies.Add(new Company(company));
             }
