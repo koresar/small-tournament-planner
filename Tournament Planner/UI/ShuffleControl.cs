@@ -58,7 +58,7 @@ namespace Tournament_Planner.UI
                 gridControl.RowHeadersVisible = false;
 
                 var bs = new BindingSource();
-                bs.DataSource = group;
+                bs.DataSource = group.Players;
                 gridControl.DataSource = bs;
 
                 gridControl.AutoSizeAllCells();

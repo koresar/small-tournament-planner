@@ -15,9 +15,18 @@ namespace Tournament_Planner.UI
         {
             this.InitializeComponent();
             new MainWindowController(this);
+            this.txtTournamentName.Focus();
+            this.txtTournamentName.SelectAll();
         }
 
         public event Action NextClicked;
+
+        public event Action GoToGroupGamesClicked;
+
+        public string TournamentName
+        {
+            get { return this.txtTournamentName.Text; }
+        }
 
         public void SetCurrentControl(Control control)
         {
@@ -37,6 +46,14 @@ namespace Tournament_Planner.UI
         public void FrobindFurtherMove()
         {
             this.btnNext.Enabled = false;
+        }
+
+        private void btnGroupGames_Click(object sender, EventArgs e)
+        {
+            if (this.GoToGroupGamesClicked != null)
+            {
+                this.GoToGroupGamesClicked();
+            }
         }
     }
 }

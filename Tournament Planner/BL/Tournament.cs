@@ -20,10 +20,13 @@ namespace Tournament_Planner.BL
             this.Matches = new MatchesCollection();
         }
 
-        /// <summary>
-        /// TODO: implement entrance of it.
-        /// </summary>
-        public string Name { get; set; }
+        public event Action Reloaded;
+
+        public string Name
+        {
+            get { return this.data.Name; }
+            set { this.data.Name = value; }
+        }
 
         public CompaniesCollection Companies { get; private set; }
 
@@ -44,17 +47,19 @@ namespace Tournament_Planner.BL
 
         public void SetXmlData(TournamentData newData)
         {
+            this.Name = newData.Name;
+
             this.Companies.Clear();
-            this.Companies.AddRange(newData.Companies.Select(c => new Company(c)));
-
             this.Players.Clear();
-            this.Players.AddRange(newData.Players.Select(p => new Player(p, this.Companies)));
-
             this.Groups.Clear();
-            this.Groups.AddRange(newData.Groups.Select(g => new Group(g, this.Players)));
-
             this.Matches.Clear();
-            this.Matches.AddRange(newData.Matches.Select(m => new Match(m, this.Players, this.Groups)));
+            
+            this.Companies.AddRange(newData.Companies.Select(c => new Company(c)));
+            this.Players.AddRange(newData.Players.Select(p => new Player(p, this)));
+            this.Groups.AddRange(newData.Groups.Select(g => new Group(g, this)));
+            this.Matches.AddRange(newData.Matches.Select(m => new Match(m, this)));
+
+            this.OnReloaded();
         }
 
         public IEnumerable<Group> SplitPeopleOnRandomGroups(int preferredNumberOfPlayersInGroup)
@@ -86,10 +91,20 @@ namespace Tournament_Planner.BL
                 throw new InvalidOperationException("No groups found. Nothing to schedule.");
             }
 
-            this.Matches.Clear();
-            foreach (Group group in this.Groups)
+            if (this.Matches.Count == 0)
             {
-                this.Matches.AddRange(group.GetGroupMatches());
+                foreach (Group group in this.Groups)
+                {
+                    this.Matches.AddRange(group.GenerateNewGroupMatches());
+                }
+            }
+        }
+
+        protected virtual void OnReloaded()
+        {
+            if (this.Reloaded != null)
+            {
+                this.Reloaded();
             }
         }
     }

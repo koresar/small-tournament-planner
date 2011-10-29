@@ -16,6 +16,9 @@ namespace Tournament_Planner.BL.XmlSerializable
             this.Matches = new List<MatchData>();
         }
 
+        [XmlElement("Name")]
+        public string Name { get; set; }
+
         [XmlArray("Companies")]
         [XmlArrayItem("Company")]
         public List<CompanyData> Companies { get; set; }

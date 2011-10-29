@@ -21,11 +21,25 @@ namespace Tournament_Planner.UI
             this.InitializeData();
 
             this.mainForm.NextClicked += this.mainForm_NextClicked;
+            this.mainForm.GoToGroupGamesClicked += this.mainForm_GoToGroupGamesClicked;
+        }
+
+        private void mainForm_GoToGroupGamesClicked()
+        {
+            var dialog = new OpenFileDialog();
+            dialog.Filter = "Schedule snapshot file (*.stpss)|*.stpss";
+            dialog.FilterIndex = 0;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                new TournametDataSaveLoad(this.tournamentData).LoadPlayersList(dialog.FileName);
+                this.SetCurrentStep(this.steps.OfType<ScheduleAndResultsController>().First());
+            }
         }
 
         private void InitializeData()
         {
             this.tournamentData = new Tournament();
+            this.tournamentData.Reloaded += () => this.mainForm.Text = this.tournamentData.Name;
             this.steps = new List<StepController>();
             this.steps.Add(new EnterPlayersController(this.tournamentData));
             this.steps.Add(new ShuffleController(this.tournamentData));
@@ -36,7 +50,16 @@ namespace Tournament_Planner.UI
         {
             if (this.currentStep == null)
             {
-                this.SetCurrentStep(this.steps.First());
+                if (string.IsNullOrWhiteSpace(this.mainForm.TournamentName))
+                {
+                    MsgBox.Error("Enter tournament name.");
+                }
+                else
+                {
+                    this.tournamentData.Name = this.mainForm.TournamentName;
+                    this.mainForm.Text = this.tournamentData.Name;
+                    this.SetCurrentStep(this.steps.First());
+                }
             }
             else if (this.currentStep == this.steps.Last())
             {

@@ -9,15 +9,18 @@ namespace Tournament_Planner.BL
 {
     public class Group : IdItem<GroupData>, IIdReferenceItem
     {
-        private MatchesCollection groupMatches;
         private PlayersCollection players = new PlayersCollection();
+        private Tournament tournament;
+        private MatchesCollection groupMatches;
 
-        public Group(GroupData data, IRepository<Player> playersRepo) : base(data)
+        public Group(GroupData data, Tournament tournament)
+            : base(data)
         {
-            this.players.AddRange(this.Data.Players.Select(playerId => playersRepo.GetById(playerId)));
+            this.players.AddRange(this.Data.Players.Select(playerId => tournament.Players.GetById(playerId)));
+            this.tournament = tournament;
         }
 
-        public Group(IList<Player> players, string name)  : base()
+        public Group(IList<Player> players, string name) : base()
         {
             this.Name = name;
             this.players.AddRange(players);
@@ -39,24 +42,23 @@ namespace Tournament_Planner.BL
             private set { this.Data.Name = value; } 
         }
 
-        public MatchesCollection GetGroupMatches()
+        public MatchesCollection Matches
         {
-            if (this.groupMatches == null)
+            get
             {
-                this.groupMatches = new MatchesCollection();
-                this.groupMatches.AddRange(this.BuildSchedule());
+                if (this.groupMatches == null)
+                {
+                    this.groupMatches = new MatchesCollection();
+                    this.groupMatches.AddRange(this.tournament.Matches.Where(m => m.Group.Id == this.Id));
+                }
+
+                return this.groupMatches;
             }
-
-            return this.groupMatches;
         }
 
-        public IEnumerable<Match> GetPlayerMatches(Player player)
+        public MatchesCollection GenerateNewGroupMatches()
         {
-            return this.GetGroupMatches().Where(m => m.Player1 == player || m.Player2 == player);
-        }
-
-        private IEnumerable<Match> BuildSchedule()
-        {
+            this.groupMatches = new MatchesCollection();
             for (int i = 0; i < this.players.Count; i++)
             {
                 for (int j = i + 1; j < this.players.Count; j++)
@@ -65,10 +67,17 @@ namespace Tournament_Planner.BL
                     var player2 = this.players[j];
                     if (player1 != player2)
                     {
-                        yield return new Match(player1, player2) { Group = this };
+                        this.groupMatches.Add(new Match(player1, player2) { Group = this });
                     }
                 }
             }
+
+            return this.groupMatches;
+        }
+
+        public IEnumerable<Match> GetPlayerMatches(Player player)
+        {
+            return this.Matches.Where(m => m.Player1 == player || m.Player2 == player);
         }
 
         public override string ToString()
@@ -78,7 +87,7 @@ namespace Tournament_Planner.BL
 
         public int GetPlayerScore(Player player)
         {
-            return this.groupMatches.GetPlayerMatches(player).Select(m => m.GetPlayerScore(player)).Sum();
+            return this.Matches.GetPlayerMatches(player).Select(m => m.GetPlayerScore(player)).Sum();
         }
 
         public override GroupData GetXmlData()

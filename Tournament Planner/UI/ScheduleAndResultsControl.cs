@@ -38,6 +38,12 @@ namespace Tournament_Planner.UI
 
         public void SetDataSources(BL.Tournament tournamentData)
         {
+            if (tournamentData == null)
+            {
+                this.tblMatches.DataSource = null;
+                return;
+            }
+
             var previousSelectedMatch = this.tblMatches.SelectedRows.Count == 1 ? (Match)this.tblMatches.SelectedRows[0].DataBoundItem : null;
 
             var bs = new BindingSource();

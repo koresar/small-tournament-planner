@@ -60,8 +60,17 @@ namespace Tournament_Planner.UI
             dialog.FilterIndex = 0;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
+                this.UnbindAll();
                 new TournametDataSaveLoad(this.TournamentData).LoadPlayersList(dialog.FileName);
+                this.editingControl.SetDataSources(this.TournamentData);
+                this.RefreshCurrentMatchData();
             }
+        }
+
+        private void UnbindAll()
+        {
+            this.groupController.SetDataSource(null);
+            this.editingControl.SetDataSources(null);
         }
 
         private void editingControl_SaveClicked()
@@ -71,10 +80,10 @@ namespace Tournament_Planner.UI
 
         private void SaveScheuleSnapshot()
         {
-            new TournametDataSaveLoad(this.TournamentData).SavePlayersList(this.GenerateSpanshotFileName());
+            new TournametDataSaveLoad(this.TournamentData).SavePlayersList(this.GenerateSnapshotFileName());
         }
 
-        private string GenerateSpanshotFileName()
+        private string GenerateSnapshotFileName()
         {
             var now = DateTime.Now;
             var fileName = string.Format("{0} {1} {2}.stpss", this.TournamentData.Name, now.ToString("yyyy-MM-dd"), now.ToString("HH-mm-ss"));

@@ -254,7 +254,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(429, 23);
             this.btnSave.TabIndex = 6;
-            this.btnSave.Text = "Save schedule spanshot";
+            this.btnSave.Text = "Save schedule snapshot";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 

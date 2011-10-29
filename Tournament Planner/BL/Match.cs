@@ -9,12 +9,12 @@ namespace Tournament_Planner.BL
 {
     public class Match : IdItem<MatchData>
     {
-        public Match(MatchData data, IRepository<Player> playersRepo, IRepository<Group> groupsRepo)
+        public Match(MatchData data, Tournament tournament)
             : base(data)
         {
-            this.Player1 = playersRepo.GetById(data.Player1Id);
-            this.Player2 = playersRepo.GetById(data.Player2Id);
-            this.Group = groupsRepo.GetById(data.GroupId);
+            this.Player1 = tournament.Players.GetById(data.Player1Id);
+            this.Player2 = tournament.Players.GetById(data.Player2Id);
+            this.Group = tournament.Groups.GetById(data.GroupId);
             this.Games = data.Games.Select(g => new Game(g)).ToList();
         }
 
@@ -35,7 +35,11 @@ namespace Tournament_Planner.BL
         }
 
         [DisplayName("Progress")]
-        public MatchProgress Progress { get; set; }
+        public MatchProgress Progress
+        {
+            get { return this.Data.Progress; }
+            set { this.Data.Progress = value; }
+        }
 
         [DisplayName("Player 1")]
         public Player Player1 { get; private set; }
@@ -131,6 +135,8 @@ namespace Tournament_Planner.BL
         {
             this.Data.GroupId = this.Group.Id;
             this.Data.Games = this.Games.Select(g => g.GetXmlData()).ToList();
+            this.Data.Player1Id = this.Player1.Id;
+            this.Data.Player2Id = this.Player2.Id;
             return base.GetXmlData();
         }
     }

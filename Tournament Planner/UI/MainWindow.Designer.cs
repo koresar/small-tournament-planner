@@ -32,6 +32,9 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.pnlCurrentStepContainer = new System.Windows.Forms.Panel();
             this.lblHello = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtTournamentName = new System.Windows.Forms.TextBox();
+            this.btnGroupGames = new System.Windows.Forms.Button();
             this.pnlCurrentStepContainer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,31 +44,63 @@
             this.btnNext.Location = new System.Drawing.Point(829, 534);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(191, 23);
-            this.btnNext.TabIndex = 0;
+            this.btnNext.TabIndex = 1;
             this.btnNext.Text = "Next";
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.button1_Click);
             // 
             // pnlCurrentStepContainer
             // 
-            this.pnlCurrentStepContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlCurrentStepContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlCurrentStepContainer.Controls.Add(this.btnGroupGames);
+            this.pnlCurrentStepContainer.Controls.Add(this.txtTournamentName);
+            this.pnlCurrentStepContainer.Controls.Add(this.label1);
             this.pnlCurrentStepContainer.Controls.Add(this.lblHello);
             this.pnlCurrentStepContainer.Location = new System.Drawing.Point(13, 13);
             this.pnlCurrentStepContainer.Name = "pnlCurrentStepContainer";
             this.pnlCurrentStepContainer.Size = new System.Drawing.Size(1007, 515);
-            this.pnlCurrentStepContainer.TabIndex = 1;
+            this.pnlCurrentStepContainer.TabIndex = 0;
             // 
             // lblHello
             // 
-            this.lblHello.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.lblHello.AutoSize = true;
+            this.lblHello.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblHello.Location = new System.Drawing.Point(405, 251);
             this.lblHello.Name = "lblHello";
             this.lblHello.Size = new System.Drawing.Size(196, 13);
             this.lblHello.TabIndex = 0;
             this.lblHello.Text = "Welcome to Tournament Planner v0.0.1";
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label1.Location = new System.Drawing.Point(405, 290);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(193, 23);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Enter your tournament name";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtTournamentName
+            // 
+            this.txtTournamentName.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtTournamentName.Location = new System.Drawing.Point(408, 317);
+            this.txtTournamentName.Name = "txtTournamentName";
+            this.txtTournamentName.Size = new System.Drawing.Size(190, 20);
+            this.txtTournamentName.TabIndex = 2;
+            this.txtTournamentName.Text = "Unnamed tournament";
+            // 
+            // btnGroupGames
+            // 
+            this.btnGroupGames.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnGroupGames.Location = new System.Drawing.Point(3, 489);
+            this.btnGroupGames.Name = "btnGroupGames";
+            this.btnGroupGames.Size = new System.Drawing.Size(145, 23);
+            this.btnGroupGames.TabIndex = 3;
+            this.btnGroupGames.Text = "Go to group games...";
+            this.btnGroupGames.UseVisualStyleBackColor = true;
+            this.btnGroupGames.Click += new System.EventHandler(this.btnGroupGames_Click);
             // 
             // MainWindow
             // 
@@ -88,6 +123,9 @@
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Panel pnlCurrentStepContainer;
         private System.Windows.Forms.Label lblHello;
+        private System.Windows.Forms.TextBox txtTournamentName;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnGroupGames;
     }
 }
 

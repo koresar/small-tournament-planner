@@ -88,7 +88,7 @@ namespace Tournament_Planner.UI
                     Skill = this.editControl.Skill,
                     Present = this.editControl.Present,
                 },
-                this.TournamentData.Companies));
+                this.TournamentData));
             }
         }
 

@@ -10,14 +10,14 @@ namespace Tournament_Planner.BL
         private const string csvSeparator = ",";
         private Company company;
 
-        public Player(PlayerData data, IRepository<Company> companiesRepo) : base(data)
+        public Player(PlayerData data, Tournament tournament) : base(data)
         {
             if (string.IsNullOrEmpty(data.FirstName) || string.IsNullOrEmpty(data.SecondName) || data.CompanyId == 0)
             {
                 throw new ArgumentException("Arguments should not be empty.");
             }
 
-            this.company = companiesRepo.GetById(this.Data.CompanyId);
+            this.company = tournament.Companies.GetById(this.Data.CompanyId);
         }
 
         [DisplayName("First name")]

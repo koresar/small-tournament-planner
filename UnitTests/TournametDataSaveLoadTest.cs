@@ -48,7 +48,7 @@ namespace UnitTests
                 Gender = Gender.Female,
                 Present = true,
                 Skill = Skill.Good,
-            }, tournament.Companies));
+            }, tournament));
 
             var fileOperator = new TournametDataSaveLoad(tournament);
             string fileName = Path.Combine(this.TestContext.DeploymentDirectory, "123.tmp");
@@ -73,7 +73,7 @@ namespace UnitTests
                 Gender = Gender.Female,
                 Present = true,
                 Skill = Skill.Good,
-            }, tournament.Companies));
+            }, tournament));
             tournament.Groups.Add(new Group(tournament.Players, "A"));
 
             var fileOperator = new TournametDataSaveLoad(tournament);
@@ -99,7 +99,7 @@ namespace UnitTests
                 Gender = Gender.Female,
                 Present = true,
                 Skill = Skill.Good,
-            }, tournament.Companies));
+            }, tournament));
             tournament.Groups.Add(new Group(tournament.Players, "A"));
             tournament.Matches.Add(new Match(new MatchData()
             {
@@ -107,7 +107,7 @@ namespace UnitTests
                 GroupId = tournament.Groups.First().Id,
                 Player1Id = tournament.Players.First().Id,
                 Player2Id = tournament.Players.First().Id,
-            }, tournament.Players, tournament.Groups));
+            }, tournament));
 
             var fileOperator = new TournametDataSaveLoad(tournament);
             string fileName = Path.Combine(this.TestContext.DeploymentDirectory, "123.tmp");

@@ -25,6 +25,9 @@ namespace Tournament_Planner.BL.XmlSerializable
         [XmlElement("GroupId")]
         public int GroupId { get; set; }
 
+        [XmlElement("Progress")]
+        public MatchProgress Progress { get; set; }
+
         [XmlArray("Games")]
         [XmlArrayItem("Game")]
         public List<GameData> Games { get; set; }
