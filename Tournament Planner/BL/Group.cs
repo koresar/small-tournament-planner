@@ -80,6 +80,11 @@ namespace Tournament_Planner.BL
             return this.Matches.Where(m => m.Player1 == player || m.Player2 == player);
         }
 
+        public Match GetMatch(Player player1, Player player2)
+        {
+            return this.Matches.Where(m => m.IsPlayerPlaysHere(player1) && m.IsPlayerPlaysHere(player2)).FirstOrDefault();
+        }
+
         public override string ToString()
         {
             return this.Name;
@@ -88,6 +93,11 @@ namespace Tournament_Planner.BL
         public int GetPlayerScore(Player player)
         {
             return this.Matches.GetPlayerMatches(player).Select(m => m.GetPlayerScore(player)).Sum();
+        }
+
+        public IEnumerable<Player> GetWinners(int numberOfWinners)
+        {
+            return this.Players.OrderBy(p => p, new PlayerComparer(this)).Take(numberOfWinners);
         }
 
         public override GroupData GetXmlData()

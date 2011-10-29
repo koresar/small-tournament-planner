@@ -58,6 +58,7 @@
     <Compile Include="BL\Company.cs" />
     <Compile Include="BL\Group.cs" />
     <Compile Include="BL\GroupsCollection.cs" />
+    <Compile Include="BL\PlayerComparer.cs" />
     <Compile Include="BL\XmlSerializable\IIdReferenceItem.cs" />
     <Compile Include="BL\IRepository.cs" />
     <Compile Include="BL\Match.cs" />
@@ -88,6 +89,13 @@
     </Compile>
     <Compile Include="UI\EnterPlayersController.cs" />
     <Compile Include="BL\Game.cs" />
+    <Compile Include="UI\FinalController.cs" />
+    <Compile Include="UI\FinalMatchesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\FinalMatchesControl.Designer.cs">
+      <DependentUpon>FinalMatchesControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\GroupControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -131,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\EnterPlayersControl.resx">
       <DependentUpon>EnterPlayersControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FinalMatchesControl.resx">
+      <DependentUpon>FinalMatchesControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\GroupControl.resx">
       <DependentUpon>GroupControl.cs</DependentUpon>

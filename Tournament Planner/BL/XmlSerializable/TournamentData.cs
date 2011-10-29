@@ -34,5 +34,24 @@ namespace Tournament_Planner.BL.XmlSerializable
         [XmlArray("Matches")]
         [XmlArrayItem("Match")]
         public List<MatchData> Matches { get; set; }
+
+        [XmlElement("PlayOffGroup")]
+        public GroupData PlayOffGroup { get; set; }
+
+        [XmlArray("PlayOffMatches")]
+        [XmlArrayItem("Match")]
+        public List<MatchData> PlayOffMatches { get; set; }
+
+        [XmlArray("FinalPlayers")]
+        [XmlArrayItem("Player")]
+        public List<PlayerData> FinalPlayers { get; set; }
+
+        [XmlArray("FinalRounds")]
+        [XmlArrayItem("Group")]
+        public List<GroupData> FinalRounds { get; set; }
+
+        [XmlArray("FinalMatches")]
+        [XmlArrayItem("Match")]
+        public List<MatchData> FinalMatches { get; set; }
     }
 }

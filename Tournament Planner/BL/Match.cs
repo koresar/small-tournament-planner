@@ -131,6 +131,36 @@ namespace Tournament_Planner.BL
             return player == this.Winner ? 3 : 0;
         }
 
+        public int GetPlayerTotalMisses(Player player)
+        {
+            if (!this.IsPlayerPlaysHere(player))
+            {
+                throw new ArgumentException("This player does not take part in the match!");
+            }
+
+            if (this.Progress != MatchProgress.Finished)
+            {
+                return 0;
+            }
+
+            return this.Games.Select(g => player == this.Player1 ? g.Score2 : g.Score1).Sum();
+        }
+
+        public int GetPlayerTotalGoals(Player player)
+        {
+            if (!this.IsPlayerPlaysHere(player))
+            {
+                throw new ArgumentException("This player does not take part in the match!");
+            }
+
+            if (this.Progress != MatchProgress.Finished)
+            {
+                return 0;
+            }
+
+            return this.Games.Select(g => player == this.Player1 ? g.Score1 : g.Score2).Sum();
+        }
+
         public override MatchData GetXmlData()
         {
             this.Data.GroupId = this.Group.Id;
