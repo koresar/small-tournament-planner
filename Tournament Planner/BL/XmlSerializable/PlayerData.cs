@@ -17,8 +17,8 @@ namespace Tournament_Planner.BL.XmlSerializable
         [XmlElement("Gender")]
         public Gender Gender { get; set; }
 
-        [XmlElement("Company")]
-        public string Company { get; set; }
+        [XmlElement("CompanyId")]
+        public int CompanyId { get; set; }
 
         [XmlElement("Skill")]
         public Skill Skill { get; set; }

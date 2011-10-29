@@ -57,6 +57,7 @@
     <Compile Include="BL\CompaniesCollection.cs" />
     <Compile Include="BL\Company.cs" />
     <Compile Include="BL\Group.cs" />
+    <Compile Include="BL\IRepository.cs" />
     <Compile Include="BL\Match.cs" />
     <Compile Include="BL\MatchesCollection.cs" />
     <Compile Include="BL\MatchProgress.cs" />

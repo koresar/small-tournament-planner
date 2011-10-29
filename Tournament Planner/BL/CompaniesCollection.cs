@@ -7,18 +7,16 @@ using Tournament_Planner.BL.XmlSerializable;
 
 namespace Tournament_Planner.BL
 {
-    public class CompaniesCollection : BindingList<Company>, IXmlSerializable<List<CompanyData>>
+    public class CompaniesCollection : BindingList<Company>, IXmlSerializable<List<CompanyData>>, IRepository<Company>
     {
+        private int lastId = 0;
+
         public CompaniesCollection() : base()
         {
         }
 
-        public CompaniesCollection(IList<Company> companies) : base(companies)
-        {
-        }
-
         public CompaniesCollection(List<CompanyData> list)
-            : this(list.Select(c => new Company(c)).ToList())
+            : base(list.Select(c => new Company(c)).ToList())
         {
         }
 
@@ -29,7 +27,61 @@ namespace Tournament_Planner.BL
 
         public Company GetByName(string name)
         {
-            return this.First(c => c.Name == name);
+            return this.FirstOrDefault(c => c.Name == name);
+        }
+
+        public Company GetById(int id)
+        {
+            return this.FirstOrDefault(c => c.Id == id);
+        }
+
+        new public void Add(Company c)
+        {
+            this.CheckNew(c);
+
+            base.Add(c);
+        }
+
+        protected override void OnAddingNew(AddingNewEventArgs e)
+        {
+            if (e.NewObject is Company)
+            {
+                this.CheckNew(e.NewObject as Company);
+            }
+
+            base.OnAddingNew(e);
+        }
+
+        protected override void OnListChanged(ListChangedEventArgs e)
+        {
+            base.OnListChanged(e);
+            if (e.ListChangedType == ListChangedType.ItemAdded)
+            {
+                this.CheckId(this[e.NewIndex]);
+            }
+        }
+
+        private void CheckNew(Company c)
+        {
+            if (this.GetByName(c.Name) != null)
+            {
+                throw new InvalidOperationException("Such company already present in collection: " + c.Name);
+            }
+            else if (this.GetById(c.Id) != null)
+            {
+                throw new InvalidOperationException("Such company ID already present in collection: " + c.Id + " (" + c.Name + ")");
+            }
+
+            this.CheckId(c);
+        }
+
+        private void CheckId(Company c)
+        {
+            if (c.Id == 0)
+            {
+                this.lastId++;
+                c.Id = this.lastId;
+            }
         }
     }
 }

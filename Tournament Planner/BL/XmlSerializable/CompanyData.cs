@@ -8,7 +8,10 @@ namespace Tournament_Planner.BL.XmlSerializable
 {
     public class CompanyData
     {
-        [XmlAttribute("Name")]
+        [XmlAttribute("Id")]
+        public int Id { get; set; }
+
+        [XmlElement("Name")]
         public string Name { get; set; }
     }
 }

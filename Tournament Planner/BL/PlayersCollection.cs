@@ -10,19 +10,12 @@ namespace Tournament_Planner.BL
     {
         public const int MaximumNumberOfPlayersInGroup = 5;
         public const int MinimumNumberOfPlayersInGroup = 3;
+        private IRepository<Company> companiesRepo;
 
-        public PlayersCollection() : base()
+        public PlayersCollection(List<PlayerData> list, IRepository<Company> companiesRepo)
+            : base(list.Select(p => new Player(p, companiesRepo)).ToList())
         {
-        }
-
-        public PlayersCollection(IList<Player> players)
-            : base(players)
-        {
-        }
-
-        public PlayersCollection(List<PlayerData> list)
-            : this(list.Select(p => new Player(p)).ToList())
-        {
+            this.companiesRepo = companiesRepo;
         }
 
         public IEnumerable<Player> Present

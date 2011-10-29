@@ -84,10 +84,11 @@ namespace Tournament_Planner.UI
                     FirstName = this.editControl.FirstNameText,
                     SecondName = this.editControl.SecondNameText, 
                     Gender = this.editControl.Gender,
-                    Company = this.editControl.Company.Name,
+                    CompanyId = this.TournamentData.Companies.GetByName(this.editControl.Company.Name).Id,
                     Skill = this.editControl.Skill,
                     Present = this.editControl.Present,
-                }));
+                },
+                this.TournamentData.Companies));
             }
         }
 

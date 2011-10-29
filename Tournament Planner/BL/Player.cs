@@ -11,14 +11,15 @@ namespace Tournament_Planner.BL
         private PlayerData data;
         private Company company;
 
-        public Player(PlayerData data)
+        public Player(PlayerData data, IRepository<Company> companiesRepo)
         {
-            if (string.IsNullOrEmpty(data.FirstName) || string.IsNullOrEmpty(data.SecondName) || data.Company == null)
+            if (string.IsNullOrEmpty(data.FirstName) || string.IsNullOrEmpty(data.SecondName) || data.CompanyId == 0)
             {
                 throw new ArgumentException("Arguments should not be empty.");
             }
 
             this.data = data;
+            this.company = companiesRepo.GetById(this.data.CompanyId);
         }
 
         [DisplayName("First name")]
@@ -45,10 +46,10 @@ namespace Tournament_Planner.BL
         [DisplayName("Company")]
         public Company Company
         {
-            get { return this.company ?? (this.company = new Company(new CompanyData() { Name = this.data.Company })); }
+            get { return this.company; }
             set
             {
-                this.data.Company = value.Name;
+                this.data.CompanyId = value.Id;
                 this.company = value;
             }
         }

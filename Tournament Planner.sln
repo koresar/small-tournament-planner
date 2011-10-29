@@ -3,7 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tournament Planner", "Tournament Planner\Tournament Planner.csproj", "{EA792C83-C3EF-4F2A-9301-4F18CDA8DF1E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7892DDC3-8C3C-4AD0-BFED-CAF750350552}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		Tournament Planner.vsmdi = Tournament Planner.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{D563F363-3246-4C03-9ADF-0813E002C087}"
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Tournament Planner.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
@@ -19,6 +31,12 @@ Global
 		{EA792C83-C3EF-4F2A-9301-4F18CDA8DF1E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EA792C83-C3EF-4F2A-9301-4F18CDA8DF1E}.Release|x86.ActiveCfg = Release|x86
 		{EA792C83-C3EF-4F2A-9301-4F18CDA8DF1E}.Release|x86.Build.0 = Release|x86
+		{D563F363-3246-4C03-9ADF-0813E002C087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D563F363-3246-4C03-9ADF-0813E002C087}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D563F363-3246-4C03-9ADF-0813E002C087}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D563F363-3246-4C03-9ADF-0813E002C087}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D563F363-3246-4C03-9ADF-0813E002C087}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D563F363-3246-4C03-9ADF-0813E002C087}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

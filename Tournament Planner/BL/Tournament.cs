@@ -18,16 +18,18 @@ namespace Tournament_Planner.BL
             this.data = new TournamentData();
             this.Schedule = new MatchesCollection();
             this.Groups = new List<Group>();
+            this.companies = new CompaniesCollection(this.data.Companies);
+            this.players = new PlayersCollection(this.data.Players, this.companies);
         }
 
         public PlayersCollection Players
         {
-            get { return this.players ?? (this.players = new PlayersCollection(this.data.Players)); }
+            get { return this.players; }
         }
 
         public CompaniesCollection Companies
         {
-            get { return this.companies ?? (this.companies = new CompaniesCollection(this.data.Companies)); }
+            get { return this.companies; }
         }
 
         public List<Group> Groups { get; private set; }
@@ -43,17 +45,20 @@ namespace Tournament_Planner.BL
 
         public void SetXmlData(TournamentData newData)
         {
-            this.Players.Clear();
-            foreach (var player in newData.Players)
-            {
-                this.Players.Add(new Player(player));
-            }
-
             this.Companies.Clear();
             foreach (var company in newData.Companies.Distinct())
             {
                 this.Companies.Add(new Company(company));
             }
+
+            this.Players.Clear();
+            foreach (var player in newData.Players)
+            {
+                this.Players.Add(new Player(player, this.companies));
+            }
+
+            this.Schedule = new MatchesCollection();
+            this.Groups = new List<Group>();
         }
 
         public IEnumerable<Group> SplitPeopleOnRandomGroups(int preferredNumberOfPlayersInGroup)

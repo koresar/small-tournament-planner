@@ -6,6 +6,7 @@ namespace Tournament_Planner.BL
 {
     public class Company : IXmlSerializable<CompanyData>
     {
+        public const string DefaultCompanyName = "Enter company name";
         private CompanyData data;
 
         /// <summary>
@@ -13,7 +14,7 @@ namespace Tournament_Planner.BL
         /// </summary>
         public Company()
         {
-            this.data = new CompanyData() { Name = "Enter company name" };
+            this.data = new CompanyData() { Name = DefaultCompanyName };
         }
 
         public Company(CompanyData data)
@@ -24,6 +25,13 @@ namespace Tournament_Planner.BL
             }
 
             this.data = data;
+        }
+
+        [Browsable(false)]
+        public int Id
+        {
+            get { return this.data.Id; }
+            set { this.data.Id = value; }
         }
 
         [DisplayName("Company name")]
