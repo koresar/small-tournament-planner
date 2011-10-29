@@ -44,6 +44,7 @@ namespace Tournament_Planner.UI
             this.steps.Add(new EnterPlayersController(this.tournamentData));
             this.steps.Add(new ShuffleController(this.tournamentData));
             this.steps.Add(new ScheduleAndResultsController(this.tournamentData));
+            this.steps.Add(new PlayOffController(this.tournamentData));
         }
 
         private void mainForm_NextClicked()

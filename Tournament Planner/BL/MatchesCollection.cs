@@ -37,6 +37,10 @@ namespace Tournament_Planner.BL
                     if (match.IsAnyPlayerSame(m))
                     {
                         m.Progress = MatchProgress.PossibleToStart;
+                        if (this.IsPlayerBusy(m.Player1) || this.IsPlayerBusy(m.Player2))
+                        {
+                            m.Progress = MatchProgress.ImpossbileToStart;
+                        }
                     }
                 }
             }

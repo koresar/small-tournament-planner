@@ -16,6 +16,11 @@ namespace Tournament_Planner.BL
 
         public int Compare(Player p1, Player p2)
         {
+            if (p1.Equals(p2))
+            {
+                return 0;
+            }
+
             // Who won more matches?
             int p1Score = this.group.GetPlayerScore(p1);
             int p2Score = this.group.GetPlayerScore(p2);

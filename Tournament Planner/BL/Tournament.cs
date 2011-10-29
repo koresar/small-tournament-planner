@@ -62,7 +62,7 @@ namespace Tournament_Planner.BL
             this.data.Players = this.Players.GetXmlData();
             this.data.Groups = this.Groups.GetXmlData();
             this.data.Matches = this.Matches.GetXmlData();
-            this.data.PlayOffGroup = this.PlayOffGroup.GetXmlData();
+            this.data.PlayOffGroup = this.PlayOffGroup == null ? null : this.PlayOffGroup.GetXmlData();
             this.data.PlayOffMatches = this.PlayOffMatches.GetXmlData();
             this.data.FinalPlayers = this.FinalPlayers.GetXmlData();
             this.data.FinalRounds = this.FinalRounds.GetXmlData();
@@ -137,7 +137,7 @@ namespace Tournament_Planner.BL
 
         public void BuildPlayOffMatches()
         {
-            if (this.IsPowerOfTwo(this.Groups.Count) || this.PlayOffGroup.Players.Count != 0)
+            if (this.IsPowerOfTwo(this.Groups.Count) || (this.PlayOffGroup != null && this.PlayOffGroup.Players.Count != 0))
             {
                 return;
             }
@@ -163,7 +163,8 @@ namespace Tournament_Planner.BL
                 Except(notInPlayOff). // Remove those are 100% finalists.
                 ToList();
 
-            this.PlayOffGroup = new Group(playOffPlayers, "Play Off");
+            this.PlayOffGroup = new PlayOffGroup(playOffPlayers, "Play Off");
+            this.PlayOffMatches = this.PlayOffGroup.GenerateNewGroupMatches();
         }
 
         public void BuildFinalRounds()

@@ -18,6 +18,8 @@ namespace Tournament_Planner.UI
         public ScheduleAndResultsController(Tournament tournamentData)
             : base(tournamentData)
         {
+            this.ProceedError = "Finish all matches before proceed to play off.";
+
             this.editingControl = new ScheduleAndResultsControl();
             this.Control = this.editingControl;
 
@@ -37,7 +39,7 @@ namespace Tournament_Planner.UI
 
         public override bool IsAllowProceed()
         {
-            return false;
+            return this.TournamentData.Matches.All(m => m.Progress == MatchProgress.Finished);
         }
 
         private void MatchInGroupGridSelected(Match match)
@@ -94,13 +96,13 @@ namespace Tournament_Planner.UI
             return Path.Combine(dir, fileName);
         }
 
-        private void editingControl_StartMatch()
+        private void editingControl_StartMatch(Match match)
         {
             this.editingControl.SetDataSources(this.TournamentData);
             this.RefreshCurrentMatchData();
         }
 
-        private void editingControl_FinishMatch()
+        private void editingControl_FinishMatch(Match match)
         {
             this.editingControl.SetDataSources(this.TournamentData);
             this.RefreshCurrentMatchData();

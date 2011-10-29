@@ -20,9 +20,9 @@ namespace Tournament_Planner.UI
             this.control.FinishMatch += this.control_FinishMatch;
         }
 
-        public event Action StartMatch;
+        public event Action<Match> StartMatch;
 
-        public event Action FinishMatch;
+        public event Action<Match> FinishMatch;
 
         public void AllowStart(bool allow)
         {
@@ -34,12 +34,6 @@ namespace Tournament_Planner.UI
             this.control.AllowResultEntering(allow);
         }
 
-        public void PopulateMatchData(Match match)
-        {
-            this.selectedMatch = match;
-            this.control.PopulateMatchData(match);
-        }
-
         private void control_FinishMatch()
         {
             if (!this.ValidateGames())
@@ -49,11 +43,13 @@ namespace Tournament_Planner.UI
 
             this.selectedMatch.Games.Clear();
             this.selectedMatch.Games.AddRange(this.control.GetGameData());
-            this.tournament.Matches.SetMatchState(this.selectedMatch, MatchProgress.Finished);
+            //this.tournament.Matches.SetMatchState(this.selectedMatch, MatchProgress.Finished);
+            this.selectedMatch.Group.Matches.SetMatchState(this.selectedMatch, MatchProgress.Finished);
+            this.SelectMatch(this.selectedMatch);
 
             if (this.FinishMatch != null)
             {
-                this.FinishMatch();
+                this.FinishMatch(this.selectedMatch);
             }
         }
 
@@ -86,28 +82,31 @@ namespace Tournament_Planner.UI
 
         private void control_StartMatch()
         {
-            this.tournament.Matches.SetMatchState(this.selectedMatch, MatchProgress.InProgress);
+            //this.tournament.Matches.SetMatchState(this.selectedMatch, MatchProgress.InProgress);
+            this.selectedMatch.Group.Matches.SetMatchState(this.selectedMatch, MatchProgress.InProgress);
+            this.SelectMatch(this.selectedMatch);
 
             if (this.StartMatch != null)
             {
-                this.StartMatch();
+                this.StartMatch(this.selectedMatch);
             }
         }
 
         public void SelectMatch(Match match)
         {
+            this.selectedMatch = match;
             if (match == null)
             {
                 this.AllowStart(false);
                 this.AllowResultEntering(false);
-                this.PopulateMatchData(null);
             }
             else
             {
                 this.AllowStart(match.Progress == MatchProgress.PossibleToStart);
                 this.AllowResultEntering(match.Progress == MatchProgress.InProgress || match.Progress == MatchProgress.Finished);
-                this.PopulateMatchData(match);
             }
+
+            this.control.PopulateMatchData(match);
         }
     }
 }

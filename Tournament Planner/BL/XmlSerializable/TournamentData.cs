@@ -42,6 +42,9 @@ namespace Tournament_Planner.BL.XmlSerializable
         [XmlArrayItem("Match")]
         public List<MatchData> PlayOffMatches { get; set; }
 
+        [XmlElement("NeedThatMorePlayersForFinal")]
+        public int NeedThatMorePlayersForFinal { get; set; }
+
         [XmlArray("FinalPlayers")]
         [XmlArrayItem("Player")]
         public List<PlayerData> FinalPlayers { get; set; }

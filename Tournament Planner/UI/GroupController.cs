@@ -24,11 +24,6 @@ namespace Tournament_Planner.UI
 
         public void SetDataSource(Group group)
         {
-            if (this.group == group)
-            {
-                return;
-            }
-
             this.group = group;
             this.control.ClearData();
 

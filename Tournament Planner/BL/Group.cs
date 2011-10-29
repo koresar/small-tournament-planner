@@ -7,10 +7,28 @@ using Tournament_Planner.BL.XmlSerializable;
 
 namespace Tournament_Planner.BL
 {
+    public class PlayOffGroup : Group
+    {
+        public PlayOffGroup(GroupData data, Tournament tournament)
+            : base(data, tournament)
+        {
+        }
+
+        public PlayOffGroup(IList<Player> players, string name)
+            : base(players, name)
+        {
+        }
+
+        protected override MatchesCollection FullMatchesCollection
+        {
+            get { return this.tournament.PlayOffMatches; }
+        }
+    }
+
     public class Group : IdItem<GroupData>, IIdReferenceItem
     {
         private PlayersCollection players = new PlayersCollection();
-        private Tournament tournament;
+        protected Tournament tournament;
         private MatchesCollection groupMatches;
 
         public Group(GroupData data, Tournament tournament)
@@ -36,6 +54,11 @@ namespace Tournament_Planner.BL
             get { return this.players; }
         }
 
+        protected virtual MatchesCollection FullMatchesCollection
+        {
+            get { return this.tournament.Matches; }
+        }
+
         public string Name 
         {
             get { return this.Data.Name; }
@@ -49,7 +72,7 @@ namespace Tournament_Planner.BL
                 if (this.groupMatches == null)
                 {
                     this.groupMatches = new MatchesCollection();
-                    this.groupMatches.AddRange(this.tournament.Matches.Where(m => m.Group.Id == this.Id));
+                    this.groupMatches.AddRange(this.FullMatchesCollection.Where(m => m.Group.Id == this.Id));
                 }
 
                 return this.groupMatches;
