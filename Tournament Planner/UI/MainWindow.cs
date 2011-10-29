@@ -23,6 +23,8 @@ namespace Tournament_Planner.UI
 
         public event Action GoToGroupGamesClicked;
 
+        public event Action GoToPlayOffClicked;
+
         public string TournamentName
         {
             get { return this.txtTournamentName.Text; }
@@ -53,6 +55,14 @@ namespace Tournament_Planner.UI
             if (this.GoToGroupGamesClicked != null)
             {
                 this.GoToGroupGamesClicked();
+            }
+        }
+
+        private void btnGoToPLayOff_Click(object sender, EventArgs e)
+        {
+            if (this.GoToPlayOffClicked != null)
+            {
+                this.GoToPlayOffClicked();
             }
         }
     }

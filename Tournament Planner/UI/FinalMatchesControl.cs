@@ -13,7 +13,12 @@ namespace Tournament_Planner.UI
     {
         public FinalMatchesControl()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+        }
+
+        public DataGridView GetPlayersTable()
+        {
+            return this.tblPlayers;
         }
     }
 }

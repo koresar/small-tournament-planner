@@ -88,8 +88,8 @@ namespace Tournament_Planner.BL
             this.Players.AddRange(newData.Players.Select(p => new Player(p, this)));
             this.Groups.AddRange(newData.Groups.Select(g => new Group(g, this)));
             this.Matches.AddRange(newData.Matches.Select(m => new Match(m, this)));
-            this.PlayOffGroup = newData.PlayOffGroup != null ? new Group(newData.PlayOffGroup, this) : null;
-            this.PlayOffMatches.AddRange(newData.PlayOffMatches.Select(m => new Match(m, this)));
+            this.PlayOffGroup = newData.PlayOffGroup != null ? new PlayOffGroup(newData.PlayOffGroup, this) : null;
+            this.PlayOffMatches.AddRange(newData.PlayOffMatches.Select(m => new Match(m, this) { Group = this.PlayOffGroup }));
             this.FinalPlayers.AddRange(newData.FinalPlayers.Select(p => new Player(p, this)));
             this.FinalRounds.AddRange(newData.FinalRounds.Select(m => new Group(m, this)));
             this.FinalMatches.AddRange(newData.FinalMatches.Select(m => new Match(m, this)));
@@ -137,19 +137,21 @@ namespace Tournament_Planner.BL
 
         public void BuildPlayOffMatches()
         {
-            if (this.IsPowerOfTwo(this.Groups.Count) || (this.PlayOffGroup != null && this.PlayOffGroup.Players.Count != 0))
+            this.FinalPlayers.Clear();
+            // Find those who 100% won.
+            var notInPlayOff =
+                this.Groups.
+                SelectMany(g => g.GetWinners(2)). // Take two best players from each group.
+                ToList();
+            this.FinalPlayers.AddRange(notInPlayOff);
+
+            if (this.IsPowerOfTwo(this.FinalPlayers.Count))
             {
                 return;
             }
 
-            // Find those who 100% won.
-            var notInPlayOff = 
-                this.Groups.
-                SelectMany(g => g.GetWinners(2)). // Select best 2 players of group.
-                ToList();
-
             // Find how many players will be in final.
-            int necessaryPlayersInTotal = this.Groups.Count + 1;
+            int necessaryPlayersInTotal = notInPlayOff.Count + 1;
             while (!this.IsPowerOfTwo(necessaryPlayersInTotal))
                 necessaryPlayersInTotal++;
 
@@ -169,17 +171,12 @@ namespace Tournament_Planner.BL
 
         public void BuildFinalRounds()
         {
-            var rnd = new Random((int)DateTime.Now.Ticks);
-            if (this.FinalPlayers.Count == 0)
-            {
-                this.FinalPlayers.AddRange(
-                    this.Groups.
-                    SelectMany(g => g.GetWinners(2)). // Take two best players from each group.
-                    Concat(this.PlayOffGroup.GetWinners(this.NeedThatMorePlayersForFinal)). // Concat with play off winners.
-                    OrderBy(p => rnd.Next()). // Shuffle them all
-                    OrderByDescending(p => p.Skill). // Sort by skill. Most skillful goes first.
-                    ToList());
-            }
+            this.FinalPlayers.AddRange(this.PlayOffGroup.GetWinners(this.NeedThatMorePlayersForFinal)); // Concat with play off winners.
+
+            //var rnd = new Random((int)DateTime.Now.Ticks);
+                //this.FinalPlayers.OrderBy(p => rnd.Next()). // Shuffle them all
+                //OrderByDescending(p => p.Skill). // Sort by skill. Most skillful goes first.
+                //ToList());
         }
 
         protected virtual void OnReloaded()

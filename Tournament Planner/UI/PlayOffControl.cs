@@ -16,6 +16,10 @@ namespace Tournament_Planner.UI
             this.InitializeComponent();
         }
 
+        public event Action LoadClicked;
+
+        public event Action SaveClicked;
+
         public EditMatchControl GetMatchControl()
         {
             return this.editMatchControl;
@@ -24,6 +28,22 @@ namespace Tournament_Planner.UI
         public GroupControl GetGroupControl()
         {
             return this.groupControl;
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            if (this.LoadClicked != null)
+            {
+                this.LoadClicked();
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (this.SaveClicked != null)
+            {
+                this.SaveClicked();
+            }
         }
     }
 }

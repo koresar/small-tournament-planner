@@ -22,6 +22,19 @@ namespace Tournament_Planner.UI
 
             this.mainForm.NextClicked += this.mainForm_NextClicked;
             this.mainForm.GoToGroupGamesClicked += this.mainForm_GoToGroupGamesClicked;
+            this.mainForm.GoToPlayOffClicked += new Action(mainForm_GoToPlayOffClicked);
+        }
+
+        private void mainForm_GoToPlayOffClicked()
+        {
+            var dialog = new OpenFileDialog();
+            dialog.Filter = "Schedule snapshot file (*.stpss)|*.stpss";
+            dialog.FilterIndex = 0;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                new TournametDataSaveLoad(this.tournamentData).LoadPlayersList(dialog.FileName);
+                this.SetCurrentStep(this.steps.OfType<PlayOffController>().First());
+            }
         }
 
         private void mainForm_GoToGroupGamesClicked()
@@ -45,6 +58,7 @@ namespace Tournament_Planner.UI
             this.steps.Add(new ShuffleController(this.tournamentData));
             this.steps.Add(new ScheduleAndResultsController(this.tournamentData));
             this.steps.Add(new PlayOffController(this.tournamentData));
+            this.steps.Add(new FinalController(this.tournamentData));
         }
 
         private void mainForm_NextClicked()

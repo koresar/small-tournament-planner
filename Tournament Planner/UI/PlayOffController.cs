@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Tournament_Planner.BL;
+using System.IO;
+using System.Windows.Forms;
 
 namespace Tournament_Planner.UI
 {
@@ -15,8 +17,12 @@ namespace Tournament_Planner.UI
         public PlayOffController(Tournament tournamentData)
             : base(tournamentData)
         {
+            this.ProceedError = "Finish all matches before proceed to play off.";
+
             this.editingControl = new PlayOffControl();
             this.Control = this.editingControl;
+            this.editingControl.SaveClicked += this.editingControl_SaveClicked;
+            this.editingControl.LoadClicked += this.editingControl_LoadClicked;
 
             this.groupController = new GroupController(this.editingControl.GetGroupControl());
             this.groupController.MatchSelected += this.MatchInGroupGridSelected;
@@ -24,6 +30,19 @@ namespace Tournament_Planner.UI
             this.editMatchController = new EditMatchController(this.TournamentData, this.editingControl.GetMatchControl());
             this.editMatchController.StartMatch += this.editingControl_StartMatch;
             this.editMatchController.FinishMatch += this.editingControl_FinishMatch;
+
+            if (this.TournamentData.PlayOffGroup == null)
+            {
+                this.editMatchController.AllowResultEntering(false);
+                this.editMatchController.AllowStart(false);
+            }
+        }
+
+        public override bool IsAllowProceed()
+        {
+            return 
+                this.TournamentData.PlayOffGroup == null ||
+                this.TournamentData.PlayOffMatches.All(m => m.Progress == MatchProgress.Finished);
         }
 
         public void MatchInGroupGridSelected(Match match)
@@ -53,6 +72,37 @@ namespace Tournament_Planner.UI
             this.TournamentData.BuildPlayOffMatches();
 
             this.RefreshGroup();
+        }
+
+        private void editingControl_LoadClicked()
+        {
+            var dialog = new OpenFileDialog();
+            dialog.Filter = "Schedule snapshot file (*.stpss)|*.stpss";
+            dialog.FilterIndex = 0;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                this.groupController.SetDataSource(null);
+                new TournametDataSaveLoad(this.TournamentData).LoadPlayersList(dialog.FileName);
+                this.RefreshGroup();
+            }
+        }
+
+        private void editingControl_SaveClicked()
+        {
+            this.SaveScheduleSnapshot();
+        }
+
+        private void SaveScheduleSnapshot()
+        {
+            new TournametDataSaveLoad(this.TournamentData).SavePlayersList(this.GenerateSnapshotFileName());
+        }
+
+        private string GenerateSnapshotFileName()
+        {
+            var now = DateTime.Now;
+            var fileName = string.Format("{0} {1} {2}.stpss", this.TournamentData.Name, now.ToString("yyyy-MM-dd"), now.ToString("HH-mm-ss"));
+            var dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            return Path.Combine(dir, fileName);
         }
     }
 }
