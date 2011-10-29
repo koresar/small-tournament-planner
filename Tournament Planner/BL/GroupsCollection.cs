@@ -9,8 +9,8 @@ namespace Tournament_Planner.BL
 {
     public class GroupsCollection : Repository<Group, GroupData>
     {
-        public GroupsCollection(List<GroupData> list, IRepository<Player> playersRepo)
-            : base(list.Select(p => new Group(p, playersRepo)).ToList())
+        public GroupsCollection()
+            : base()
         {
         }
     }

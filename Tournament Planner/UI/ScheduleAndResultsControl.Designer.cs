@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tblMatches = new System.Windows.Forms.DataGridView();
+            this.groupControl = new Tournament_Planner.UI.GroupControl();
             this.pnlResult = new System.Windows.Forms.Panel();
             this.pnlGames = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,7 +45,8 @@
             this.lblPlayerVsPlayer = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.groupControl = new Tournament_Planner.UI.GroupControl();
+            this.btnLoad = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -67,6 +69,8 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnSave);
+            this.splitContainer1.Panel2.Controls.Add(this.btnLoad);
             this.splitContainer1.Panel2.Controls.Add(this.groupControl);
             this.splitContainer1.Panel2.Controls.Add(this.pnlResult);
             this.splitContainer1.Panel2.Controls.Add(this.btnStart);
@@ -87,6 +91,15 @@
             this.tblMatches.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.tblMatches.Size = new System.Drawing.Size(439, 591);
             this.tblMatches.TabIndex = 0;
+            // 
+            // groupControl
+            // 
+            this.groupControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupControl.Location = new System.Drawing.Point(6, 175);
+            this.groupControl.Name = "groupControl";
+            this.groupControl.Size = new System.Drawing.Size(430, 161);
+            this.groupControl.TabIndex = 1;
             // 
             // pnlResult
             // 
@@ -221,14 +234,29 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // groupControl
+            // btnLoad
             // 
-            this.groupControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupControl.Location = new System.Drawing.Point(11, 175);
-            this.groupControl.Name = "groupControl";
-            this.groupControl.Size = new System.Drawing.Size(425, 161);
-            this.groupControl.TabIndex = 1;
+            this.btnLoad.Location = new System.Drawing.Point(6, 565);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(429, 23);
+            this.btnLoad.TabIndex = 6;
+            this.btnLoad.Text = "Load schedule...";
+            this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Location = new System.Drawing.Point(6, 536);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(429, 23);
+            this.btnSave.TabIndex = 6;
+            this.btnSave.Text = "Save schedule spanshot";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // ScheduleAndResultsControl
             // 
@@ -268,5 +296,7 @@
         private System.Windows.Forms.Panel pnlGames;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private GroupControl groupControl;
+        private System.Windows.Forms.Button btnLoad;
+        private System.Windows.Forms.Button btnSave;
     }
 }

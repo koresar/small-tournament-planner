@@ -9,6 +9,8 @@ namespace Tournament_Planner.BL
     {
         void Add(T item);
 
+        void AddRange(IEnumerable<T> items);
+
         T GetById(int id);
     }
 }

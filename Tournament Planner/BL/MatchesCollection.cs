@@ -3,19 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
+using Tournament_Planner.BL.XmlSerializable;
 
 namespace Tournament_Planner.BL
 {
-    public class MatchesCollection : BindingList<Match>
+    public class MatchesCollection : Repository<Match, MatchData>
     {
-        public MatchesCollection() : base()
+        public MatchesCollection()
+            : base()
         {
-        }
-
-        public MatchesCollection(IList<Match> matches)
-            : base(matches)
-        {
-
         }
 
         public void SetMatchState(Match match, MatchProgress matchProgress)

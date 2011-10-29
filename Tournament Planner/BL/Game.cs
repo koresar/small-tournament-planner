@@ -6,7 +6,7 @@ using Tournament_Planner.BL.XmlSerializable;
 
 namespace Tournament_Planner.BL
 {
-    public class Game
+    public class Game : IXmlSerializable<GameData>
     {
         private GameData data;
 
@@ -21,9 +21,17 @@ namespace Tournament_Planner.BL
             this.Score2 = score2;
         }
 
-        public int Score1 { get { return this.data.Score1; } private set { this.data.Score1 = value; } }
+        public int Score1
+        {
+            get { return this.data.Score1; }
+            private set { this.data.Score1 = value; }
+        }
 
-        public int Score2 { get { return this.data.Score2; } private set { this.data.Score2 = value; } }
+        public int Score2
+        {
+            get { return this.data.Score2; }
+            private set { this.data.Score2 = value; }
+        }
 
         public string GetStringResult(bool inverse = false)
         {
@@ -33,6 +41,11 @@ namespace Tournament_Planner.BL
         public override string ToString()
         {
             return this.GetStringResult();
+        }
+
+        public GameData GetXmlData()
+        {
+            return this.data;
         }
     }
 }

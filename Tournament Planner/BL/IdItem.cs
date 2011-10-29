@@ -7,20 +7,20 @@ using System.ComponentModel;
 
 namespace Tournament_Planner.BL
 {
-    public class IdItem<T> : IXmlSerializable<T>, IIdReferenceItem where T : class, IIdReferenceItem, new()
+    public class IdItem<TData> : IXmlSerializable<TData>, IIdReferenceItem where TData : class, IIdReferenceItem, new()
     {
         public IdItem ()
 	    {
-            this.Data = new T();
+            this.Data = new TData();
 	    }
 
-        public IdItem(T data)
+        public IdItem(TData data)
         {
             this.Data = data;
         }
 
         [Browsable(false)]
-        protected T Data { get; private set; }
+        protected TData Data { get; private set; }
 
         [Browsable(false)]
         public int Id
@@ -29,14 +29,14 @@ namespace Tournament_Planner.BL
             set { this.Data.Id = value; }
         }
 
-        public virtual T GetXmlData()
+        public virtual TData GetXmlData()
         {
             return this.Data;
         }
 
         public override bool Equals(object obj)
         {
-            var item = obj as IdItem<T>;
+            var item = obj as IdItem<TData>;
             return
                 item != null &&
                 item.Id == this.Id;

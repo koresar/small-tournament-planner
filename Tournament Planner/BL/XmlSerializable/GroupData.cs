@@ -8,6 +8,11 @@ namespace Tournament_Planner.BL.XmlSerializable
 {
     public class GroupData : IIdReferenceItem
     {
+        public GroupData()
+        {
+            this.Players = new List<int>();
+        }
+
         [XmlAttribute("Id")]
         public int Id { get; set; }
 

@@ -14,11 +14,16 @@ namespace Tournament_Planner.BL
         public Tournament()
         {
             this.data = new TournamentData();
-            this.Companies = new CompaniesCollection(this.data.Companies);
-            this.Players = new PlayersCollection(this.data.Players, this.Companies);
-            this.Groups = new GroupsCollection(this.data.Groups, this.Players);
-            this.Schedule = new MatchesCollection();
+            this.Companies = new CompaniesCollection();
+            this.Players = new PlayersCollection();
+            this.Groups = new GroupsCollection();
+            this.Matches = new MatchesCollection();
         }
+
+        /// <summary>
+        /// TODO: implement entrance of it.
+        /// </summary>
+        public string Name { get; set; }
 
         public CompaniesCollection Companies { get; private set; }
 
@@ -26,37 +31,30 @@ namespace Tournament_Planner.BL
 
         public GroupsCollection Groups { get; private set; }
 
-        public MatchesCollection Schedule { get; private set; }
+        public MatchesCollection Matches { get; private set; }
 
         public TournamentData GetXmlData()
         {
             this.data.Companies = this.Companies.GetXmlData();
             this.data.Players = this.Players.GetXmlData();
             this.data.Groups = this.Groups.GetXmlData();
+            this.data.Matches = this.Matches.GetXmlData();
             return this.data;
         }
 
         public void SetXmlData(TournamentData newData)
         {
             this.Companies.Clear();
-            foreach (var company in newData.Companies)
-            {
-                this.Companies.Add(new Company(company));
-            }
+            this.Companies.AddRange(newData.Companies.Select(c => new Company(c)));
 
             this.Players.Clear();
-            foreach (var player in newData.Players)
-            {
-                this.Players.Add(new Player(player, this.Companies));
-            }
+            this.Players.AddRange(newData.Players.Select(p => new Player(p, this.Companies)));
 
             this.Groups.Clear();
-            foreach (var group in newData.Groups)
-            {
-                this.Groups.Add(new Group(group, this.Players));
-            }
+            this.Groups.AddRange(newData.Groups.Select(g => new Group(g, this.Players)));
 
-            this.Schedule = new MatchesCollection();
+            this.Matches.Clear();
+            this.Matches.AddRange(newData.Matches.Select(m => new Match(m, this.Players, this.Groups)));
         }
 
         public IEnumerable<Group> SplitPeopleOnRandomGroups(int preferredNumberOfPlayersInGroup)
@@ -88,13 +86,10 @@ namespace Tournament_Planner.BL
                 throw new InvalidOperationException("No groups found. Nothing to schedule.");
             }
 
-            this.Schedule.Clear();
+            this.Matches.Clear();
             foreach (Group group in this.Groups)
             {
-                foreach (Match match in group.GetGroupMatches())
-                {
-                    this.Schedule.Add(match);
-                }
+                this.Matches.AddRange(group.GetGroupMatches());
             }
         }
     }

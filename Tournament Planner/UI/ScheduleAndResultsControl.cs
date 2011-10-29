@@ -27,6 +27,10 @@ namespace Tournament_Planner.UI
 
         public event Action FinishMatch;
 
+        public event Action LoadClicked;
+
+        public event Action SaveClicked;
+
         public GroupControl GetGroupControl()
         {
             return this.groupControl;
@@ -37,7 +41,7 @@ namespace Tournament_Planner.UI
             var previousSelectedMatch = this.tblMatches.SelectedRows.Count == 1 ? (Match)this.tblMatches.SelectedRows[0].DataBoundItem : null;
 
             var bs = new BindingSource();
-            bs.DataSource = tournamentData.Schedule;
+            bs.DataSource = tournamentData.Matches;
             this.tblMatches.DataSource = bs;
             this.tblMatches.AutoSizeAllCells();
 
@@ -151,6 +155,22 @@ namespace Tournament_Planner.UI
                 }
 
                 this.lblPlayerVsPlayer.Text = string.Format("{0} vs {1}", match.Player1.FullName, match.Player2.FullName);
+            }
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            if (this.LoadClicked != null)
+            {
+                this.LoadClicked();
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (this.SaveClicked != null)
+            {
+                this.SaveClicked();
             }
         }
     }

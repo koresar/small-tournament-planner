@@ -11,8 +11,8 @@ namespace Tournament_Planner.BL
         public const int MaximumNumberOfPlayersInGroup = 5;
         public const int MinimumNumberOfPlayersInGroup = 3;
 
-        public PlayersCollection(List<PlayerData> list, IRepository<Company> companiesRepo)
-            : base(list.Select(p => new Player(p, companiesRepo)).ToList())
+        public PlayersCollection()
+            : base()
         {
         }
 

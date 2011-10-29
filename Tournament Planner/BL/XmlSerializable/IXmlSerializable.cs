@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Tournament_Planner.BL.XmlSerializable
 {
-    public interface IXmlSerializable<T>
+    public interface IXmlSerializable<TData>
     {
-        T GetXmlData();
+        TData GetXmlData();
     }
 }

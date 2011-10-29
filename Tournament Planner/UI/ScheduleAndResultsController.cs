@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Tournament_Planner.BL;
+using System.Windows.Forms;
+using System.IO;
 
 namespace Tournament_Planner.UI
 {
@@ -15,13 +17,14 @@ namespace Tournament_Planner.UI
         public ScheduleAndResultsController(Tournament tournamentData)
             : base(tournamentData)
         {
-            // TODO: Add Save and Load buttons for whole data!
             this.editingControl = new ScheduleAndResultsControl();
             this.Control = this.editingControl;
 
             this.editingControl.MatchSelected += this.MatchInListSelected;
             this.editingControl.StartMatch += this.editingControl_StartMatch;
             this.editingControl.FinishMatch += this.editingControl_FinishMatch;
+            this.editingControl.SaveClicked += this.editingControl_SaveClicked;
+            this.editingControl.LoadClicked += this.editingControl_LoadClicked;
 
             this.groupController = new GroupController(this.editingControl.GetGroupControl());
             this.groupController.MatchSelected += this.MatchInGroupGridSelected;
@@ -50,9 +53,38 @@ namespace Tournament_Planner.UI
             }
         }
 
+        private void editingControl_LoadClicked()
+        {
+            var dialog = new OpenFileDialog();
+            dialog.Filter = "Schedule snapshot file (*.stpss)|*.stpss";
+            dialog.FilterIndex = 0;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                new TournametDataSaveLoad(this.TournamentData).LoadPlayersList(dialog.FileName);
+            }
+        }
+
+        private void editingControl_SaveClicked()
+        {
+            this.SaveScheuleSnapshot();
+        }
+
+        private void SaveScheuleSnapshot()
+        {
+            new TournametDataSaveLoad(this.TournamentData).SavePlayersList(this.GenerateSpanshotFileName());
+        }
+
+        private string GenerateSpanshotFileName()
+        {
+            var now = DateTime.Now;
+            var fileName = string.Format("{0} {1} {2}.stpss", this.TournamentData.Name, now.ToString("yyyy-MM-dd"), now.ToString("HH-mm-ss"));
+            var dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            return Path.Combine(dir, fileName);
+        }
+
         private void editingControl_StartMatch()
         {
-            this.TournamentData.Schedule.SetMatchState(this.selectedMatch, MatchProgress.InProgress);
+            this.TournamentData.Matches.SetMatchState(this.selectedMatch, MatchProgress.InProgress);
             this.editingControl.SetDataSources(this.TournamentData);
             this.RefreshCurrentMatchData();
         }
@@ -83,7 +115,7 @@ namespace Tournament_Planner.UI
 
             this.selectedMatch.Games.Clear();
             this.selectedMatch.Games.AddRange(games);
-            this.TournamentData.Schedule.SetMatchState(this.selectedMatch, MatchProgress.Finished);
+            this.TournamentData.Matches.SetMatchState(this.selectedMatch, MatchProgress.Finished);
             this.editingControl.SetDataSources(this.TournamentData);
             this.RefreshCurrentMatchData();
         }

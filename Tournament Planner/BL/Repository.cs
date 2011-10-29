@@ -24,6 +24,14 @@ namespace Tournament_Planner.BL
             return this.FirstOrDefault(i => i.Id == id);
         }
 
+        public void AddRange(IEnumerable<T> items)
+        {
+            foreach (var item in items)
+            {
+                this.Add(item);
+            }
+        }
+
         protected override void OnListChanged(ListChangedEventArgs e)
         {
             base.OnListChanged(e);

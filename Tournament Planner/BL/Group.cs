@@ -10,23 +10,17 @@ namespace Tournament_Planner.BL
     public class Group : IdItem<GroupData>, IIdReferenceItem
     {
         private MatchesCollection groupMatches;
-        private BindingList<Player> players = new BindingList<Player>();
+        private PlayersCollection players = new PlayersCollection();
 
         public Group(GroupData data, IRepository<Player> playersRepo) : base(data)
         {
-            foreach (var playerId in this.Data.Players)
-            {
-                this.players.Add(playersRepo.GetById(playerId));
-            }
+            this.players.AddRange(this.Data.Players.Select(playerId => playersRepo.GetById(playerId)));
         }
 
         public Group(IList<Player> players, string name)  : base()
         {
             this.Name = name;
-            foreach (var player in players)
-            {
-                this.players.Add(player);
-            }
+            this.players.AddRange(players);
 
             //foreach (var player in players)
             //{
@@ -49,7 +43,8 @@ namespace Tournament_Planner.BL
         {
             if (this.groupMatches == null)
             {
-                this.groupMatches = new MatchesCollection(this.BuildSchedule().ToList());
+                this.groupMatches = new MatchesCollection();
+                this.groupMatches.AddRange(this.BuildSchedule());
             }
 
             return this.groupMatches;
@@ -86,7 +81,7 @@ namespace Tournament_Planner.BL
             return this.groupMatches.GetPlayerMatches(player).Select(m => m.GetPlayerScore(player)).Sum();
         }
 
-        public GroupData GetXmlData()
+        public override GroupData GetXmlData()
         {
             this.Data.Players = this.players.Select(p => p.Id).ToList();
             return base.GetXmlData();

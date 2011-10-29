@@ -7,11 +7,15 @@ using Tournament_Planner.BL.XmlSerializable;
 
 namespace Tournament_Planner.BL
 {
-    public class Match
+    public class Match : IdItem<MatchData>
     {
-        public Match(MatchData data)
+        public Match(MatchData data, IRepository<Player> playersRepo, IRepository<Group> groupsRepo)
+            : base(data)
         {
-
+            this.Player1 = playersRepo.GetById(data.Player1Id);
+            this.Player2 = playersRepo.GetById(data.Player2Id);
+            this.Group = groupsRepo.GetById(data.GroupId);
+            this.Games = data.Games.Select(g => new Game(g)).ToList();
         }
 
         public Match(Player player1, Player player2)
@@ -121,6 +125,13 @@ namespace Tournament_Planner.BL
             }
 
             return player == this.Winner ? 3 : 0;
+        }
+
+        public override MatchData GetXmlData()
+        {
+            this.Data.GroupId = this.Group.Id;
+            this.Data.Games = this.Games.Select(g => g.GetXmlData()).ToList();
+            return base.GetXmlData();
         }
     }
 }
