@@ -13,6 +13,7 @@ namespace Tournament_Planner.UI
         private ScheduleAndResultsControl editingControl;
         private Match selectedMatch;
         private GroupController groupController;
+        private EditMatchController editMatchController;
 
         public ScheduleAndResultsController(Tournament tournamentData)
             : base(tournamentData)
@@ -21,13 +22,15 @@ namespace Tournament_Planner.UI
             this.Control = this.editingControl;
 
             this.editingControl.MatchSelected += this.MatchInListSelected;
-            this.editingControl.StartMatch += this.editingControl_StartMatch;
-            this.editingControl.FinishMatch += this.editingControl_FinishMatch;
             this.editingControl.SaveClicked += this.editingControl_SaveClicked;
             this.editingControl.LoadClicked += this.editingControl_LoadClicked;
 
             this.groupController = new GroupController(this.editingControl.GetGroupControl());
             this.groupController.MatchSelected += this.MatchInGroupGridSelected;
+
+            this.editMatchController = new EditMatchController(this.TournamentData, this.editingControl.GetMatchControl());
+            this.editMatchController.StartMatch += this.editingControl_StartMatch;
+            this.editMatchController.FinishMatch += this.editingControl_FinishMatch;
         }
 
         private bool clickFromGroup = false;
@@ -75,10 +78,10 @@ namespace Tournament_Planner.UI
 
         private void editingControl_SaveClicked()
         {
-            this.SaveScheuleSnapshot();
+            this.SaveScheduleSnapshot();
         }
 
-        private void SaveScheuleSnapshot()
+        private void SaveScheduleSnapshot()
         {
             new TournametDataSaveLoad(this.TournamentData).SavePlayersList(this.GenerateSnapshotFileName());
         }
@@ -93,38 +96,12 @@ namespace Tournament_Planner.UI
 
         private void editingControl_StartMatch()
         {
-            this.TournamentData.Matches.SetMatchState(this.selectedMatch, MatchProgress.InProgress);
             this.editingControl.SetDataSources(this.TournamentData);
             this.RefreshCurrentMatchData();
         }
 
         private void editingControl_FinishMatch()
         {
-            var games = this.editingControl.GetGameData().Where(g => g != null).ToList();
-            if (games.Count < 2)
-            {
-                this.editingControl.SetGameDataError("Please, enter at least two first game results.");
-                return;
-            }
-
-            if ((games[0].Score1 == games[0].Score2) || (games[1].Score1 == games[1].Score2) ||
-                (games.Count == 3 && games[2].Score1 == games[2].Score2))
-            {
-                this.editingControl.SetGameDataError("It is impossible to have win-win in a game.");
-                return;
-            }
-
-            int gamesWon1 = games.Count(g => g.Score1 > g.Score2);
-            int gamesWon2 = games.Count(g => g.Score1 < g.Score2);
-            if (gamesWon1 == gamesWon2)
-            {
-                this.editingControl.SetGameDataError("It is impossible to have win-win in a match. Enter third game result.");
-                return;
-            }
-
-            this.selectedMatch.Games.Clear();
-            this.selectedMatch.Games.AddRange(games);
-            this.TournamentData.Matches.SetMatchState(this.selectedMatch, MatchProgress.Finished);
             this.editingControl.SetDataSources(this.TournamentData);
             this.RefreshCurrentMatchData();
         }
@@ -142,18 +119,14 @@ namespace Tournament_Planner.UI
 
         private void RefreshCurrentMatchData()
         {
+            this.editMatchController.SelectMatch(this.selectedMatch);
+
             if (this.selectedMatch == null)
             {
-                this.editingControl.AllowStart(false);
-                this.editingControl.AllowResultEntering(false);
-                this.editingControl.PopulateMatchData(null);
                 this.groupController.SetDataSource(null);
             }
             else
             {
-                this.editingControl.AllowStart(this.selectedMatch.Progress == MatchProgress.PossibleToStart);
-                this.editingControl.AllowResultEntering(this.selectedMatch.Progress == MatchProgress.InProgress || this.selectedMatch.Progress == MatchProgress.Finished);
-                this.editingControl.PopulateMatchData(this.selectedMatch);
                 this.groupController.SetDataSource(this.selectedMatch.Group);
                 this.groupController.TrySelectMatch(this.selectedMatch);
             }

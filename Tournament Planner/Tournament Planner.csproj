@@ -73,6 +73,13 @@
     <Compile Include="BL\XmlSerializable\PlayerData.cs" />
     <Compile Include="BL\XmlSerializable\Skill.cs" />
     <Compile Include="BL\XmlSerializable\TournamentData.cs" />
+    <Compile Include="UI\EditMatchControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\EditMatchControl.Designer.cs">
+      <DependentUpon>EditMatchControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\EditMatchController.cs" />
     <Compile Include="UI\EnterPlayersControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -119,6 +126,9 @@
     <Compile Include="BL\Tournament.cs" />
     <Compile Include="UI\TournametDataSaveLoad.cs" />
     <Compile Include="UI\UiExtensionMethods.cs" />
+    <EmbeddedResource Include="UI\EditMatchControl.resx">
+      <DependentUpon>EditMatchControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\EnterPlayersControl.resx">
       <DependentUpon>EnterPlayersControl.cs</DependentUpon>
     </EmbeddedResource>
