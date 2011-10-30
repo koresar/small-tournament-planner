@@ -171,7 +171,10 @@ namespace Tournament_Planner.BL
 
         public void BuildFinalRounds()
         {
-            this.FinalPlayers.AddRange(this.PlayOffGroup.GetWinners(this.NeedThatMorePlayersForFinal)); // Concat with play off winners.
+            if (this.PlayOffGroup != null && !this.IsPowerOfTwo(this.FinalPlayers.Count))
+            {
+                this.FinalPlayers.AddRange(this.PlayOffGroup.GetWinners(this.NeedThatMorePlayersForFinal)); // Concat with play off winners.
+            }
 
             //var rnd = new Random((int)DateTime.Now.Ticks);
                 //this.FinalPlayers.OrderBy(p => rnd.Next()). // Shuffle them all
