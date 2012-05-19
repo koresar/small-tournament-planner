@@ -54,7 +54,7 @@ namespace Tournament_Planner.UI
             foreach (var group in groups)
             {
                 var gridControl = new DataGridView();
-                gridControl.Height += 5; // This is a magic number. Nope. It's a MAGIC number. UI magic happened after this line introduced.
+                gridControl.Height += 5; // This is a magic number. Nope. It's a MAAAGIC number. UI magic happened after this line introduced.
                 gridControl.RowHeadersVisible = false;
 
                 var bs = new BindingSource();
@@ -62,8 +62,12 @@ namespace Tournament_Planner.UI
                 gridControl.DataSource = bs;
 
                 gridControl.AutoSizeAllCells();
+                gridControl.AutoSize = true;
                 this.flowLayoutPanel.Controls.Add(gridControl);
             }
+
+            var sum = groups.Select(g => g.GenerateNewGroupMatches().Count).Sum();
+            this.lblNumberOfGames.Text = sum.ToString();
         }
     }
 }

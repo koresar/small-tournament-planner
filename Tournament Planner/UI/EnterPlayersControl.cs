@@ -10,6 +10,7 @@ namespace Tournament_Planner.UI
         public EnterPlayersControl()
         {
             this.InitializeComponent();
+            new ColorizeTableByColumnValue(this.tblPlayers, "Company");
         }
 
         public event Action AddClicked;

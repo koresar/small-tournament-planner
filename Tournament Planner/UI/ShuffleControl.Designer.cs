@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tblPlayers = new System.Windows.Forms.DataGridView();
             this.fullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnDoShuffle = new System.Windows.Forms.Button();
@@ -36,6 +36,8 @@
             this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.cmbPlayersInGroup = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblNumberOfGames = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tblPlayers)).BeginInit();
             this.pnlGroups.SuspendLayout();
             this.SuspendLayout();
@@ -46,14 +48,14 @@
             this.tblPlayers.AllowUserToDeleteRows = false;
             this.tblPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.tblPlayers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.tblPlayers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.tblPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tblPlayers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.fullName});
@@ -100,6 +102,7 @@
             // flowLayoutPanel
             // 
             this.flowLayoutPanel.AutoScroll = true;
+            this.flowLayoutPanel.AutoSize = true;
             this.flowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel.Location = new System.Drawing.Point(0, 0);
@@ -124,10 +127,32 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Desired number of players in a group";
             // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label2.Location = new System.Drawing.Point(200, 262);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 23);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Number of games:";
+            // 
+            // lblNumberOfGames
+            // 
+            this.lblNumberOfGames.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblNumberOfGames.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNumberOfGames.Location = new System.Drawing.Point(200, 285);
+            this.lblNumberOfGames.Name = "lblNumberOfGames";
+            this.lblNumberOfGames.Size = new System.Drawing.Size(100, 29);
+            this.lblNumberOfGames.TabIndex = 5;
+            this.lblNumberOfGames.Text = "#";
+            this.lblNumberOfGames.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ShuffleControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblNumberOfGames);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbPlayersInGroup);
             this.Controls.Add(this.pnlGroups);
@@ -137,6 +162,7 @@
             this.Size = new System.Drawing.Size(718, 499);
             ((System.ComponentModel.ISupportInitialize)(this.tblPlayers)).EndInit();
             this.pnlGroups.ResumeLayout(false);
+            this.pnlGroups.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -150,6 +176,8 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
         private System.Windows.Forms.ComboBox cmbPlayersInGroup;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblNumberOfGames;
 
     }
 }

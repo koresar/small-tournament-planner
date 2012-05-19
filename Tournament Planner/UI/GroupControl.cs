@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Tournament_Planner.UI
@@ -17,6 +12,27 @@ namespace Tournament_Planner.UI
         {
             this.InitializeComponent();
             this.tblData.SelectionChanged += this.tblData_SelectionChanged;
+            new ColorizeTableByValueData(
+                this.tblData, 
+                (val, cellStyle)  =>
+                    {
+                        if (val.Length < 2 || val[1] != ':')
+                        {
+                            return;
+                        }
+
+                        if (val.StartsWith("2"))
+                        {
+                            cellStyle.BackColor = Color.LightGreen;
+                            cellStyle.ForeColor = Color.Black;
+                        }
+
+                        if (val.StartsWith("1") || val.StartsWith("0"))
+                        {
+                            cellStyle.BackColor = Color.LightPink;
+                            cellStyle.ForeColor = Color.Black;
+                        }
+                });
         }
 
         public event Action<object> CellSelected;

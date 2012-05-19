@@ -74,6 +74,9 @@
     <Compile Include="BL\XmlSerializable\PlayerData.cs" />
     <Compile Include="BL\XmlSerializable\Skill.cs" />
     <Compile Include="BL\XmlSerializable\TournamentData.cs" />
+    <Compile Include="UI\ColorizeTable.cs" />
+    <Compile Include="UI\ColorizeTableByColumnValue.cs" />
+    <Compile Include="UI\ColorizeTableByValueData.cs" />
     <Compile Include="UI\EditMatchControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

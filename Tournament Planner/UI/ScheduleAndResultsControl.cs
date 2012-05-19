@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -16,6 +14,7 @@ namespace Tournament_Planner.UI
         {
             this.InitializeComponent();
             this.tblMatches.SelectionChanged += this.tblMatches_SelectionChanged;
+            new ColorizeTableByColumnValue(this.tblMatches, "Progress");
         }
 
         public event Action<Match> MatchSelected;
