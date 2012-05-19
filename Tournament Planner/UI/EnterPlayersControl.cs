@@ -124,7 +124,7 @@ namespace Tournament_Planner.UI
 
         private void tblPlayers_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete)
+            if (e.KeyCode == Keys.Delete && this.tblPlayers.SelectedRows.Count > 0)
             {
                 if (this.DeletePlayerClicked != null)
                 {

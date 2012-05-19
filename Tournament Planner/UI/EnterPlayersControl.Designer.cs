@@ -34,6 +34,8 @@
             this.tblPlayers = new System.Windows.Forms.DataGridView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tblCompanies = new System.Windows.Forms.DataGridView();
+            this.lblNumberOfPlayer = new System.Windows.Forms.Label();
+            this.chkPresent = new System.Windows.Forms.CheckBox();
             this.cmbSkill = new System.Windows.Forms.ComboBox();
             this.btnLoadList = new System.Windows.Forms.Button();
             this.btnSaveList = new System.Windows.Forms.Button();
@@ -49,9 +51,8 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.chkPresent = new System.Windows.Forms.CheckBox();
             this.companiesCollectionBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.lblNumberOfPlayer = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tblPlayers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -79,13 +80,13 @@
             this.tblPlayers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.tblPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tblPlayers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.tblPlayers.Location = new System.Drawing.Point(0, 110);
+            this.tblPlayers.Location = new System.Drawing.Point(0, 130);
             this.tblPlayers.MultiSelect = false;
             this.tblPlayers.Name = "tblPlayers";
             this.tblPlayers.ReadOnly = true;
             this.tblPlayers.RowHeadersVisible = false;
             this.tblPlayers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tblPlayers.Size = new System.Drawing.Size(540, 380);
+            this.tblPlayers.Size = new System.Drawing.Size(540, 360);
             this.tblPlayers.TabIndex = 0;
             this.tblPlayers.SelectionChanged += new System.EventHandler(this.tblPlayers_SelectionChanged);
             this.tblPlayers.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tblPlayers_KeyUp);
@@ -102,6 +103,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.label6);
             this.splitContainer1.Panel2.Controls.Add(this.lblNumberOfPlayer);
             this.splitContainer1.Panel2.Controls.Add(this.chkPresent);
             this.splitContainer1.Panel2.Controls.Add(this.cmbSkill);
@@ -140,6 +142,28 @@
             this.tblCompanies.Name = "tblCompanies";
             this.tblCompanies.Size = new System.Drawing.Size(253, 490);
             this.tblCompanies.TabIndex = 0;
+            // 
+            // lblNumberOfPlayer
+            // 
+            this.lblNumberOfPlayer.AutoSize = true;
+            this.lblNumberOfPlayer.Location = new System.Drawing.Point(7, 90);
+            this.lblNumberOfPlayer.Name = "lblNumberOfPlayer";
+            this.lblNumberOfPlayer.Size = new System.Drawing.Size(95, 13);
+            this.lblNumberOfPlayer.TabIndex = 9;
+            this.lblNumberOfPlayer.Text = "Number of players:";
+            // 
+            // chkPresent
+            // 
+            this.chkPresent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkPresent.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkPresent.Checked = true;
+            this.chkPresent.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPresent.Location = new System.Drawing.Point(251, 58);
+            this.chkPresent.Name = "chkPresent";
+            this.chkPresent.Size = new System.Drawing.Size(96, 17);
+            this.chkPresent.TabIndex = 8;
+            this.chkPresent.Text = "Present today";
+            this.chkPresent.UseVisualStyleBackColor = true;
             // 
             // cmbSkill
             // 
@@ -293,31 +317,18 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // chkPresent
-            // 
-            this.chkPresent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkPresent.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkPresent.Checked = true;
-            this.chkPresent.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPresent.Location = new System.Drawing.Point(251, 58);
-            this.chkPresent.Name = "chkPresent";
-            this.chkPresent.Size = new System.Drawing.Size(96, 17);
-            this.chkPresent.TabIndex = 8;
-            this.chkPresent.Text = "Present today";
-            this.chkPresent.UseVisualStyleBackColor = true;
-            // 
             // companiesCollectionBindingSource
             // 
             this.companiesCollectionBindingSource.DataSource = typeof(Tournament_Planner.BL.CompaniesCollection);
             // 
-            // lblNumberOfPlayer
+            // label6
             // 
-            this.lblNumberOfPlayer.AutoSize = true;
-            this.lblNumberOfPlayer.Location = new System.Drawing.Point(7, 90);
-            this.lblNumberOfPlayer.Name = "lblNumberOfPlayer";
-            this.lblNumberOfPlayer.Size = new System.Drawing.Size(95, 13);
-            this.lblNumberOfPlayer.TabIndex = 9;
-            this.lblNumberOfPlayer.Text = "Number of players:";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 114);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(242, 13);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "You can remove players by pressing DELETE key";
             // 
             // EnterPlayersControl
             // 
@@ -363,5 +374,6 @@
         private System.Windows.Forms.Button btnApply;
         private System.Windows.Forms.CheckBox chkPresent;
         private System.Windows.Forms.Label lblNumberOfPlayer;
+        private System.Windows.Forms.Label label6;
     }
 }

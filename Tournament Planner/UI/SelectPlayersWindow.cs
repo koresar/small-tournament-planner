@@ -15,7 +15,7 @@ namespace Tournament_Planner.UI
     {
         private readonly int necessaryNumber;
 
-        public SelectPlayersWindow(IEnumerable<Player> players, int necessaryNumber)
+        public SelectPlayersWindow(IEnumerable<Player> players, int necessaryNumber = 0)
         {
             this.necessaryNumber = necessaryNumber;
             this.InitializeComponent();
@@ -32,6 +32,12 @@ namespace Tournament_Planner.UI
 
         private void lstPlayers_ItemCheck(object sender, ItemCheckEventArgs e)
         {
+            if (this.necessaryNumber == 0)
+            {
+                this.btnOk.Enabled = true;
+                return;
+            }
+
             int checkedCount = this.SelectedPlayers.Count() + (e.NewValue == CheckState.Checked ? 1 : -1);
             this.btnOk.Enabled = checkedCount == this.necessaryNumber;
         }

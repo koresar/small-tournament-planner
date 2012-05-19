@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.tblPlayers = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnAddPlayer = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tblPlayers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -36,27 +38,57 @@
             // 
             this.tblPlayers.AllowUserToAddRows = false;
             this.tblPlayers.AllowUserToDeleteRows = false;
+            this.tblPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tblPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tblPlayers.Location = new System.Drawing.Point(4, 4);
+            this.tblPlayers.Location = new System.Drawing.Point(4, 24);
             this.tblPlayers.Name = "tblPlayers";
             this.tblPlayers.ReadOnly = true;
-            this.tblPlayers.Size = new System.Drawing.Size(286, 482);
+            this.tblPlayers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.tblPlayers.Size = new System.Drawing.Size(934, 462);
             this.tblPlayers.TabIndex = 0;
+            this.tblPlayers.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tblPlayers_KeyUp);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(4, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(242, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "You can remove players by pressing DELETE key";
+            // 
+            // btnAddPlayer
+            // 
+            this.btnAddPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddPlayer.Location = new System.Drawing.Point(703, 0);
+            this.btnAddPlayer.Name = "btnAddPlayer";
+            this.btnAddPlayer.Size = new System.Drawing.Size(235, 23);
+            this.btnAddPlayer.TabIndex = 2;
+            this.btnAddPlayer.Text = "Add any other player";
+            this.btnAddPlayer.UseVisualStyleBackColor = true;
+            this.btnAddPlayer.Click += new System.EventHandler(this.btnAddPlayer_Click);
             // 
             // FinalMatchesControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnAddPlayer);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.tblPlayers);
             this.Name = "FinalMatchesControl";
             this.Size = new System.Drawing.Size(941, 489);
             ((System.ComponentModel.ISupportInitialize)(this.tblPlayers)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataGridView tblPlayers;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnAddPlayer;
     }
 }
