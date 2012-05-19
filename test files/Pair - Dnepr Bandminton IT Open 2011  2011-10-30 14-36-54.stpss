@@ -1,0 +1,357 @@
+<?xml version="1.0"?>
+<TournamentData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>Pair - Dnepr Bandminton IT Open 2011 </Name>
+  <Companies>
+    <Company Id="1">
+      <Name>Ciklum</Name>
+    </Company>
+    <Company Id="4">
+      <Name>Банк + РТЦ</Name>
+    </Company>
+    <Company Id="6">
+      <Name>Epam</Name>
+    </Company>
+    <Company Id="8">
+      <Name>ISD</Name>
+    </Company>
+    <Company Id="11">
+      <Name>Ciklum+Demix</Name>
+    </Company>
+    <Company Id="13">
+      <Name>ITG+УкрАэроРух</Name>
+    </Company>
+    <Company Id="16">
+      <Name>Ciklum+ISD</Name>
+    </Company>
+  </Companies>
+  <Players>
+    <Player Id="1">
+      <FirstName>Вадим Тиканов</FirstName>
+      <SecondName>Дима Пискун</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>1</CompanyId>
+      <Skill>Good</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="2">
+      <FirstName>Евгений Бояркин</FirstName>
+      <SecondName>Дмитрий Лебедев</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>4</CompanyId>
+      <Skill>Good</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="3">
+      <FirstName>Панасенко</FirstName>
+      <SecondName>Азаров</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>6</CompanyId>
+      <Skill>Unknown</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="4">
+      <FirstName>Палагута</FirstName>
+      <SecondName>Шинкаренко</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>6</CompanyId>
+      <Skill>Beginner</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="5">
+      <FirstName>Фальов</FirstName>
+      <SecondName>Белоглазов</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>8</CompanyId>
+      <Skill>Good</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="6">
+      <FirstName>Боднарук</FirstName>
+      <SecondName>Дзыгин</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>11</CompanyId>
+      <Skill>Average</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="7">
+      <FirstName>Клименко</FirstName>
+      <SecondName>Бауков</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>13</CompanyId>
+      <Skill>Average</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="8">
+      <FirstName>Войцех</FirstName>
+      <SecondName>Олифиренко</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>8</CompanyId>
+      <Skill>Good</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="9">
+      <FirstName>Наташа Клименко</FirstName>
+      <SecondName>Антон Василенко</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>16</CompanyId>
+      <Skill>Beginner</Skill>
+      <Present>true</Present>
+    </Player>
+  </Players>
+  <Groups>
+    <Group Id="4">
+      <Name>A</Name>
+      <Players>
+        <Id>1</Id>
+        <Id>5</Id>
+        <Id>4</Id>
+      </Players>
+    </Group>
+    <Group Id="5">
+      <Name>B</Name>
+      <Players>
+        <Id>2</Id>
+        <Id>7</Id>
+        <Id>9</Id>
+      </Players>
+    </Group>
+    <Group Id="6">
+      <Name>C</Name>
+      <Players>
+        <Id>8</Id>
+        <Id>6</Id>
+        <Id>3</Id>
+      </Players>
+    </Group>
+  </Groups>
+  <Matches>
+    <Match Id="1">
+      <Player1Id>1</Player1Id>
+      <Player2Id>5</Player2Id>
+      <GroupId>4</GroupId>
+      <Progress>Finished</Progress>
+      <Games>
+        <Game>
+          <Score1>18</Score1>
+          <Score2>21</Score2>
+        </Game>
+        <Game>
+          <Score1>14</Score1>
+          <Score2>21</Score2>
+        </Game>
+      </Games>
+    </Match>
+    <Match Id="2">
+      <Player1Id>1</Player1Id>
+      <Player2Id>4</Player2Id>
+      <GroupId>4</GroupId>
+      <Progress>Finished</Progress>
+      <Games>
+        <Game>
+          <Score1>21</Score1>
+          <Score2>15</Score2>
+        </Game>
+        <Game>
+          <Score1>21</Score1>
+          <Score2>14</Score2>
+        </Game>
+      </Games>
+    </Match>
+    <Match Id="3">
+      <Player1Id>5</Player1Id>
+      <Player2Id>4</Player2Id>
+      <GroupId>4</GroupId>
+      <Progress>Finished</Progress>
+      <Games>
+        <Game>
+          <Score1>21</Score1>
+          <Score2>9</Score2>
+        </Game>
+        <Game>
+          <Score1>21</Score1>
+          <Score2>15</Score2>
+        </Game>
+      </Games>
+    </Match>
+    <Match Id="1">
+      <Player1Id>2</Player1Id>
+      <Player2Id>7</Player2Id>
+      <GroupId>5</GroupId>
+      <Progress>Finished</Progress>
+      <Games>
+        <Game>
+          <Score1>15</Score1>
+          <Score2>21</Score2>
+        </Game>
+        <Game>
+          <Score1>12</Score1>
+          <Score2>21</Score2>
+        </Game>
+      </Games>
+    </Match>
+    <Match Id="2">
+      <Player1Id>2</Player1Id>
+      <Player2Id>9</Player2Id>
+      <GroupId>5</GroupId>
+      <Progress>Finished</Progress>
+      <Games>
+        <Game>
+          <Score1>21</Score1>
+          <Score2>5</Score2>
+        </Game>
+        <Game>
+          <Score1>21</Score1>
+          <Score2>10</Score2>
+        </Game>
+      </Games>
+    </Match>
+    <Match Id="3">
+      <Player1Id>7</Player1Id>
+      <Player2Id>9</Player2Id>
+      <GroupId>5</GroupId>
+      <Progress>Finished</Progress>
+      <Games>
+        <Game>
+          <Score1>21</Score1>
+          <Score2>11</Score2>
+        </Game>
+        <Game>
+          <Score1>21</Score1>
+          <Score2>10</Score2>
+        </Game>
+      </Games>
+    </Match>
+    <Match Id="1">
+      <Player1Id>8</Player1Id>
+      <Player2Id>6</Player2Id>
+      <GroupId>6</GroupId>
+      <Progress>Finished</Progress>
+      <Games>
+        <Game>
+          <Score1>21</Score1>
+          <Score2>3</Score2>
+        </Game>
+        <Game>
+          <Score1>21</Score1>
+          <Score2>7</Score2>
+        </Game>
+      </Games>
+    </Match>
+    <Match Id="2">
+      <Player1Id>8</Player1Id>
+      <Player2Id>3</Player2Id>
+      <GroupId>6</GroupId>
+      <Progress>Finished</Progress>
+      <Games>
+        <Game>
+          <Score1>21</Score1>
+          <Score2>9</Score2>
+        </Game>
+        <Game>
+          <Score1>21</Score1>
+          <Score2>9</Score2>
+        </Game>
+      </Games>
+    </Match>
+    <Match Id="3">
+      <Player1Id>6</Player1Id>
+      <Player2Id>3</Player2Id>
+      <GroupId>6</GroupId>
+      <Progress>Finished</Progress>
+      <Games>
+        <Game>
+          <Score1>7</Score1>
+          <Score2>21</Score2>
+        </Game>
+        <Game>
+          <Score1>13</Score1>
+          <Score2>21</Score2>
+        </Game>
+      </Games>
+    </Match>
+  </Matches>
+  <PlayOffGroup Id="0">
+    <Name>Play Off</Name>
+    <Players>
+      <Id>4</Id>
+      <Id>9</Id>
+      <Id>6</Id>
+    </Players>
+  </PlayOffGroup>
+  <PlayOffMatches>
+    <Match Id="1">
+      <Player1Id>4</Player1Id>
+      <Player2Id>9</Player2Id>
+      <GroupId>0</GroupId>
+      <Progress>PossibleToStart</Progress>
+      <Games />
+    </Match>
+    <Match Id="2">
+      <Player1Id>4</Player1Id>
+      <Player2Id>6</Player2Id>
+      <GroupId>0</GroupId>
+      <Progress>PossibleToStart</Progress>
+      <Games />
+    </Match>
+    <Match Id="3">
+      <Player1Id>9</Player1Id>
+      <Player2Id>6</Player2Id>
+      <GroupId>0</GroupId>
+      <Progress>PossibleToStart</Progress>
+      <Games />
+    </Match>
+  </PlayOffMatches>
+  <NeedThatMorePlayersForFinal>2</NeedThatMorePlayersForFinal>
+  <FinalPlayers>
+    <Player Id="5">
+      <FirstName>Фальов</FirstName>
+      <SecondName>Белоглазов</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>8</CompanyId>
+      <Skill>Good</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="1">
+      <FirstName>Вадим Тиканов</FirstName>
+      <SecondName>Дима Пискун</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>1</CompanyId>
+      <Skill>Good</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="7">
+      <FirstName>Клименко</FirstName>
+      <SecondName>Бауков</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>13</CompanyId>
+      <Skill>Average</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="2">
+      <FirstName>Евгений Бояркин</FirstName>
+      <SecondName>Дмитрий Лебедев</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>4</CompanyId>
+      <Skill>Good</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="8">
+      <FirstName>Войцех</FirstName>
+      <SecondName>Олифиренко</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>8</CompanyId>
+      <Skill>Good</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="3">
+      <FirstName>Панасенко</FirstName>
+      <SecondName>Азаров</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>6</CompanyId>
+      <Skill>Unknown</Skill>
+      <Present>true</Present>
+    </Player>
+  </FinalPlayers>
+  <FinalRounds />
+  <FinalMatches />
+</TournamentData>

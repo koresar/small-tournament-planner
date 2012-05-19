@@ -1,0 +1,134 @@
+﻿<?xml version="1.0"?>
+<TournamentData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>Single Man - Dnepr Bandminton IT Open 2011 </Name>
+  <Companies>
+    <Company Id="1">
+      <Name>Ciklum</Name>
+    </Company>
+    <Company Id="3">
+      <Name>УкрАэроРух</Name>
+    </Company>
+    <Company Id="5">
+      <Name>ISD</Name>
+    </Company>
+    <Company Id="7">
+      <Name>Банк Кредит-Днепр</Name>
+    </Company>
+    <Company Id="9">
+      <Name>РТЦ</Name>
+    </Company>
+    <Company Id="11">
+      <Name>Demix</Name>
+    </Company>
+    <Company Id="13">
+      <Name>Epam</Name>
+    </Company>
+    <Company Id="15">
+      <Name>ITG</Name>
+    </Company>
+  </Companies>
+  <Players>
+    <Player Id="1">
+      <FirstName>Дима</FirstName>
+      <SecondName>Пискун</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>1</CompanyId>
+      <Skill>Good</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="2">
+      <FirstName>Сергей</FirstName>
+      <SecondName>Клименко</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>3</CompanyId>
+      <Skill>Good</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="3">
+      <FirstName>Сергей</FirstName>
+      <SecondName>Войцех</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>5</CompanyId>
+      <Skill>Good</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="4">
+      <FirstName>Дмитрий</FirstName>
+      <SecondName>Лебедев</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>7</CompanyId>
+      <Skill>Good</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="5">
+      <FirstName>Евгений</FirstName>
+      <SecondName>Бояркин</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>9</CompanyId>
+      <Skill>Good</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="6">
+      <FirstName>Василий</FirstName>
+      <SecondName>Боднарук</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>11</CompanyId>
+      <Skill>Average</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="7">
+      <FirstName>Игорь</FirstName>
+      <SecondName>Палагута</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>13</CompanyId>
+      <Skill>Beginner</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="8">
+      <FirstName>Лёха</FirstName>
+      <SecondName>Бауков</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>15</CompanyId>
+      <Skill>Good</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="9">
+      <FirstName>Маша</FirstName>
+      <SecondName>Олифиренко</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>5</CompanyId>
+      <Skill>Good</Skill>
+      <Present>true</Present>
+    </Player>
+    <Player Id="10">
+      <FirstName>Антон</FirstName>
+      <SecondName>Василенко</SecondName>
+      <Gender>Male</Gender>
+      <CompanyId>1</CompanyId>
+      <Skill>Average</Skill>
+      <Present>true</Present>
+    </Player>
+  </Players>
+  <Groups>
+    <Group Id="7">
+      <Name>A</Name>
+      <Players>
+        <Id>1</Id>
+        <Id>5</Id>
+        <Id>9</Id>
+        <Id>8</Id>
+        <Id>10</Id>
+      </Players>
+    </Group>
+    <Group Id="8">
+      <Name>B</Name>
+      <Players>
+        <Id>4</Id>
+        <Id>2</Id>
+        <Id>3</Id>
+        <Id>6</Id>
+        <Id>7</Id>
+      </Players>
+    </Group>
+  </Groups>
+</TournamentData>

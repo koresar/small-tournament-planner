@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<TournamentData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Companies>
+    <Company Name="ISD" />
+    <Company Name="ITG" />
+    <Company Name="Ciklum" />
+    <Company Name="SoftServe" />
+    <Company Name="Luxsoft" />
+    <Company Name="Sitecore" />
+  </Companies>
+  <Players />
+</TournamentData>
