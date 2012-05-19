@@ -23,6 +23,7 @@ namespace Tournament_Planner.UI
             this.Control = this.editingControl;
             this.editingControl.SaveClicked += this.editingControl_SaveClicked;
             this.editingControl.LoadClicked += this.editingControl_LoadClicked;
+            this.editingControl.ManuallyEnterPlayersClicked += this.EditingControlOnManuallyEnterPlayersClicked;
 
             this.groupController = new GroupController(this.editingControl.GetGroupControl());
             this.groupController.MatchSelected += this.MatchInGroupGridSelected;
@@ -40,9 +41,10 @@ namespace Tournament_Planner.UI
 
         public override bool IsAllowProceed()
         {
-            return 
+            return
                 this.TournamentData.PlayOffGroup == null ||
-                this.TournamentData.PlayOffMatches.All(m => m.Progress == MatchProgress.Finished);
+                this.TournamentData.PlayOffMatches.All(m => m.Progress == MatchProgress.Finished) ||
+                this.TournamentData.IsFinalPlayersAcceptable();
         }
 
         public void MatchInGroupGridSelected(Match match)
@@ -90,6 +92,31 @@ namespace Tournament_Planner.UI
         private void editingControl_SaveClicked()
         {
             this.SaveScheduleSnapshot();
+        }
+
+        private void EditingControlOnManuallyEnterPlayersClicked()
+        {
+            if (this.TournamentData.NeedThatMorePlayersForFinal > 0)
+            {
+                var form = new SelectPlayersWindow(this.TournamentData.GetPossiblePlayoffPlayers(), this.TournamentData.NeedThatMorePlayersForFinal);
+                if (form.ShowDialog() == DialogResult.OK && form.SelectedPlayers.Count() == this.TournamentData.NeedThatMorePlayersForFinal)
+                {
+                    this.editingControl.GetManualPlayersControl().DataSource = form.SelectedPlayers.ToList();
+                    this.TournamentData.FinalPlayers.AddRange(form.SelectedPlayers);
+                    this.ShowManualPlayers();
+                    this.HideGaming();
+                }
+            }
+        }
+
+        private void ShowManualPlayers()
+        {
+            this.editingControl.GetManualPlayersControl().Visible = true;
+        }
+
+        private void HideGaming()
+        {
+            this.editingControl.GetGroupControl().Visible = this.editingControl.GetMatchControl().Visible = false;
         }
 
         private void SaveScheduleSnapshot()

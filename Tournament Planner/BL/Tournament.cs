@@ -135,6 +135,11 @@ namespace Tournament_Planner.BL
             }
         }
 
+        public bool IsFinalPlayersAcceptable()
+        {
+            return this.IsPowerOfTwo(this.FinalPlayers.Count);
+        }
+
         public void BuildPlayOffMatches()
         {
             this.FinalPlayers.Clear();
@@ -145,7 +150,7 @@ namespace Tournament_Planner.BL
                 ToList();
             this.FinalPlayers.AddRange(notInPlayOff);
 
-            if (this.IsPowerOfTwo(this.FinalPlayers.Count))
+            if (this.IsFinalPlayersAcceptable())
             {
                 return;
             }
@@ -169,9 +174,14 @@ namespace Tournament_Planner.BL
             this.PlayOffMatches = this.PlayOffGroup.GenerateNewGroupMatches();
         }
 
+        public IEnumerable<Player> GetPossiblePlayoffPlayers()
+        {
+            return this.Players.Except(this.FinalPlayers);
+        }
+
         public void BuildFinalRounds()
         {
-            if (this.PlayOffGroup != null && !this.IsPowerOfTwo(this.FinalPlayers.Count))
+            if (this.PlayOffGroup != null && !this.IsFinalPlayersAcceptable())
             {
                 this.FinalPlayers.AddRange(this.PlayOffGroup.GetWinners(this.NeedThatMorePlayersForFinal)); // Concat with play off winners.
             }

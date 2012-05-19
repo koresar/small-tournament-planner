@@ -133,6 +133,12 @@
       <DependentUpon>ScheduleAndResultsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ScheduleAndResultsController.cs" />
+    <Compile Include="UI\SelectPlayersWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SelectPlayersWindow.Designer.cs">
+      <DependentUpon>SelectPlayersWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ShuffleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -174,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ScheduleAndResultsControl.resx">
       <DependentUpon>ScheduleAndResultsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SelectPlayersWindow.resx">
+      <DependentUpon>SelectPlayersWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ShuffleControl.resx">
       <DependentUpon>ShuffleControl.cs</DependentUpon>

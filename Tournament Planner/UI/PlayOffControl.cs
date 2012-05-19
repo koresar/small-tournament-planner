@@ -20,6 +20,8 @@ namespace Tournament_Planner.UI
 
         public event Action SaveClicked;
 
+        public event Action ManuallyEnterPlayersClicked;
+
         public EditMatchControl GetMatchControl()
         {
             return this.editMatchControl;
@@ -28,6 +30,11 @@ namespace Tournament_Planner.UI
         public GroupControl GetGroupControl()
         {
             return this.groupControl;
+        }
+
+        public ListBox GetManualPlayersControl()
+        {
+            return this.lstManualPlayers;
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
@@ -43,6 +50,14 @@ namespace Tournament_Planner.UI
             if (this.SaveClicked != null)
             {
                 this.SaveClicked();
+            }
+        }
+
+        private void btnManualPlayers_Click(object sender, EventArgs e)
+        {
+            if (this.ManuallyEnterPlayersClicked != null)
+            {
+                this.ManuallyEnterPlayersClicked();
             }
         }
     }
