@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 using Tournament_Planner.BL;
@@ -17,6 +11,10 @@ namespace Tournament_Planner.UI
         {
             this.InitializeComponent();
         }
+
+        public event Action LoadClicked;
+
+        public event Action SaveClicked;
 
         public event Action<Player> DeletePlayerClicked;
 
@@ -44,6 +42,22 @@ namespace Tournament_Planner.UI
             if (this.AddPlayerClicked != null)
             {
                 this.AddPlayerClicked();
+            }
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            if (this.LoadClicked != null)
+            {
+                this.LoadClicked();
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (this.SaveClicked != null)
+            {
+                this.SaveClicked();
             }
         }
     }
