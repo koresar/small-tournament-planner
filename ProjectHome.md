@@ -1,0 +1,1 @@
+There is no free tournament planning software out there, so this application is a try to fix the problem.
